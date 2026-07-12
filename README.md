@@ -36,7 +36,10 @@ Juego 3D de acción tipo *soulslike*, **de código abierto**, desarrollado con
    git clone https://github.com/mefixer/GameProyect.git
    ```
 
-3. Abre `project.godot` con el editor de Godot.
+3. Abre `project.godot` con el editor de Godot y pulsa **F5** para jugar.
+
+Guía completa (instalación por distro, ejecución sin editor, depuración y
+problemas comunes): [docs/como-ejecutar.md](docs/como-ejecutar.md).
 
 ## Estructura del proyecto
 
