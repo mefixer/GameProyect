@@ -1,0 +1,82 @@
+[gd_scene load_steps=13 format=3 uid="uid://dspin7arm2q4w"]
+
+[ext_resource type="Script" path="res://scripts/enemies/training_dummy.gd" id="1_dummy"]
+[ext_resource type="Script" path="res://scripts/enemies/spinner_arm.gd" id="2_spinarm"]
+[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="3_health"]
+[ext_resource type="Script" path="res://scripts/components/hurtbox.gd" id="4_hurtbox"]
+[ext_resource type="Script" path="res://scripts/components/hitbox.gd" id="5_hitbox"]
+
+[sub_resource type="CapsuleShape3D" id="shape_dummy"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="mesh_dummy"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="mat_dummy"]
+albedo_color = Color(0.85, 0.55, 0.2, 1)
+
+[sub_resource type="CapsuleShape3D" id="shape_hurt"]
+radius = 0.45
+height = 1.9
+
+[sub_resource type="BoxMesh" id="mesh_arm"]
+size = Vector3(0.16, 0.16, 1.6)
+
+[sub_resource type="StandardMaterial3D" id="mat_arm"]
+albedo_color = Color(0.55, 0.45, 0.35, 1)
+
+[sub_resource type="BoxShape3D" id="shape_hit"]
+size = Vector3(0.3, 0.3, 0.9)
+
+[node name="SpinnerDummy" type="StaticBody3D" groups=["lock_target"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_dummy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("shape_dummy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("mesh_dummy")
+surface_material_override/0 = SubResource("mat_dummy")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_health")
+max_health = 80.0
+
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_hurtbox")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("shape_hurt")
+
+[node name="ArmPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+script = ExtResource("2_spinarm")
+
+[node name="Arm" type="MeshInstance3D" parent="ArmPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
+mesh = SubResource("mesh_arm")
+surface_material_override/0 = SubResource("mat_arm")
+
+[node name="Hitbox" type="Area3D" parent="ArmPivot/Arm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.35)
+collision_layer = 0
+collision_mask = 8
+monitoring = false
+monitorable = false
+script = ExtResource("5_hitbox")
+damage = 12.0
+knockback = 6.0
+rehit_interval = 0.8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArmPivot/Arm/Hitbox"]
+shape = SubResource("shape_hit")

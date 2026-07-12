@@ -7,7 +7,7 @@ Juego 3D de acción tipo *soulslike*, **de código abierto**, desarrollado con
 
 ## Estado
 
-🚧 **En desarrollo temprano** — Fase 1: prototipo de movimiento, cámara y lock-on en greybox.
+🚧 **En desarrollo temprano** — Fase 2: combate núcleo (ataques, esquiva con i-frames, estamina, bloqueo) en greybox.
 
 ## Controles (prototipo)
 
@@ -15,8 +15,12 @@ Juego 3D de acción tipo *soulslike*, **de código abierto**, desarrollado con
 | --- | --- | --- |
 | Mover | WASD | Stick izquierdo |
 | Cámara | Ratón | Stick derecho |
-| Sprint | Shift | B / Círculo |
+| Sprint (mantener) | Shift | B / Círculo |
+| Esquiva (toque corto) | Shift | B / Círculo |
 | Salto | Espacio | A / Cruz |
+| Ataque ligero | Clic izquierdo | RB / R1 |
+| Ataque fuerte | Q | Gatillo derecho |
+| Bloquear (mantener) | Clic derecho | LB / L1 |
 | Lock-on | Tab o clic central | R3 |
 | Cambiar objetivo | Rueda del ratón | — |
 | Soltar/capturar ratón | Esc / clic | — |

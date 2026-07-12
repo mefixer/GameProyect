@@ -11,11 +11,13 @@ extends Node3D
 @export var pivot_height := 1.4
 @export var follow_speed := 25.0
 @export var lock_break_distance := 14.0
+@export var shake_magnitude := 0.25
 
 var lock_target: Node3D = null
 
 var _yaw := 0.0
 var _pitch := -0.35
+var _trauma := 0.0
 
 @onready var _player: CharacterBody3D = get_parent()
 @onready var _pitch_node: Node3D = $Pitch
@@ -74,6 +76,21 @@ func _process(delta: float) -> void:
 	if lock_target:
 		_marker.global_position = lock_target.global_position + Vector3(0.0, 2.0, 0.0)
 
+	# Sacudida por trauma: decae sola y usa los offsets de la cámara
+	if _trauma > 0.0:
+		_trauma = maxf(_trauma - 2.5 * delta, 0.0)
+		var shake := _trauma * _trauma * shake_magnitude
+		_camera.h_offset = randf_range(-shake, shake)
+		_camera.v_offset = randf_range(-shake, shake)
+	else:
+		_camera.h_offset = 0.0
+		_camera.v_offset = 0.0
+
+
+## Acumula sacudida de cámara (golpes, bloqueos, impactos).
+func add_trauma(amount: float) -> void:
+	_trauma = minf(_trauma + amount, 1.0)
+
 
 ## Convierte el input 2D (get_vector) a una dirección en el mundo
 ## relativa a la orientación horizontal de la cámara.
@@ -98,6 +115,7 @@ func _validate_lock_target() -> void:
 	if lock_target == null:
 		return
 	if not is_instance_valid(lock_target) \
+			or not lock_target.is_in_group("lock_target") \
 			or _player.global_position.distance_to(lock_target.global_position) > lock_break_distance:
 		lock_target = null
 

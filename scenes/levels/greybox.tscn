@@ -1,7 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://dq1vf6z8yw3sm"]
+[gd_scene load_steps=26 format=3 uid="uid://dq1vf6z8yw3sm"]
 
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_playerscn"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/training_dummy.tscn" id="2_dummyscn"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/spinner_dummy.tscn" id="3_spinnerscn"]
+[ext_resource type="PackedScene" path="res://scenes/ui/debug_hud.tscn" id="4_hudscn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.18, 0.22, 0.35, 1)
@@ -191,3 +193,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -6)
 
 [node name="Dummy3" parent="." instance=ExtResource("2_dummyscn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="SpinnerDummy" parent="." instance=ExtResource("3_spinnerscn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 4)
+
+[node name="DebugHud" parent="." instance=ExtResource("4_hudscn")]
