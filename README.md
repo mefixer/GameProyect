@@ -14,15 +14,17 @@ Juego 3D de acción tipo *soulslike*, **de código abierto**, desarrollado con
 1. Instala [Godot 4.7+](https://godotengine.org/download) (o vía Flatpak:
    `flatpak install flathub org.godotengine.Godot`)
 2. Clona el repositorio (requiere [Git LFS](https://git-lfs.com)):
+
    ```bash
    git lfs install
-   git clone <url-del-repositorio>
+   git clone https://github.com/mefixer/GameProyect.git
    ```
+
 3. Abre `project.godot` con el editor de Godot.
 
 ## Estructura del proyecto
 
-```
+```text
 scenes/     Escenas de Godot (player, enemies, levels, ui, main)
 scripts/    GDScript (componentes reutilizables, autoloads, lógica)
 assets/     Modelos, texturas, materiales, audio, fuentes (vía Git LFS)
@@ -33,7 +35,7 @@ docs/       Documentación pública del proyecto
 ## Herramientas usadas
 
 | Área | Herramienta |
-|---|---|
+| --- | --- |
 | Motor | Godot 4.7 |
 | Modelado y animación | Blender |
 | Texturas | Krita / Material Maker |
