@@ -48,6 +48,9 @@ addons/     Plugins del editor
 docs/       Documentación pública del proyecto
 ```
 
+La arquitectura del código, con diagramas de la máquina de estados y el sistema
+de combate, está documentada en [docs/arquitectura.md](docs/arquitectura.md).
+
 ## Herramientas usadas
 
 | Área | Herramienta |
