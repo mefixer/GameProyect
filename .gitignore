@@ -1,0 +1,18 @@
+# Godot 4 — datos internos del editor e importación
+.godot/
+
+# Builds exportadas
+build/
+export_presets.cfg
+
+# Traducciones compiladas
+*.translation
+
+# Archivos temporales de Blender
+*.blend1
+*.blend2
+
+# Sistema
+.directory
+.DS_Store
+Thumbs.db
