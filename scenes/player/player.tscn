@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://bpxq3w7k2m4nr"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_player"]
+[ext_resource type="Script" path="res://scripts/player/camera_rig.gd" id="2_camrig"]
+
+[sub_resource type="CapsuleShape3D" id="shape_body"]
+radius = 0.35
+height = 1.7
+
+[sub_resource type="CapsuleMesh" id="mesh_body"]
+radius = 0.35
+height = 1.7
+
+[sub_resource type="StandardMaterial3D" id="mat_body"]
+albedo_color = Color(0.35, 0.55, 0.85, 1)
+
+[sub_resource type="BoxMesh" id="mesh_nose"]
+size = Vector3(0.14, 0.14, 0.35)
+
+[sub_resource type="StandardMaterial3D" id="mat_nose"]
+albedo_color = Color(0.95, 0.85, 0.3, 1)
+
+[sub_resource type="SphereShape3D" id="shape_lock_area"]
+radius = 12.0
+
+[sub_resource type="SphereMesh" id="mesh_marker"]
+radius = 0.12
+height = 0.24
+
+[sub_resource type="StandardMaterial3D" id="mat_marker"]
+albedo_color = Color(1, 0.9, 0.2, 1)
+emission_enabled = true
+emission = Color(1, 0.85, 0.1, 1)
+emission_energy_multiplier = 2.0
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("shape_body")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+mesh = SubResource("mesh_body")
+surface_material_override/0 = SubResource("mat_body")
+
+[node name="Nose" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -0.35)
+mesh = SubResource("mesh_nose")
+surface_material_override/0 = SubResource("mat_nose")
+
+[node name="CameraRig" type="Node3D" parent="."]
+script = ExtResource("2_camrig")
+
+[node name="Pitch" type="Node3D" parent="CameraRig"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraRig/Pitch"]
+spring_length = 4.0
+collision_mask = 1
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig/Pitch/SpringArm3D"]
+current = true
+
+[node name="LockOnArea" type="Area3D" parent="CameraRig"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraRig/LockOnArea"]
+shape = SubResource("shape_lock_area")
+
+[node name="LockMarker" type="MeshInstance3D" parent="CameraRig"]
+top_level = true
+visible = false
+mesh = SubResource("mesh_marker")
+surface_material_override/0 = SubResource("mat_marker")

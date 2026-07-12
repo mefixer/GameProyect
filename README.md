@@ -7,7 +7,19 @@ Juego 3D de acción tipo *soulslike*, **de código abierto**, desarrollado con
 
 ## Estado
 
-🚧 **En desarrollo temprano** — Fase 0/1: proyecto base y prototipo de movimiento.
+🚧 **En desarrollo temprano** — Fase 1: prototipo de movimiento, cámara y lock-on en greybox.
+
+## Controles (prototipo)
+
+| Acción | Teclado/Ratón | Mando |
+| --- | --- | --- |
+| Mover | WASD | Stick izquierdo |
+| Cámara | Ratón | Stick derecho |
+| Sprint | Shift | B / Círculo |
+| Salto | Espacio | A / Cruz |
+| Lock-on | Tab o clic central | R3 |
+| Cambiar objetivo | Rueda del ratón | — |
+| Soltar/capturar ratón | Esc / clic | — |
 
 ## Cómo abrir el proyecto
 

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://ce8ty2h5ka9wd"]
+
+[sub_resource type="CapsuleShape3D" id="shape_dummy"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="mesh_dummy"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="mat_dummy"]
+albedo_color = Color(0.75, 0.3, 0.25, 1)
+
+[node name="TrainingDummy" type="StaticBody3D" groups=["lock_target"]]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("shape_dummy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("mesh_dummy")
+surface_material_override/0 = SubResource("mat_dummy")
