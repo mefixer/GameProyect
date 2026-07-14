@@ -83,7 +83,7 @@ size = Vector3(10, 3, 0.6)
 [sub_resource type="BoxMesh" id="mesh_wall"]
 size = Vector3(10, 3, 0.6)
 
-[node name="Greybox" type="Node3D" unique_id=1676319321]
+[node name="Greybox" type="Node3D" unique_id=1676319321 groups=["level"]]
 script = ExtResource("8_levelmgr")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1125609995]

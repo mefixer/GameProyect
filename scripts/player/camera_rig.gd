@@ -35,18 +35,17 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if lock_target == null:
-			_yaw -= event.relative.x * mouse_sensitivity
-			_pitch = clampf(_pitch - event.relative.y * mouse_sensitivity, min_pitch, max_pitch)
+			var sensitivity := mouse_sensitivity * Settings.mouse_sensitivity
+			_yaw -= event.relative.x * sensitivity
+			_pitch = clampf(_pitch - event.relative.y * sensitivity, min_pitch, max_pitch)
 	elif event.is_action_pressed("lock_on"):
 		_toggle_lock_on()
 	elif event.is_action_pressed("switch_target_right"):
 		_switch_target(1)
 	elif event.is_action_pressed("switch_target_left"):
 		_switch_target(-1)
-	elif event.is_action_pressed("ui_cancel"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	elif event is InputEventMouseButton and event.pressed \
-			and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+			and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and not UiState.menu_open:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
@@ -55,8 +54,9 @@ func _process(delta: float) -> void:
 
 	var stick := Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
 	if lock_target == null and not stick.is_zero_approx():
-		_yaw -= stick.x * stick_speed * delta
-		_pitch = clampf(_pitch - stick.y * stick_speed * delta, min_pitch, max_pitch)
+		var speed := stick_speed * Settings.mouse_sensitivity
+		_yaw -= stick.x * speed * delta
+		_pitch = clampf(_pitch - stick.y * speed * delta, min_pitch, max_pitch)
 
 	if lock_target:
 		var to_target := lock_target.global_position - _player.global_position

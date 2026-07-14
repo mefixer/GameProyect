@@ -7,7 +7,7 @@ Juego 3D de acción tipo *soulslike*, **de código abierto**, desarrollado con
 
 ## Estado
 
-🚧 **En desarrollo temprano** — Fase 4: bucle soulslike completo en greybox — newen (almas), rewe (checkpoint), frascos de lawen, subida de nivel y guardado.
+🚧 **En desarrollo temprano** — Fase 7: UI/UX — menú principal, pausa, opciones (volumen/sensibilidad/remapeo) e inventario, sobre el bosque con jefe (Fase 6).
 
 ## Controles (prototipo)
 
@@ -25,7 +25,12 @@ Juego 3D de acción tipo *soulslike*, **de código abierto**, desarrollado con
 | Interactuar (rewe) | E | Y / Triángulo |
 | Frasco de lawen | R | Cruceta arriba |
 | Cambiar objetivo | Rueda del ratón | — |
-| Soltar/capturar ratón | Esc / clic | — |
+| Pausa | Esc | Start |
+| Inventario / estado del personaje | I | X / Cuadrado |
+| Soltar/capturar ratón | Clic (fuera de menús) | — |
+
+Teclado remapeable desde **Opciones** (menú principal o pausa), salvo los
+controles de ratón (ataque, bloqueo, lock-on) y el mando.
 
 ## Cómo abrir el proyecto
 

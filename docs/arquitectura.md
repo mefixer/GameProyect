@@ -1,7 +1,7 @@
 # Arquitectura del código
 
-Documentación técnica del estado actual (Fases 1–4: movimiento, cámara, combate,
-enemigos con IA y sistemas soulslike). Los diagramas son
+Documentación técnica del estado actual (Fases 1–7: movimiento, cámara, combate,
+enemigos con IA, sistemas soulslike, jefe y UI/UX). Los diagramas son
 [Mermaid](https://mermaid.js.org) — GitHub y Obsidian los renderizan.
 
 ## Visión general
@@ -336,6 +336,54 @@ Diseño completo, tabla de ataques y diagrama de estados en
   pulsar lock-on de nuevo.
 - **Shake por trauma**: los golpes suman trauma (0.25–0.5); la sacudida es
   `trauma² × magnitud` sobre `h_offset/v_offset` de la cámara y decae sola.
+
+## UI/UX (Fase 7)
+
+Menú principal, pausa, opciones e inventario — con exclusión mutua para que
+nunca se abran dos superposiciones a la vez.
+
+```mermaid
+flowchart TD
+    MM["MainMenu<br/>(escena principal)"] -->|Nueva Partida| RESET["GameState.reset_new_game()"] --> BOSQUE[bosque.tscn]
+    MM -->|Continuar| BOSQUE
+    MM -->|Opciones| OPT[OptionsMenu]
+
+    BOSQUE -->|tecla Pause| PM[PauseMenu]
+    BOSQUE -->|tecla Inventory| IM[InventoryMenu]
+    PM -->|Opciones| OPT
+    PM -->|Guardar y salir| MM
+    REWE[Rewe] -->|E: descansar| RM[ReweMenu]
+
+    PM -. UiState.try_open/close .-> UI[(UiState<br/>menu_open)]
+    IM -. UiState.try_open/close .-> UI
+    REWE -. UiState.try_open/close .-> UI
+```
+
+- **`UiState`** (autoload): un único booleano `menu_open` compartido por
+  Pausa, Inventario y el menú del Rewe. `try_open()` falla si ya hay otro
+  menú abierto — así nunca se apilan ni pelean por el modo del ratón.
+  Solo el menú "raíz" que abrió (Pausa/Inventario/Rewe) pausa el árbol y
+  cambia el modo del ratón; `OptionsMenu`, anidado dentro de Pausa o del
+  menú principal, no toca `UiState` — simplemente se muestra u oculta.
+- **`Settings`** (autoload, separado de `GameState`): volumen maestro,
+  sensibilidad de cámara y remapeo de teclado, persistidos en
+  `user://settings.cfg` (`ConfigFile`, no JSON) — es configuración del
+  usuario, no progreso de partida, por eso sobrevive a "Nueva Partida".
+  El remapeo edita `InputMap` en runtime (solo el evento de teclado de
+  cada acción; el mando y los clics de ratón quedan intactos).
+- **`PauseMenu` e `InventoryMenu`** son autoloads-escena con
+  `process_mode = PROCESS_MODE_ALWAYS`: siguen escuchando su tecla incluso
+  con el árbol pausado o antes de que exista ninguna partida. Cada uno
+  ignora el otro mientras esté visible gracias a `get_viewport().set_input_as_handled()`
+  tras actuar, evitando una condición de carrera donde cerrar uno reabriera
+  el otro en el mismo frame.
+- **Grupo `"level"`**: los menús de pausa/inventario solo reaccionan si
+  `get_tree().current_scene` pertenece a este grupo — así no interfieren
+  con el menú principal, que no lo tiene.
+- **`MainMenu`**: "Nueva Partida" llama a `GameState.reset_new_game()`
+  (limpia newen, stats, atajos, jefes vencidos…) antes de cargar el nivel;
+  "Continuar" solo se habilita si `GameState.has_respawn` es verdadero, y
+  carga `GameState.respawn_scene` (el nivel donde estaba el último rewe).
 
 ## Grupos y señales clave
 

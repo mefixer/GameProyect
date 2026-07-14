@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhuemul0fauna1"]
+
+[ext_resource type="Script" path="res://scripts/wildlife/huemul.gd" id="1_huemul"]
+[ext_resource type="PackedScene" path="res://assets/models/props_cc/huemul.glb" id="2_huemulmesh"]
+
+[sub_resource type="CapsuleShape3D" id="shape_huemul"]
+radius = 0.35
+height = 1.1
+
+[node name="Huemul" type="CharacterBody3D" groups=["wildlife"]]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_huemul")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+shape = SubResource("shape_huemul")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Scan" parent="Visual" instance=ExtResource("2_huemulmesh")]

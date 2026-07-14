@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" path="res://scenes/bosses/boss_cherufe.tscn" id="30_cherufe"]
 [ext_resource type="PackedScene" path="res://scenes/ui/boss_health_bar.tscn" id="31_bosshud"]
 [ext_resource type="Script" path="res://scripts/world/boss_trigger.gd" id="32_bosstrigger"]
+[ext_resource type="PackedScene" path="res://scenes/wildlife/huemul.tscn" id="33_huemul"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.12, 0.15, 0.22, 1)
@@ -137,7 +138,7 @@ emission_enabled = true
 emission = Color(1, 0.4, 0.1, 1)
 emission_energy_multiplier = 1.5
 
-[node name="Bosque" type="Node3D" unique_id=147320806]
+[node name="Bosque" type="Node3D" unique_id=147320806 groups=["level"]]
 script = ExtResource("9_levelmgr")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1806652219]
@@ -526,5 +527,11 @@ surface_material_override/0 = SubResource("mat_lava_crack")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34)
 
 [node name="BossHealthBar" parent="." instance=ExtResource("31_bosshud")]
+
+[node name="Huemul1" parent="." instance=ExtResource("33_huemul")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 18)
+
+[node name="Huemul2" parent="." instance=ExtResource("33_huemul")]
+transform = Transform3D(0.966, 0, 0.259, 0, 1, 0, -0.259, 0, 0.966, -10, 0, 16)
 
 [node name="DebugHud" parent="." unique_id=1628268555 instance=ExtResource("4_hud")]

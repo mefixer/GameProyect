@@ -61,10 +61,11 @@ navega hasta la carpeta y selecciona `project.godot`.
 ### Desde el editor
 
 Pulsa **F5** (o el botón ▶ arriba a la derecha). Se lanza la escena principal:
-el greybox de pruebas con el jugador, los maniquís y el HUD.
+el **menú principal** (Nueva Partida / Continuar / Opciones / Salir).
 
-- **F6** ejecuta la escena que tengas abierta en el editor (útil para probar
-  una escena suelta).
+- **F6** ejecuta la escena que tengas abierta en el editor — la forma rápida
+  de saltar directo a `scenes/levels/bosque.tscn` o al `greybox.tscn` de
+  pruebas sin pasar por el menú mientras desarrollas.
 - **F8** o cerrar la ventana termina la partida.
 
 ### Sin editor (directo a jugar)
@@ -91,7 +92,14 @@ godot --path .
 | Interactuar (descansar en el rewe) | E | Y / Triángulo |
 | Frasco de lawen (curar) | R | Cruceta arriba |
 | Cambiar objetivo fijado | Rueda del ratón | — |
-| Soltar/recapturar el ratón | Esc / clic | — |
+| Pausa | Esc | Start |
+| Inventario / estado del personaje | I | X / Cuadrado |
+| Soltar/recapturar el ratón | Clic (fuera de menús) | — |
+
+El teclado es remapeable desde **Opciones** (accesible desde el menú principal
+o la pausa) para las acciones de movimiento, salto, ataque fuerte, interactuar,
+frasco e inventario. Los controles de ratón (ataque ligero, bloqueo, lock-on)
+y el mando quedan fijos por ahora.
 
 ## 5. Probar y depurar
 

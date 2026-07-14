@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmainmenu00001"]
+
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_mainmenu"]
+
+[sub_resource type="Environment" id="env_bg"]
+background_mode = 1
+background_color = Color(0.08, 0.07, 0.1, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_mainmenu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("env_bg")
+
+[node name="Center" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="Center"]
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Title" type="Label" parent="Center/VBox"]
+text = "Soulslike 3D"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 48
+
+[node name="Subtitle" type="Label" parent="Center/VBox"]
+text = "Wallmapu — título provisional"
+horizontal_alignment = 1
+modulate = Color(1, 1, 1, 0.6)
+
+[node name="Spacer" type="Control" parent="Center/VBox"]
+custom_minimum_size = Vector2(0, 20)
+
+[node name="NewGameButton" type="Button" parent="Center/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 44)
+text = "Nueva Partida"
+
+[node name="ContinueButton" type="Button" parent="Center/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 44)
+text = "Continuar"
+
+[node name="OptionsButton" type="Button" parent="Center/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 44)
+text = "Opciones"
+
+[node name="QuitButton" type="Button" parent="Center/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 44)
+text = "Salir"
+
+[node name="OptionsContainer" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0

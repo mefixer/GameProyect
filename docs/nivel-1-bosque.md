@@ -69,3 +69,6 @@ flowchart TD
 - [x] 7 modelos CC-BY de cultura mapuche integrados (rehue, ruca, 2 chemamüll,
   escultura, tótems, máscara kollón); 2 descartados por licencia NC (kollón del
   Museo Nacional, pipa de piedra) ✅ 2026-07-14
+- [x] Fauna ambiental: 2 huemules pastando (huyen si el jugador se acerca,
+  decorativos, sin combate) — hoy es un modelo genérico de ciervo (CC-BY) como
+  placeholder; pendiente un huemul real más adelante ✅ 2026-07-14

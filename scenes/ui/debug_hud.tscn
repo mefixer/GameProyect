@@ -40,3 +40,9 @@ text = "Newen: 0"
 [node name="FlaskLabel" type="Label" parent="Margin/VBox/InfoRow"]
 unique_name_in_owner = true
 text = "Lawen: 3/3"
+
+[node name="EquipLabel" type="Label" parent="Margin/VBox"]
+unique_name_in_owner = true
+text = "Toki + Escudo de cuero  ·  [I] Inventario"
+modulate = Color(1, 1, 1, 0.55)
+theme_override_font_sizes/font_size = 13

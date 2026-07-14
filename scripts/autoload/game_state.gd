@@ -140,6 +140,27 @@ func _current_scene_path() -> String:
 	return scene.scene_file_path if scene else ""
 
 
+# ── Nueva partida ────────────────────────────────────────────
+
+
+func reset_new_game() -> void:
+	newen = 0
+	level = 1
+	stats = BASE_STATS.duplicate()
+	max_flasks = 3
+	flasks = max_flasks
+	has_respawn = false
+	respawn_position = Vector3.ZERO
+	respawn_scene = ""
+	has_drop = false
+	dropped_newen = 0
+	dropped_position = Vector3.ZERO
+	drop_scene = ""
+	shortcuts = {}
+	defeated_bosses = {}
+	save_game()
+
+
 # ── Jefes ─────────────────────────────────────────────────────
 
 

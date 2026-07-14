@@ -25,16 +25,16 @@ func _physics_process(_delta: float) -> void:
 
 
 func _rest() -> void:
+	if not UiState.try_open():
+		return
 	GameState.rest_at_rewe(spawn_point.global_position)
-	get_tree().paused = true
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	menu.open()
 
 
 func _on_menu_closed() -> void:
 	# Levantarse del rewe: el mundo se reinicia (enemigos incluidos), como
 	# en los souls. La recarga cura al jugador y lo coloca en el rewe.
-	get_tree().paused = false
+	UiState.close()
 	get_tree().reload_current_scene()
 
 
