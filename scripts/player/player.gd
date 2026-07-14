@@ -33,6 +33,8 @@ const ATTACKS := {
 @export var sprint_stamina_per_sec := 12.0
 @export var hit_stagger := 0.4
 @export var guard_break_stagger := 0.9
+## Ventana de parry: los primeros N segundos tras levantar el escudo.
+@export var parry_window := 0.18
 
 var state := State.MOVE
 
@@ -47,12 +49,15 @@ var _stagger_duration := 0.4
 var _attack_tween: Tween
 var _body_material: StandardMaterial3D
 var _body_base_color: Color
+var _shield_material: StandardMaterial3D
+var _shield_base_color: Color
 
 @onready var camera_rig: CameraRig = $CameraRig
 @onready var visual: Node3D = $Visual
 @onready var body_mesh: MeshInstance3D = $Visual/Body
 @onready var weapon_pivot: Node3D = $Visual/WeaponPivot
 @onready var shield_pivot: Node3D = $Visual/ShieldPivot
+@onready var shield_mesh: MeshInstance3D = $Visual/ShieldPivot/Shield
 @onready var hitbox: Hitbox = $Visual/WeaponPivot/Weapon/Hitbox
 @onready var hurtbox: Hurtbox = $Hurtbox
 @onready var health: HealthComponent = $HealthComponent
@@ -70,6 +75,9 @@ func _ready() -> void:
 	_body_material = body_mesh.get_active_material(0).duplicate()
 	body_mesh.set_surface_override_material(0, _body_material)
 	_body_base_color = _body_material.albedo_color
+	_shield_material = shield_mesh.get_active_material(0).duplicate()
+	shield_mesh.set_surface_override_material(0, _shield_material)
+	_shield_base_color = _shield_material.albedo_color
 
 
 func _physics_process(delta: float) -> void:
@@ -253,6 +261,10 @@ func _on_hit_received(from_hitbox: Hitbox) -> void:
 	away = away.normalized() if not away.is_zero_approx() else Vector3.BACK
 
 	if state == State.BLOCK and _is_facing(attack_origin):
+		# Parry: golpe recibido justo al levantar el escudo → gratis y castiga
+		if _state_time <= parry_window:
+			_execute_parry(from_hitbox)
+			return
 		# Bloqueo: sin daño, pero cuesta estamina; si te deja en 0, rompe la guardia
 		stamina.try_consume(from_hitbox.damage * 1.2)
 		camera_rig.add_trauma(0.25)
@@ -269,6 +281,23 @@ func _on_hit_received(from_hitbox: Hitbox) -> void:
 		_lower_shield()
 		_knockback = away * from_hitbox.knockback
 		_enter_stagger(hit_stagger)
+
+
+func _execute_parry(from_hitbox: Hitbox) -> void:
+	GameFeel.hitstop(0.15)
+	camera_rig.add_trauma(0.3)
+	_flash_shield(Color(1.0, 0.95, 0.55))
+	# "Punch" del escudo hacia delante y de vuelta
+	var punch := create_tween()
+	punch.tween_property(shield_pivot, "position", SHIELD_BLOCK_POS + Vector3(0, 0, -0.25), 0.06)
+	punch.tween_property(shield_pivot, "position", SHIELD_BLOCK_POS, 0.18)
+	if from_hitbox.source and from_hitbox.source.has_method("on_parried"):
+		from_hitbox.source.on_parried()
+
+
+func _flash_shield(color: Color) -> void:
+	_shield_material.albedo_color = color
+	create_tween().tween_property(_shield_material, "albedo_color", _shield_base_color, 0.35)
 
 
 func _on_hit_landed(_hurtbox: Hurtbox) -> void:

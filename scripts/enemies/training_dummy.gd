@@ -1,6 +1,8 @@
 extends StaticBody3D
 ## Maniquí de entrenamiento: recibe daño, parpadea, "muere" y reaparece.
 
+signal parried
+
 @export var respawn_time := 3.0
 
 @onready var health: HealthComponent = $HealthComponent
@@ -23,6 +25,12 @@ func _on_hit_received(hitbox: Hitbox) -> void:
 	health.apply_damage(hitbox.damage)
 	if health.is_alive():
 		_flash(Color.WHITE)
+
+
+## Llamado por el jugador al hacer parry a un golpe de este maniquí.
+func on_parried() -> void:
+	_flash(Color(1.0, 0.95, 0.4))
+	parried.emit()
 
 
 func _on_died() -> void:
