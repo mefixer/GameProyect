@@ -88,6 +88,8 @@ godot --path .
 | Bloquear (mantener) | Clic derecho | LB / L1 |
 | Parry (bloquear justo antes del impacto) | Clic derecho | LB / L1 |
 | Lock-on / soltar lock-on | Tab o clic central | R3 |
+| Interactuar (descansar en el rewe) | E | Y / Triángulo |
+| Frasco de lawen (curar) | R | Cruceta arriba |
 | Cambiar objetivo fijado | Rueda del ratón | — |
 | Soltar/recapturar el ratón | Esc / clic | — |
 

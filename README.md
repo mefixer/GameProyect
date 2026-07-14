@@ -7,7 +7,7 @@ Juego 3D de acción tipo *soulslike*, **de código abierto**, desarrollado con
 
 ## Estado
 
-🚧 **En desarrollo temprano** — Fase 3: enemigos con IA (persecución con navmesh, ataques telegrafiados, 3 variantes) en greybox.
+🚧 **En desarrollo temprano** — Fase 4: bucle soulslike completo en greybox — newen (almas), rewe (checkpoint), frascos de lawen, subida de nivel y guardado.
 
 ## Controles (prototipo)
 
@@ -22,6 +22,8 @@ Juego 3D de acción tipo *soulslike*, **de código abierto**, desarrollado con
 | Ataque fuerte | Q | Gatillo derecho |
 | Bloquear (mantener) / Parry (justo antes del impacto) | Clic derecho | LB / L1 |
 | Lock-on | Tab o clic central | R3 |
+| Interactuar (rewe) | E | Y / Triángulo |
+| Frasco de lawen | R | Cruceta arriba |
 | Cambiar objetivo | Rueda del ratón | — |
 | Soltar/capturar ratón | Esc / clic | — |
 

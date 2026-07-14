@@ -1,7 +1,8 @@
 # Arquitectura del código
 
-Documentación técnica del estado actual (Fases 1–3: movimiento, cámara, combate y enemigos con IA).
-Los diagramas son [Mermaid](https://mermaid.js.org) — GitHub y Obsidian los renderizan.
+Documentación técnica del estado actual (Fases 1–4: movimiento, cámara, combate,
+enemigos con IA y sistemas soulslike). Los diagramas son
+[Mermaid](https://mermaid.js.org) — GitHub y Obsidian los renderizan.
 
 ## Visión general
 
@@ -250,6 +251,54 @@ Reglas clave:
 se destruye al impactar cualquier cosa o a los 4 s. El enemigo a distancia lo
 instancia en `_attack_became_active()` apuntando al pecho del jugador — se
 esquiva con la rodada (i-frames) o moviéndose lateralmente.
+
+## Sistemas soulslike (Fase 4)
+
+El autoload **`GameState`** guarda todo lo que debe sobrevivir a las recargas de
+escena (muerte y descanso): newen, nivel, estadísticas, frascos, punto de
+reaparición y el newen soltado. Se persiste en `user://savegame.json` al
+descansar y al morir.
+
+### El bucle de muerte
+
+```mermaid
+flowchart TD
+    A[Jugador muere] --> B["GameState.on_player_died()<br/>suelta TODO el newen donde cayó<br/>(si había un montón anterior, se pierde)"]
+    B --> C[Recarga de escena a los 2.5 s]
+    C --> D["level_manager.gd coloca al jugador<br/>en el último rewe y materializa<br/>el orbe de newen en el lugar de la muerte"]
+    D --> E{¿Llegas al orbe<br/>sin morir?}
+    E -- sí --> F[Recuperas todo el newen]
+    E -- no, mueres --> B
+```
+
+### El rewe (checkpoint)
+
+Al pulsar **E** dentro del área del rewe:
+
+1. Fija el punto de reaparición y **guarda la partida**.
+2. Rellena los frascos de lawen.
+3. Abre el **menú de nivel** (el juego se pausa): repartir newen entre estadísticas.
+4. Al levantarse, **el mundo se recarga**: enemigos reaparecen y todo se cura
+   (regla souls: descansar tiene un precio).
+
+### Estadísticas
+
+| Estadística | Efecto por punto |
+| --- | --- |
+| Vigor | +8 vida máxima |
+| Resistencia | +5 estamina máxima |
+| Fuerza | +4% daño del ataque fuerte |
+| Destreza | +4% daño del ataque ligero |
+| Espiritualidad | Reservada para el trance del kultrún (GDD) |
+
+- Base 10 en todo → 100 de vida y 100 de estamina iniciales.
+- Subir de nivel cuesta `80 + 20 × nivel` newen (crece cada nivel).
+- Los enemigos otorgan newen al morir (`newen_reward`: 20–60 según variante).
+
+### Frascos de lawen
+
+**R** cura el 40% de la vida máxima si queda algún frasco (3 al inicio).
+Solo se rellenan descansando en el rewe.
 
 ## Cámara y lock-on
 
