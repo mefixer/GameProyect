@@ -53,6 +53,7 @@ flowchart TD
 - [ ] Playtest de ritmo: ¿el recorrido completo toma 10–15 min la primera vez?
 - [ ] Colisión en árboles que bordean el camino principal
 - [ ] Arena del jefe real detrás de la niebla (Fase 6)
-- [ ] Assets temáticos propios a futuro: ruka mapuche (hay
-  [modelo libre en Sketchfab](https://sketchfab.com/3d-models/ruca-mapuche-cd2de259ba4941ecb1818b2259dd65dc)
-  para referencia), rewe tallado real, chemamüll
+- [ ] Assets temáticos propios: **pendiente descarga manual** de Sketchfab (chemamüll ×2,
+  rehue, kultrün — todos CC-BY del FabLab UC Temuco). Ver la tabla y los pasos en
+  [CREDITS.md](../CREDITS.md). Requiere cuenta gratuita de Sketchfab; no automatizable.
+- [x] 2 props CC-BY descargados directo (escudo de madera, hacha) en `assets/models/props_cc/` ✅ 2026-07-13
