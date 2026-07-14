@@ -65,6 +65,11 @@ var _shield_base_color: Color
 
 
 func _ready() -> void:
+	# Estadísticas del personaje (GameState persiste entre recargas de escena)
+	health.max_health = GameState.max_health()
+	health.reset()
+	stamina.max_stamina = GameState.max_stamina()
+	stamina.stamina = stamina.max_stamina
 	weapon_pivot.rotation_degrees = WEAPON_IDLE
 	shield_pivot.position = SHIELD_IDLE_POS
 	hitbox.source = self
@@ -133,6 +138,8 @@ func _state_move(delta: float) -> void:
 			_try_attack("light")
 		elif Input.is_action_just_pressed("attack_heavy"):
 			_try_attack("heavy")
+		elif Input.is_action_just_pressed("use_flask"):
+			_try_use_flask()
 		elif Input.is_action_pressed("block") and stamina.stamina > 0.0:
 			_enter_block()
 
@@ -197,7 +204,9 @@ func _try_attack(attack_name: String) -> bool:
 	_lower_shield()
 	_attack = def
 	_hitbox_active = false
-	hitbox.damage = def.damage
+	var multiplier := GameState.light_damage_multiplier() if attack_name == "light" \
+			else GameState.heavy_damage_multiplier()
+	hitbox.damage = def.damage * multiplier
 	_change_state(State.ATTACK)
 	# Con lock-on el golpe sale ya orientado al objetivo
 	if camera_rig.lock_target:
@@ -222,6 +231,13 @@ func _try_dodge() -> bool:
 	tween.tween_property(visual, "scale:y", 0.55, dodge_duration * 0.3)
 	tween.tween_property(visual, "scale:y", 1.0, dodge_duration * 0.5)
 	return true
+
+
+func _try_use_flask() -> void:
+	if health.health >= health.max_health or not GameState.use_flask():
+		return
+	health.heal(health.max_health * 0.4)
+	_flash(Color(0.4, 1.0, 0.55))
 
 
 func _enter_block() -> void:
@@ -307,6 +323,7 @@ func _on_hit_landed(_hurtbox: Hurtbox) -> void:
 
 func _on_died() -> void:
 	_change_state(State.DEAD)
+	GameState.on_player_died(global_position)
 	if _attack_tween:
 		_attack_tween.kill()
 	hitbox.deactivate()

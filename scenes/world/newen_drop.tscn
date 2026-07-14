@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnewendrop001"]
+
+[ext_resource type="Script" path="res://scripts/world/newen_drop.gd" id="1_drop"]
+
+[sub_resource type="SphereMesh" id="mesh_orb"]
+radius = 0.22
+height = 0.44
+
+[sub_resource type="StandardMaterial3D" id="mat_orb"]
+albedo_color = Color(0.4, 1, 0.6, 1)
+emission_enabled = true
+emission = Color(0.25, 1, 0.5, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="SphereShape3D" id="shape_orb"]
+radius = 0.8
+
+[node name="NewenDrop" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_drop")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("mesh_orb")
+surface_material_override/0 = SubResource("mat_orb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("shape_orb")

@@ -11,6 +11,7 @@ const WEAPON_IDLE := Vector3(-20.0, 0.0, 0.0)
 @export_group("Identidad")
 @export var body_color := Color(0.7, 0.25, 0.2)
 @export var max_health := 90.0
+@export var newen_reward := 25
 
 @export_group("Movimiento")
 @export var chase_speed := 4.0
@@ -235,6 +236,7 @@ func on_parried() -> void:
 
 func _on_died() -> void:
 	_change_state(State.DEAD)
+	GameState.add_newen(newen_reward)
 	remove_from_group("lock_target")
 	if _attack_tween:
 		_attack_tween.kill()

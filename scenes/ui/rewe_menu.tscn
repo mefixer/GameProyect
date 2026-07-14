@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://brewemenu0001"]
+
+[ext_resource type="Script" path="res://scripts/ui/rewe_menu.gd" id="1_rewemenu"]
+
+[node name="ReweMenu" type="CanvasLayer"]
+process_mode = 2
+layer = 10
+script = ExtResource("1_rewemenu")
+
+[node name="Dim" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.55)
+
+[node name="Center" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(560, 0)
+
+[node name="Margin" type="MarginContainer" parent="Center/Panel"]
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="Center/Panel/Margin"]
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Center/Panel/Margin/VBox"]
+theme_override_font_sizes/font_size = 24
+text = "Rewe — Descanso"
+horizontal_alignment = 1
+
+[node name="NewenLabel" type="Label" parent="Center/Panel/Margin/VBox"]
+unique_name_in_owner = true
+text = "Newen: 0"
+horizontal_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="Center/Panel/Margin/VBox"]
+unique_name_in_owner = true
+text = "Nivel 1"
+horizontal_alignment = 1
+
+[node name="StatsGrid" type="GridContainer" parent="Center/Panel/Margin/VBox"]
+unique_name_in_owner = true
+columns = 4
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 8
+
+[node name="CloseButton" type="Button" parent="Center/Panel/Margin/VBox"]
+unique_name_in_owner = true
+text = "Levantarse"
