@@ -1,14 +1,19 @@
-[gd_scene load_steps=21 format=3 uid="uid://bpxq3w7k2m4nr"]
+[gd_scene format=3 uid="uid://bpxq3w7k2m4nr"]
 
-[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_player"]
-[ext_resource type="Script" path="res://scripts/player/camera_rig.gd" id="2_camrig"]
-[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="3_health"]
-[ext_resource type="Script" path="res://scripts/components/stamina_component.gd" id="4_stamina"]
-[ext_resource type="Script" path="res://scripts/components/hurtbox.gd" id="5_hurtbox"]
-[ext_resource type="Script" path="res://scripts/components/hitbox.gd" id="6_hitbox"]
+[ext_resource type="Script" uid="uid://dxlnsyvhgrhae" path="res://scripts/player/player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://8k77blkwrgn3" path="res://scripts/player/camera_rig.gd" id="2_camrig"]
+[ext_resource type="Script" uid="uid://vsi8ki1ipl6r" path="res://scripts/components/health_component.gd" id="3_health"]
+[ext_resource type="Script" uid="uid://dogw3xritrbyw" path="res://scripts/components/stamina_component.gd" id="4_stamina"]
+[ext_resource type="Script" uid="uid://brn8vlnin3v0p" path="res://scripts/components/hurtbox.gd" id="5_hurtbox"]
+[ext_resource type="Script" uid="uid://p2kk3bs0cmdw" path="res://scripts/components/hitbox.gd" id="6_hitbox"]
+[ext_resource type="PackedScene" uid="uid://bo6ms5rrobbmo" path="res://assets/models/sketchfab_cc/demon_sword/scene.gltf" id="7_demon_sword"]
 
 [sub_resource type="CapsuleShape3D" id="shape_body"]
 radius = 0.35
+height = 1.7
+
+[sub_resource type="CapsuleShape3D" id="shape_hurtbox"]
+radius = 0.38
 height = 1.7
 
 [sub_resource type="CapsuleMesh" id="mesh_body"]
@@ -24,24 +29,14 @@ size = Vector3(0.14, 0.14, 0.35)
 [sub_resource type="StandardMaterial3D" id="mat_nose"]
 albedo_color = Color(0.95, 0.85, 0.3, 1)
 
-[sub_resource type="BoxMesh" id="mesh_weapon"]
-size = Vector3(0.1, 0.1, 0.85)
-
-[sub_resource type="StandardMaterial3D" id="mat_weapon"]
-albedo_color = Color(0.45, 0.35, 0.28, 1)
-
-[sub_resource type="BoxMesh" id="mesh_shield"]
-size = Vector3(0.45, 0.6, 0.08)
-
-[sub_resource type="StandardMaterial3D" id="mat_shield"]
-albedo_color = Color(0.5, 0.38, 0.25, 1)
-
 [sub_resource type="BoxShape3D" id="shape_hitbox"]
 size = Vector3(0.35, 0.35, 0.7)
 
-[sub_resource type="CapsuleShape3D" id="shape_hurtbox"]
-radius = 0.38
-height = 1.7
+[sub_resource type="BoxMesh" id="mesh_shield"]
+size = Vector3(0.4984375, 0.6, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="mat_shield"]
+albedo_color = Color(0.5, 0.38, 0.25, 1)
 
 [sub_resource type="SphereShape3D" id="shape_lock_area"]
 radius = 12.0
@@ -56,91 +51,92 @@ emission_enabled = true
 emission = Color(1, 0.85, 0.1, 1)
 emission_energy_multiplier = 2.0
 
-[node name="Player" type="CharacterBody3D" groups=["player"]]
+[node name="Player" type="CharacterBody3D" unique_id=91105951 groups=["player"]]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_player")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1297888171]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("shape_body")
 
-[node name="HealthComponent" type="Node" parent="."]
+[node name="HealthComponent" type="Node" parent="." unique_id=1175291001]
 script = ExtResource("3_health")
 
-[node name="StaminaComponent" type="Node" parent="."]
+[node name="StaminaComponent" type="Node" parent="." unique_id=1668423902]
 script = ExtResource("4_stamina")
 
-[node name="Hurtbox" type="Area3D" parent="."]
+[node name="Hurtbox" type="Area3D" parent="." unique_id=726276180]
 collision_layer = 8
 collision_mask = 0
 monitoring = false
 script = ExtResource("5_hurtbox")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" unique_id=262196410]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("shape_hurtbox")
 
-[node name="Visual" type="Node3D" parent="."]
+[node name="Visual" type="Node3D" parent="." unique_id=741028878]
 
-[node name="Body" type="MeshInstance3D" parent="Visual"]
+[node name="Body" type="MeshInstance3D" parent="Visual" unique_id=906929929]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 mesh = SubResource("mesh_body")
 surface_material_override/0 = SubResource("mat_body")
 
-[node name="Nose" type="MeshInstance3D" parent="Visual"]
+[node name="Nose" type="MeshInstance3D" parent="Visual" unique_id=925149664]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -0.35)
 mesh = SubResource("mesh_nose")
 surface_material_override/0 = SubResource("mat_nose")
 
-[node name="WeaponPivot" type="Node3D" parent="Visual"]
+[node name="WeaponPivot" type="Node3D" parent="Visual" unique_id=2022855766]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 1.3, 0)
 
-[node name="Weapon" type="MeshInstance3D" parent="Visual/WeaponPivot"]
+[node name="Weapon" type="Node3D" parent="Visual/WeaponPivot" unique_id=1627069875]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.425)
-mesh = SubResource("mesh_weapon")
-surface_material_override/0 = SubResource("mat_weapon")
 
-[node name="Hitbox" type="Area3D" parent="Visual/WeaponPivot/Weapon"]
+[node name="SwordModel" parent="Visual/WeaponPivot/Weapon" unique_id=263281525 instance=ExtResource("7_demon_sword")]
+transform = Transform3D(0.095775075, 0.028355, 0.00480923, 0, 0.01672197, -0.09859197, -0.02875995, 0.09442653, 0.01601548, 0.19844365, 0.15828764, -0.39782804)
+
+[node name="Hitbox" type="Area3D" parent="Visual/WeaponPivot/Weapon" unique_id=1146340969]
 collision_layer = 0
 collision_mask = 8
 monitoring = false
 monitorable = false
 script = ExtResource("6_hitbox")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Visual/WeaponPivot/Weapon/Hitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visual/WeaponPivot/Weapon/Hitbox" unique_id=684757170]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
 shape = SubResource("shape_hitbox")
 
-[node name="ShieldPivot" type="Node3D" parent="Visual"]
+[node name="ShieldPivot" type="Node3D" parent="Visual" unique_id=635921284]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42, 1.15, 0)
 
-[node name="Shield" type="MeshInstance3D" parent="Visual/ShieldPivot"]
+[node name="Shield" type="MeshInstance3D" parent="Visual/ShieldPivot" unique_id=278437386]
+transform = Transform3D(0.98236835, 0, 0.18695563, 0.056654315, 0.9529791, -0.29769313, -0.17816481, 0.30303615, 0.9361765, 0.037398607, -0.038351297, -0.46389854)
 mesh = SubResource("mesh_shield")
 surface_material_override/0 = SubResource("mat_shield")
 
-[node name="CameraRig" type="Node3D" parent="."]
+[node name="CameraRig" type="Node3D" parent="." unique_id=701251801]
 script = ExtResource("2_camrig")
 
-[node name="Pitch" type="Node3D" parent="CameraRig"]
+[node name="Pitch" type="Node3D" parent="CameraRig" unique_id=662033450]
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CameraRig/Pitch"]
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraRig/Pitch" unique_id=1740452668]
 spring_length = 4.0
-collision_mask = 1
 margin = 0.2
 
-[node name="Camera3D" type="Camera3D" parent="CameraRig/Pitch/SpringArm3D"]
+[node name="Camera3D" type="Camera3D" parent="CameraRig/Pitch/SpringArm3D" unique_id=1436627039]
 current = true
 
-[node name="LockOnArea" type="Area3D" parent="CameraRig"]
+[node name="LockOnArea" type="Area3D" parent="CameraRig" unique_id=1681859435]
 collision_layer = 0
 collision_mask = 4
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraRig/LockOnArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraRig/LockOnArea" unique_id=483798128]
 shape = SubResource("shape_lock_area")
 
-[node name="LockMarker" type="MeshInstance3D" parent="CameraRig"]
+[node name="LockMarker" type="MeshInstance3D" parent="CameraRig" unique_id=1952366044]
 top_level = true
 visible = false
 mesh = SubResource("mesh_marker")

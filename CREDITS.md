@@ -17,6 +17,9 @@ con su origen y licencia.
 | Ruka, ruca mapuche con estructura interior | borisquezadaa | [Sketchfab](https://sketchfab.com/3d-models/ruka-ruca-mapuche-con-estructura-interior-ee090c403bd14aa5b80b49ed36fe4263) | **CC-BY 4.0** | `assets/models/mapuche_sketchfab/ruka_interior/` — descargado pero **sin usar aún** (alternativa a la ruca de arriba, tiene interior habitable) |
 | Totems Colectivo Originario | EternalEchoesVR | [Sketchfab](https://sketchfab.com/3d-models/totems-colectivo-originario-9c5bd6c472e34a6a9cff47ca2dd9c6b1) | **CC-BY 4.0** | `assets/models/mapuche_sketchfab/totems_colectivo/` — hito visual hacia la zona norte corrupta (`scenes/props/totems_colectivo.tscn`) |
 | Escultura Pueblos Originarios - Plaza Baquedano | Luis Cuevas Quiroga | [Sketchfab](https://sketchfab.com/3d-models/escultura-pueblos-originarios-plaza-baquedano-9377fdfc40994c3bb5212b6e90f895a0) | **CC-BY 4.0** | `assets/models/mapuche_sketchfab/escultura_pueblos/` — bienvenida cerca del rewe (`scenes/props/escultura_pueblos.tscn`) |
+| Demon Sword (arma, placeholder) | kyrylyushkov | [Sketchfab](https://sketchfab.com/3d-models/demon-sword-9b385527820545a39bacf4410297767c) | **CC-BY 4.0** — requiere atribución | `assets/models/sketchfab_cc/demon_sword/` |
+| The Parade Armour of King Erik XIV of Sweden (armadura, placeholder) | The Royal Armoury (Livrustkammaren) | [Sketchfab](https://sketchfab.com/3d-models/the-parade-armour-of-king-erik-xiv-of-sweden-bd189bba7d9e4924b12826a6d68200d9) | **CC-BY 4.0** — requiere atribución | `assets/models/sketchfab_cc/parade_armour_erik_xiv/` |
+| Retro Textures Fantasy (pack de texturas: puertas, muros, suelos, techos, ventanas) | [Kenney](https://kenney.nl) | [kenney.nl](https://kenney.nl/assets/retro-textures-fantasy) | **CC0** | `assets/textures/kenney_retro_fantasy/` |
 
 > Notas técnicas:
 >
