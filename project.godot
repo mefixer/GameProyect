@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Soulslike 3D"
 config/description="Juego 3D de acción tipo soulslike ambientado en la cultura mapuche, de código abierto, hecho con Godot. (Título provisional)"
-run/main_scene="res://scenes/levels/greybox.tscn"
+run/main_scene="res://scenes/levels/bosque.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

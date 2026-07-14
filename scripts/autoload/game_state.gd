@@ -25,9 +25,13 @@ var max_flasks := 3
 
 var has_respawn := false
 var respawn_position := Vector3.ZERO
+var respawn_scene := ""
 var has_drop := false
 var dropped_newen := 0
 var dropped_position := Vector3.ZERO
+var drop_scene := ""
+## Atajos abiertos de forma permanente (id → true), estilo souls.
+var shortcuts := {}
 
 
 func _ready() -> void:
@@ -80,6 +84,7 @@ func add_newen(amount: int) -> void:
 func on_player_died(position: Vector3) -> void:
 	dropped_newen = newen
 	dropped_position = position
+	drop_scene = _current_scene_path()
 	has_drop = newen > 0
 	newen = 0
 	newen_changed.emit(newen)
@@ -110,9 +115,27 @@ func use_flask() -> bool:
 func rest_at_rewe(spawn_position: Vector3) -> void:
 	has_respawn = true
 	respawn_position = spawn_position
+	respawn_scene = _current_scene_path()
 	flasks = max_flasks
 	flasks_changed.emit(flasks, max_flasks)
 	save_game()
+
+
+# ── Atajos persistentes ──────────────────────────────────────
+
+
+func is_shortcut_open(id: String) -> bool:
+	return shortcuts.get(id, false)
+
+
+func open_shortcut(id: String) -> void:
+	shortcuts[id] = true
+	save_game()
+
+
+func _current_scene_path() -> String:
+	var scene := get_tree().current_scene
+	return scene.scene_file_path if scene else ""
 
 
 # ── Guardado ─────────────────────────────────────────────────
@@ -126,9 +149,12 @@ func save_game() -> void:
 		"max_flasks": max_flasks,
 		"has_respawn": has_respawn,
 		"respawn_position": [respawn_position.x, respawn_position.y, respawn_position.z],
+		"respawn_scene": respawn_scene,
 		"has_drop": has_drop,
 		"dropped_newen": dropped_newen,
 		"dropped_position": [dropped_position.x, dropped_position.y, dropped_position.z],
+		"drop_scene": drop_scene,
+		"shortcuts": shortcuts,
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file:
@@ -153,9 +179,12 @@ func load_game() -> void:
 	flasks = max_flasks
 	has_respawn = bool(data.get("has_respawn", false))
 	respawn_position = _to_vector3(data.get("respawn_position", []))
+	respawn_scene = str(data.get("respawn_scene", ""))
 	has_drop = bool(data.get("has_drop", false))
 	dropped_newen = int(data.get("dropped_newen", 0))
 	dropped_position = _to_vector3(data.get("dropped_position", []))
+	drop_scene = str(data.get("drop_scene", ""))
+	shortcuts = data.get("shortcuts", {}) if data.get("shortcuts") is Dictionary else {}
 
 
 func _to_vector3(values: Variant) -> Vector3:

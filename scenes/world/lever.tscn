@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://clever0atajo1"]
+
+[ext_resource type="Script" path="res://scripts/world/lever.gd" id="1_lever"]
+
+[sub_resource type="BoxMesh" id="mesh_base"]
+size = Vector3(0.4, 1.0, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="mat_stone"]
+albedo_color = Color(0.45, 0.44, 0.42, 1)
+
+[sub_resource type="BoxMesh" id="mesh_arm"]
+size = Vector3(0.09, 0.75, 0.09)
+
+[sub_resource type="StandardMaterial3D" id="mat_arm"]
+albedo_color = Color(0.85, 0.7, 0.3, 1)
+
+[sub_resource type="SphereShape3D" id="shape_area"]
+radius = 2.2
+
+[node name="Lever" type="Node3D"]
+script = ExtResource("1_lever")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("mesh_base")
+surface_material_override/0 = SubResource("mat_stone")
+
+[node name="ArmPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Arm" type="MeshInstance3D" parent="ArmPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37, 0)
+mesh = SubResource("mesh_arm")
+surface_material_override/0 = SubResource("mat_arm")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("shape_area")
+
+[node name="Prompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+billboard = 1
+text = "[E] Accionar palanca"
+font_size = 44
+outline_size = 8
