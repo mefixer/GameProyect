@@ -32,6 +32,8 @@ var dropped_position := Vector3.ZERO
 var drop_scene := ""
 ## Atajos abiertos de forma permanente (id → true), estilo souls.
 var shortcuts := {}
+## Jefes vencidos de forma permanente (id → true): no vuelven a aparecer.
+var defeated_bosses := {}
 
 
 func _ready() -> void:
@@ -138,6 +140,18 @@ func _current_scene_path() -> String:
 	return scene.scene_file_path if scene else ""
 
 
+# ── Jefes ─────────────────────────────────────────────────────
+
+
+func is_boss_defeated(id: String) -> bool:
+	return defeated_bosses.get(id, false)
+
+
+func defeat_boss(id: String) -> void:
+	defeated_bosses[id] = true
+	save_game()
+
+
 # ── Guardado ─────────────────────────────────────────────────
 
 
@@ -155,6 +169,7 @@ func save_game() -> void:
 		"dropped_position": [dropped_position.x, dropped_position.y, dropped_position.z],
 		"drop_scene": drop_scene,
 		"shortcuts": shortcuts,
+		"defeated_bosses": defeated_bosses,
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file:
@@ -185,6 +200,7 @@ func load_game() -> void:
 	dropped_position = _to_vector3(data.get("dropped_position", []))
 	drop_scene = str(data.get("drop_scene", ""))
 	shortcuts = data.get("shortcuts", {}) if data.get("shortcuts") is Dictionary else {}
+	defeated_bosses = data.get("defeated_bosses", {}) if data.get("defeated_bosses") is Dictionary else {}
 
 
 func _to_vector3(values: Variant) -> Vector3:

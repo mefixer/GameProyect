@@ -1,34 +1,37 @@
 [gd_scene format=3 uid="uid://cbosque0nivel"]
 
-[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_player"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="2_enemy"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/ranged_enemy.tscn" id="3_ranged"]
-[ext_resource type="PackedScene" path="res://scenes/ui/debug_hud.tscn" id="4_hud"]
-[ext_resource type="PackedScene" path="res://scenes/world/rewe.tscn" id="5_rewe"]
-[ext_resource type="PackedScene" path="res://scenes/world/gate.tscn" id="6_gate"]
-[ext_resource type="PackedScene" path="res://scenes/world/lever.tscn" id="7_lever"]
-[ext_resource type="Script" path="res://scripts/levels/navmesh_baker.gd" id="8_baker"]
-[ext_resource type="Script" path="res://scripts/levels/level_manager.gd" id="9_levelmgr"]
-[ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/pine_tree_1.tscn" id="10_pine1"]
-[ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/pine_tree_2.tscn" id="11_pine2"]
-[ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/pine_tree_3.tscn" id="12_pine3"]
-[ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/pine_tree_4.tscn" id="13_pine4"]
-[ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/pine_tree_5.tscn" id="14_pine5"]
-[ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/dead_tree_1.tscn" id="15_dead1"]
-[ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/dead_tree_2.tscn" id="16_dead2"]
-[ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/dead_tree_3.tscn" id="17_dead3"]
-[ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/rock_1.tscn" id="18_rock1"]
-[ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/rock_2.tscn" id="19_rock2"]
-[ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/rock_3.tscn" id="20_rock3"]
-[ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/bush.tscn" id="21_bush"]
-[ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/bush_large.tscn" id="22_bushlg"]
-[ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/grass_large.tscn" id="23_grass"]
-[ext_resource type="PackedScene" path="res://scenes/props/ruca.tscn" id="24_ruca"]
-[ext_resource type="PackedScene" path="res://scenes/props/chemamull_1.tscn" id="25_chema1"]
-[ext_resource type="PackedScene" path="res://scenes/props/chemamull_2.tscn" id="26_chema2"]
-[ext_resource type="PackedScene" path="res://scenes/props/escultura_pueblos.tscn" id="27_escult"]
-[ext_resource type="PackedScene" path="res://scenes/props/totems_colectivo.tscn" id="28_totems"]
-[ext_resource type="PackedScene" path="res://scenes/props/mascara_kollon.tscn" id="29_kollon"]
+[ext_resource type="PackedScene" uid="uid://bpxq3w7k2m4nr" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://benemy0melee1" path="res://scenes/enemies/enemy.tscn" id="2_enemy"]
+[ext_resource type="PackedScene" uid="uid://cranged0enemy" path="res://scenes/enemies/ranged_enemy.tscn" id="3_ranged"]
+[ext_resource type="PackedScene" uid="uid://c3v8n2hueak1x" path="res://scenes/ui/debug_hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" uid="uid://crewe0totem01" path="res://scenes/world/rewe.tscn" id="5_rewe"]
+[ext_resource type="PackedScene" uid="uid://bgate0atajo01" path="res://scenes/world/gate.tscn" id="6_gate"]
+[ext_resource type="PackedScene" uid="uid://clever0atajo1" path="res://scenes/world/lever.tscn" id="7_lever"]
+[ext_resource type="Script" uid="uid://bfyj5jyhb1d84" path="res://scripts/levels/navmesh_baker.gd" id="8_baker"]
+[ext_resource type="Script" uid="uid://dkg3bcdsgsyu6" path="res://scripts/levels/level_manager.gd" id="9_levelmgr"]
+[ext_resource type="PackedScene" uid="uid://d08bwkbq3tlfu" path="res://assets/models/quaternius_nature/prefabs/pine_tree_1.tscn" id="10_pine1"]
+[ext_resource type="PackedScene" uid="uid://ctkuq7aarnnfa" path="res://assets/models/quaternius_nature/prefabs/pine_tree_2.tscn" id="11_pine2"]
+[ext_resource type="PackedScene" uid="uid://3pwp5if4er62" path="res://assets/models/quaternius_nature/prefabs/pine_tree_3.tscn" id="12_pine3"]
+[ext_resource type="PackedScene" uid="uid://co7j7rveaerst" path="res://assets/models/quaternius_nature/prefabs/pine_tree_4.tscn" id="13_pine4"]
+[ext_resource type="PackedScene" uid="uid://dai5in6up8clr" path="res://assets/models/quaternius_nature/prefabs/pine_tree_5.tscn" id="14_pine5"]
+[ext_resource type="PackedScene" uid="uid://c74yieky8umj1" path="res://assets/models/quaternius_nature/prefabs/dead_tree_1.tscn" id="15_dead1"]
+[ext_resource type="PackedScene" uid="uid://cj8dowlm137nj" path="res://assets/models/quaternius_nature/prefabs/dead_tree_2.tscn" id="16_dead2"]
+[ext_resource type="PackedScene" uid="uid://1fyj38f4tqh2" path="res://assets/models/quaternius_nature/prefabs/dead_tree_3.tscn" id="17_dead3"]
+[ext_resource type="PackedScene" uid="uid://bdu8tyncb4hv" path="res://assets/models/quaternius_nature/prefabs/rock_1.tscn" id="18_rock1"]
+[ext_resource type="PackedScene" uid="uid://jhi3ffyck7n0" path="res://assets/models/quaternius_nature/prefabs/rock_2.tscn" id="19_rock2"]
+[ext_resource type="PackedScene" uid="uid://chlabnsxaxxad" path="res://assets/models/quaternius_nature/prefabs/rock_3.tscn" id="20_rock3"]
+[ext_resource type="PackedScene" uid="uid://dmal0fae2ug2r" path="res://assets/models/quaternius_nature/prefabs/bush.tscn" id="21_bush"]
+[ext_resource type="PackedScene" uid="uid://cp6csavsh6ssr" path="res://assets/models/quaternius_nature/prefabs/bush_large.tscn" id="22_bushlg"]
+[ext_resource type="PackedScene" uid="uid://bix8ddf40dcyw" path="res://assets/models/quaternius_nature/prefabs/grass_large.tscn" id="23_grass"]
+[ext_resource type="PackedScene" uid="uid://dprop0ruca001" path="res://scenes/props/ruca.tscn" id="24_ruca"]
+[ext_resource type="PackedScene" uid="uid://dprop0chema01" path="res://scenes/props/chemamull_1.tscn" id="25_chema1"]
+[ext_resource type="PackedScene" uid="uid://dprop0chema02" path="res://scenes/props/chemamull_2.tscn" id="26_chema2"]
+[ext_resource type="PackedScene" uid="uid://dprop0escult1" path="res://scenes/props/escultura_pueblos.tscn" id="27_escult"]
+[ext_resource type="PackedScene" uid="uid://dprop0totems1" path="res://scenes/props/totems_colectivo.tscn" id="28_totems"]
+[ext_resource type="PackedScene" uid="uid://dprop0kollon1" path="res://scenes/props/mascara_kollon.tscn" id="29_kollon"]
+[ext_resource type="PackedScene" path="res://scenes/bosses/boss_cherufe.tscn" id="30_cherufe"]
+[ext_resource type="PackedScene" path="res://scenes/ui/boss_health_bar.tscn" id="31_bosshud"]
+[ext_resource type="Script" path="res://scripts/world/boss_trigger.gd" id="32_bosstrigger"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.12, 0.15, 0.22, 1)
@@ -52,30 +55,23 @@ geometry_parsed_geometry_type = 1
 cell_size = 0.2
 agent_radius = 0.4
 
-[sub_resource type="StandardMaterial3D" id="mat_ground"]
-albedo_color = Color(0.2, 0.26, 0.17, 1)
-
-[sub_resource type="StandardMaterial3D" id="mat_rock"]
-albedo_color = Color(0.32, 0.31, 0.3, 1)
-
-[sub_resource type="StandardMaterial3D" id="mat_fog"]
-transparency = 1
-albedo_color = Color(1, 0.45, 0.15, 0.4)
-emission_enabled = true
-emission = Color(1, 0.4, 0.1, 1)
-emission_energy_multiplier = 1.5
-
 [sub_resource type="BoxShape3D" id="shape_floor"]
 size = Vector3(80, 1, 80)
 
 [sub_resource type="BoxMesh" id="mesh_floor"]
 size = Vector3(80, 1, 80)
 
+[sub_resource type="StandardMaterial3D" id="mat_ground"]
+albedo_color = Color(0.2, 0.26, 0.17, 1)
+
 [sub_resource type="BoxShape3D" id="shape_wall_ns"]
 size = Vector3(82, 7, 1)
 
 [sub_resource type="BoxMesh" id="mesh_wall_ns"]
 size = Vector3(82, 7, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_rock"]
+albedo_color = Color(0.32, 0.31, 0.3, 1)
 
 [sub_resource type="BoxShape3D" id="shape_wall_ew"]
 size = Vector3(1, 7, 82)
@@ -119,134 +115,163 @@ size = Vector3(10, 4.4, 0.3)
 [sub_resource type="BoxMesh" id="mesh_fog"]
 size = Vector3(10, 4.4, 0.3)
 
-[node name="Bosque" type="Node3D"]
+[sub_resource type="BoxMesh" id="mesh_arena_floor"]
+size = Vector3(30, 0.15, 12)
+
+[sub_resource type="StandardMaterial3D" id="mat_arena_floor"]
+albedo_color = Color(0.16, 0.1, 0.09, 1)
+
+[sub_resource type="BoxMesh" id="mesh_lava_crack"]
+size = Vector3(1.2, 0.05, 8)
+
+[sub_resource type="StandardMaterial3D" id="mat_lava_crack"]
+albedo_color = Color(1, 0.35, 0.1, 1)
+emission_enabled = true
+emission = Color(1, 0.3, 0.05, 1)
+emission_energy_multiplier = 2.5
+
+[sub_resource type="StandardMaterial3D" id="mat_fog"]
+transparency = 1
+albedo_color = Color(1, 0.45, 0.15, 0.4)
+emission_enabled = true
+emission = Color(1, 0.4, 0.1, 1)
+emission_energy_multiplier = 1.5
+
+[node name="Bosque" type="Node3D" unique_id=147320806]
 script = ExtResource("9_levelmgr")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1806652219]
 environment = SubResource("env")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=30925814]
 transform = Transform3D(0.86603, -0.38302, 0.32139, 0, 0.64279, 0.76604, -0.5, -0.66341, 0.55667, 0, 15, 0)
 light_color = Color(1, 0.87, 0.72, 1)
 light_energy = 0.8
 shadow_enabled = true
 
-[node name="NavRegion" type="NavigationRegion3D" parent="."]
+[node name="NavRegion" type="NavigationRegion3D" parent="." unique_id=2055346558]
 navigation_mesh = SubResource("navmesh")
 script = ExtResource("8_baker")
 
-[node name="Floor" type="StaticBody3D" parent="NavRegion"]
+[node name="Floor" type="StaticBody3D" parent="NavRegion" unique_id=1573527407]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Floor" unique_id=268036331]
 shape = SubResource("shape_floor")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Floor" unique_id=1274082110]
 mesh = SubResource("mesh_floor")
 surface_material_override/0 = SubResource("mat_ground")
 
-[node name="WallN" type="StaticBody3D" parent="NavRegion"]
+[node name="WallN" type="StaticBody3D" parent="NavRegion" unique_id=2140202782]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -40.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/WallN"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/WallN" unique_id=684801208]
 shape = SubResource("shape_wall_ns")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/WallN"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/WallN" unique_id=950377762]
 mesh = SubResource("mesh_wall_ns")
 surface_material_override/0 = SubResource("mat_rock")
 
-[node name="WallS" type="StaticBody3D" parent="NavRegion"]
+[node name="WallS" type="StaticBody3D" parent="NavRegion" unique_id=28270026]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 40.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/WallS"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/WallS" unique_id=1153613277]
 shape = SubResource("shape_wall_ns")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/WallS"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/WallS" unique_id=1509624954]
 mesh = SubResource("mesh_wall_ns")
 surface_material_override/0 = SubResource("mat_rock")
 
-[node name="WallE" type="StaticBody3D" parent="NavRegion"]
+[node name="WallE" type="StaticBody3D" parent="NavRegion" unique_id=1684999959]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5, 3, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/WallE"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/WallE" unique_id=1321701305]
 shape = SubResource("shape_wall_ew")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/WallE"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/WallE" unique_id=1734904390]
 mesh = SubResource("mesh_wall_ew")
 surface_material_override/0 = SubResource("mat_rock")
 
-[node name="WallW" type="StaticBody3D" parent="NavRegion"]
+[node name="WallW" type="StaticBody3D" parent="NavRegion" unique_id=998152159]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.5, 3, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/WallW"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/WallW" unique_id=603691314]
 shape = SubResource("shape_wall_ew")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/WallW"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/WallW" unique_id=1970807534]
 mesh = SubResource("mesh_wall_ew")
 surface_material_override/0 = SubResource("mat_rock")
 
-[node name="WallAtajoA" type="StaticBody3D" parent="NavRegion"]
+[node name="WallAtajoA" type="StaticBody3D" parent="NavRegion" unique_id=623987002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 2, 12.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/WallAtajoA"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/WallAtajoA" unique_id=1472457770]
 shape = SubResource("shape_atajo_a")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/WallAtajoA"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/WallAtajoA" unique_id=1665524081]
 mesh = SubResource("mesh_atajo_a")
 surface_material_override/0 = SubResource("mat_rock")
 
-[node name="WallAtajoB" type="StaticBody3D" parent="NavRegion"]
+[node name="WallAtajoB" type="StaticBody3D" parent="NavRegion" unique_id=295610443]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 2, 30.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/WallAtajoB"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/WallAtajoB" unique_id=1647484720]
 shape = SubResource("shape_atajo_b")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/WallAtajoB"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/WallAtajoB" unique_id=201262099]
 mesh = SubResource("mesh_atajo_b")
 surface_material_override/0 = SubResource("mat_rock")
 
-[node name="Plateau" type="StaticBody3D" parent="NavRegion"]
+[node name="Plateau" type="StaticBody3D" parent="NavRegion" unique_id=1692426645]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 2, -12)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Plateau"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Plateau" unique_id=1680808153]
 shape = SubResource("shape_plateau")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Plateau"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Plateau" unique_id=1118188750]
 mesh = SubResource("mesh_plateau")
 surface_material_override/0 = SubResource("mat_rock")
 
-[node name="Ramp" type="StaticBody3D" parent="NavRegion"]
+[node name="Ramp" type="StaticBody3D" parent="NavRegion" unique_id=150324000]
 transform = Transform3D(1, 0, 0, 0, 0.9487, -0.3162, 0, 0.3162, 0.9487, 24, 2, 4)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Ramp"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Ramp" unique_id=1423633859]
 shape = SubResource("shape_ramp")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Ramp"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Ramp" unique_id=1439188128]
 mesh = SubResource("mesh_ramp")
 surface_material_override/0 = SubResource("mat_rock")
 
-[node name="BossWallW" type="StaticBody3D" parent="NavRegion"]
+[node name="BossWallW" type="StaticBody3D" parent="NavRegion" unique_id=2021800394]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5, 2.5, -27)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/BossWallW"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/BossWallW" unique_id=208605550]
 shape = SubResource("shape_bosswall")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/BossWallW"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/BossWallW" unique_id=474107880]
 mesh = SubResource("mesh_bosswall")
 surface_material_override/0 = SubResource("mat_rock")
 
-[node name="BossWallE" type="StaticBody3D" parent="NavRegion"]
+[node name="BossWallE" type="StaticBody3D" parent="NavRegion" unique_id=806625226]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 2.5, -27)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/BossWallE"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/BossWallE" unique_id=446321253]
 shape = SubResource("shape_bosswall")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/BossWallE"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/BossWallE" unique_id=923497495]
 mesh = SubResource("mesh_bosswall")
 surface_material_override/0 = SubResource("mat_rock")
 
-[node name="FogGate" type="StaticBody3D" parent="."]
+[node name="FogGate" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, -27)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("32_bosstrigger")
+boss_path = NodePath("../BossCherufe")
+boss_id = "cherufe"
+boss_display_name = "Cherufe"
+health_bar_path = NodePath("../BossHealthBar")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FogGate"]
 shape = SubResource("shape_fog")
@@ -258,32 +283,32 @@ surface_material_override/0 = SubResource("mat_fog")
 [node name="Label3D" type="Label3D" parent="FogGate"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0.4)
 billboard = 1
-text = "El Cherufe duerme más allá…
-(arena del jefe — Fase 6)"
+text = "El Cherufe duerme más allá…"
 font_size = 40
 outline_size = 8
 
-[node name="Gate" parent="." instance=ExtResource("6_gate")]
+[node name="Gate" parent="." unique_id=1461430075 instance=ExtResource("6_gate")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 13, 0, 21)
 shortcut_id = "atajo_bosque"
 
-[node name="Lever" parent="." instance=ExtResource("7_lever")]
+[node name="Lever" parent="." unique_id=357823675 instance=ExtResource("7_lever")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 4, -19)
 gate = NodePath("../Gate")
 
-[node name="Rewe" parent="." instance=ExtResource("5_rewe")]
+[node name="Rewe" parent="." unique_id=1823305274 instance=ExtResource("5_rewe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 24)
 
-[node name="Player" parent="." instance=ExtResource("1_player")]
+[node name="Player" parent="." unique_id=1828636204 instance=ExtResource("1_player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.1, 28)
 
-[node name="SoldadoSendero" parent="." instance=ExtResource("2_enemy")]
+[node name="SoldadoSendero" parent="." unique_id=1726894113 instance=ExtResource("2_enemy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 8)
 
-[node name="RapidoSendero" parent="." instance=ExtResource("2_enemy")]
+[node name="RapidoSendero" parent="." unique_id=1356649946 instance=ExtResource("2_enemy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 14)
 body_color = Color(0.2, 0.65, 0.6, 1)
 max_health = 50.0
+newen_reward = 20
 chase_speed = 5.5
 attack_damage = 9.0
 attack_knockback = 4.0
@@ -292,12 +317,12 @@ attack_windup = 0.3
 attack_active = 0.15
 attack_recovery = 0.35
 attack_cooldown = 0.9
-newen_reward = 20
 
-[node name="EmboscadaRapido" parent="." instance=ExtResource("2_enemy")]
+[node name="EmboscadaRapido" parent="." unique_id=2099892391 instance=ExtResource("2_enemy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -2)
 body_color = Color(0.2, 0.65, 0.6, 1)
 max_health = 50.0
+newen_reward = 20
 chase_speed = 5.5
 attack_damage = 9.0
 attack_knockback = 4.0
@@ -306,11 +331,11 @@ attack_windup = 0.3
 attack_active = 0.15
 attack_recovery = 0.35
 attack_cooldown = 0.9
-newen_reward = 20
 
-[node name="EmboscadaArquero" parent="." instance=ExtResource("3_ranged")]
+[node name="EmboscadaArquero" parent="." unique_id=803512632 instance=ExtResource("3_ranged")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -5)
 max_health = 60.0
+newen_reward = 35
 chase_speed = 3.5
 detection_range = 11.0
 deaggro_range = 20.0
@@ -321,12 +346,12 @@ attack_windup = 0.7
 attack_active = 0.1
 attack_recovery = 0.5
 attack_cooldown = 2.2
-newen_reward = 35
 
-[node name="PesadoMeseta" parent="." instance=ExtResource("2_enemy")]
+[node name="PesadoMeseta" parent="." unique_id=810377001 instance=ExtResource("2_enemy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 4, -13)
 body_color = Color(0.55, 0.15, 0.12, 1)
 max_health = 150.0
+newen_reward = 60
 chase_speed = 2.6
 attack_damage = 24.0
 attack_knockback = 7.0
@@ -335,152 +360,171 @@ attack_windup = 0.8
 attack_active = 0.3
 attack_recovery = 0.9
 attack_cooldown = 2.0
-newen_reward = 60
 
-[node name="Decor" type="Node3D" parent="."]
+[node name="Decor" type="Node3D" parent="." unique_id=1614106660]
 
-[node name="Pino1" parent="Decor" instance=ExtResource("10_pine1")]
+[node name="Pino1" parent="Decor" unique_id=1862011104 instance=ExtResource("10_pine1")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -5, 0, 22)
 
-[node name="Pino2" parent="Decor" instance=ExtResource("11_pine2")]
+[node name="Pino2" parent="Decor" unique_id=114983994 instance=ExtResource("11_pine2")]
 transform = Transform3D(0, 0, 1.1, 0, 1.1, 0, -1.1, 0, 0, 5, 0, 21)
 
-[node name="Pino3" parent="Decor" instance=ExtResource("12_pine3")]
+[node name="Pino3" parent="Decor" unique_id=605930189 instance=ExtResource("12_pine3")]
 transform = Transform3D(-1.3, 0, 0, 0, 1.3, 0, 0, 0, -1.3, -6, 0, 17)
 
-[node name="Pino4" parent="Decor" instance=ExtResource("13_pine4")]
+[node name="Pino4" parent="Decor" unique_id=654843134 instance=ExtResource("13_pine4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 16)
 
-[node name="Pino5" parent="Decor" instance=ExtResource("14_pine5")]
+[node name="Pino5" parent="Decor" unique_id=2104539272 instance=ExtResource("14_pine5")]
 transform = Transform3D(0, 0, 1.25, 0, 1.25, 0, -1.25, 0, 0, -5, 0, 12)
 
-[node name="Pino6" parent="Decor" instance=ExtResource("10_pine1")]
+[node name="Pino6" parent="Decor" unique_id=2071360685 instance=ExtResource("10_pine1")]
 transform = Transform3D(-1.1, 0, 0, 0, 1.1, 0, 0, 0, -1.1, 6, 0, 11)
 
-[node name="Pino7" parent="Decor" instance=ExtResource("11_pine2")]
+[node name="Pino7" parent="Decor" unique_id=931693838 instance=ExtResource("11_pine2")]
 transform = Transform3D(1.35, 0, 0, 0, 1.35, 0, 0, 0, 1.35, -12, 0, -2)
 
-[node name="Pino8" parent="Decor" instance=ExtResource("12_pine3")]
+[node name="Pino8" parent="Decor" unique_id=1334397897 instance=ExtResource("12_pine3")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -9, 0, 6)
 
-[node name="Pino9" parent="Decor" instance=ExtResource("13_pine4")]
+[node name="Pino9" parent="Decor" unique_id=631318021 instance=ExtResource("13_pine4")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 12, 0, 2)
 
-[node name="Pino10" parent="Decor" instance=ExtResource("14_pine5")]
+[node name="Pino10" parent="Decor" unique_id=1235639619 instance=ExtResource("14_pine5")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 10, 0, 7)
 
-[node name="Pino11" parent="Decor" instance=ExtResource("10_pine1")]
+[node name="Pino11" parent="Decor" unique_id=1650629033 instance=ExtResource("10_pine1")]
 transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -13, 0, -10)
 
-[node name="Pino12" parent="Decor" instance=ExtResource("11_pine2")]
+[node name="Pino12" parent="Decor" unique_id=711253813 instance=ExtResource("11_pine2")]
 transform = Transform3D(0, 0, 1.15, 0, 1.15, 0, -1.15, 0, 0, 6, 0, -13)
 
-[node name="Pino13" parent="Decor" instance=ExtResource("12_pine3")]
+[node name="Pino13" parent="Decor" unique_id=1106056287 instance=ExtResource("12_pine3")]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -20, 0, 10)
 
-[node name="Pino14" parent="Decor" instance=ExtResource("13_pine4")]
+[node name="Pino14" parent="Decor" unique_id=1150784863 instance=ExtResource("13_pine4")]
 transform = Transform3D(-1.25, 0, 0, 0, 1.25, 0, 0, 0, -1.25, -25, 0, -5)
 
-[node name="Pino15" parent="Decor" instance=ExtResource("14_pine5")]
+[node name="Pino15" parent="Decor" unique_id=1872011796 instance=ExtResource("14_pine5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -18)
 
-[node name="Pino16" parent="Decor" instance=ExtResource("10_pine1")]
+[node name="Pino16" parent="Decor" unique_id=1616222458 instance=ExtResource("10_pine1")]
 transform = Transform3D(0, 0, 1.2, 0, 1.2, 0, -1.2, 0, 0, -28, 0, 20)
 
-[node name="Pino17" parent="Decor" instance=ExtResource("11_pine2")]
+[node name="Pino17" parent="Decor" unique_id=374581355 instance=ExtResource("11_pine2")]
 transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 30, 0, 25)
 
-[node name="Pino18" parent="Decor" instance=ExtResource("12_pine3")]
+[node name="Pino18" parent="Decor" unique_id=1786415612 instance=ExtResource("12_pine3")]
 transform = Transform3D(-1.1, 0, 0, 0, 1.1, 0, 0, 0, -1.1, 35, 0, 15)
 
-[node name="Pino19" parent="Decor" instance=ExtResource("13_pine4")]
+[node name="Pino19" parent="Decor" unique_id=1605944328 instance=ExtResource("13_pine4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, -18)
 
-[node name="Pino20" parent="Decor" instance=ExtResource("14_pine5")]
+[node name="Pino20" parent="Decor" unique_id=1899040353 instance=ExtResource("14_pine5")]
 transform = Transform3D(0, 0, 1.1, 0, 1.1, 0, -1.1, 0, 0, 30, 4, -6)
 
-[node name="Muerto1" parent="Decor" instance=ExtResource("15_dead1")]
+[node name="Muerto1" parent="Decor" unique_id=1116570792 instance=ExtResource("15_dead1")]
 transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -7, 0, -22)
 
-[node name="Muerto2" parent="Decor" instance=ExtResource("16_dead2")]
+[node name="Muerto2" parent="Decor" unique_id=639691450 instance=ExtResource("16_dead2")]
 transform = Transform3D(0, 0, 1.2, 0, 1.2, 0, -1.2, 0, 0, 7, 0, -23)
 
-[node name="Muerto3" parent="Decor" instance=ExtResource("17_dead3")]
+[node name="Muerto3" parent="Decor" unique_id=669306694 instance=ExtResource("17_dead3")]
 transform = Transform3D(-1.15, 0, 0, 0, 1.15, 0, 0, 0, -1.15, -3, 0, -25)
 
-[node name="Muerto4" parent="Decor" instance=ExtResource("15_dead1")]
+[node name="Muerto4" parent="Decor" unique_id=1085107389 instance=ExtResource("15_dead1")]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 10, 0, -20)
 
-[node name="Roca1" parent="Decor" instance=ExtResource("18_rock1")]
+[node name="Roca1" parent="Decor" unique_id=728408635 instance=ExtResource("18_rock1")]
 transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, -14, 0, 2)
 
-[node name="Roca2" parent="Decor" instance=ExtResource("19_rock2")]
+[node name="Roca2" parent="Decor" unique_id=1596017281 instance=ExtResource("19_rock2")]
 transform = Transform3D(0, 0, 1.4, 0, 1.4, 0, -1.4, 0, 0, 11, 0, -8)
 
-[node name="Roca3" parent="Decor" instance=ExtResource("20_rock3")]
+[node name="Roca3" parent="Decor" unique_id=1750878348 instance=ExtResource("20_rock3")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -6, 0, 18)
 
-[node name="Roca4" parent="Decor" instance=ExtResource("18_rock1")]
+[node name="Roca4" parent="Decor" unique_id=1854987911 instance=ExtResource("18_rock1")]
 transform = Transform3D(-1.5, 0, 0, 0, 1.5, 0, 0, 0, -1.5, 26, 0, 12)
 
-[node name="Roca5" parent="Decor" instance=ExtResource("19_rock2")]
+[node name="Roca5" parent="Decor" unique_id=323642280 instance=ExtResource("19_rock2")]
 transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 18, 0, 8)
 
-[node name="Roca6" parent="Decor" instance=ExtResource("20_rock3")]
+[node name="Roca6" parent="Decor" unique_id=1821189120 instance=ExtResource("20_rock3")]
 transform = Transform3D(0, 0, 1.7, 0, 1.7, 0, -1.7, 0, 0, -22, 0, -12)
 
-[node name="Arbusto1" parent="Decor" instance=ExtResource("21_bush")]
+[node name="Arbusto1" parent="Decor" unique_id=110463221 instance=ExtResource("21_bush")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 4, 0, 20)
 
-[node name="Arbusto2" parent="Decor" instance=ExtResource("22_bushlg")]
+[node name="Arbusto2" parent="Decor" unique_id=1946335577 instance=ExtResource("22_bushlg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 12)
 
-[node name="Arbusto3" parent="Decor" instance=ExtResource("21_bush")]
+[node name="Arbusto3" parent="Decor" unique_id=1526982972 instance=ExtResource("21_bush")]
 transform = Transform3D(0, 0, 1.3, 0, 1.3, 0, -1.3, 0, 0, 8, 0, 4)
 
-[node name="Arbusto4" parent="Decor" instance=ExtResource("22_bushlg")]
+[node name="Arbusto4" parent="Decor" unique_id=1474027358 instance=ExtResource("22_bushlg")]
 transform = Transform3D(-1.1, 0, 0, 0, 1.1, 0, 0, 0, -1.1, -10, 0, -6)
 
-[node name="Arbusto5" parent="Decor" instance=ExtResource("21_bush")]
+[node name="Arbusto5" parent="Decor" unique_id=1981001470 instance=ExtResource("21_bush")]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 20, 0, 14)
 
-[node name="Arbusto6" parent="Decor" instance=ExtResource("22_bushlg")]
+[node name="Arbusto6" parent="Decor" unique_id=1584176287 instance=ExtResource("22_bushlg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 4, -14)
 
-[node name="Hierba1" parent="Decor" instance=ExtResource("23_grass")]
+[node name="Hierba1" parent="Decor" unique_id=719713469 instance=ExtResource("23_grass")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 18)
 
-[node name="Hierba2" parent="Decor" instance=ExtResource("23_grass")]
+[node name="Hierba2" parent="Decor" unique_id=2073409137 instance=ExtResource("23_grass")]
 transform = Transform3D(0, 0, 1.4, 0, 1.4, 0, -1.4, 0, 0, -4, 0, 4)
 
-[node name="Hierba3" parent="Decor" instance=ExtResource("23_grass")]
+[node name="Hierba3" parent="Decor" unique_id=1421392533 instance=ExtResource("23_grass")]
 transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 5, 0, -3)
 
-[node name="Hierba4" parent="Decor" instance=ExtResource("23_grass")]
+[node name="Hierba4" parent="Decor" unique_id=939968567 instance=ExtResource("23_grass")]
 transform = Transform3D(-1.5, 0, 0, 0, 1.5, 0, 0, 0, -1.5, -2, 0, -14)
 
-[node name="Hierba5" parent="Decor" instance=ExtResource("23_grass")]
+[node name="Hierba5" parent="Decor" unique_id=1881973425 instance=ExtResource("23_grass")]
 transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 16, 0, 20)
 
-[node name="Hierba6" parent="Decor" instance=ExtResource("23_grass")]
+[node name="Hierba6" parent="Decor" unique_id=781138044 instance=ExtResource("23_grass")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 22, 4, -10)
 
-[node name="ReweHut" parent="." instance=ExtResource("24_ruca")]
+[node name="ReweHut" parent="." unique_id=605462224 instance=ExtResource("24_ruca")]
 transform = Transform3D(0.985, 0, -0.174, 0, 1, 0, 0.174, 0, 0.985, 5, 0, 21)
 
-[node name="AncestroSendero" parent="." instance=ExtResource("25_chema1")]
+[node name="AncestroSendero" parent="." unique_id=268162441 instance=ExtResource("25_chema1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 11)
 
-[node name="AncestroEmboscada" parent="." instance=ExtResource("26_chema2")]
+[node name="AncestroEmboscada" parent="." unique_id=1303794548 instance=ExtResource("26_chema2")]
 transform = Transform3D(0.966, 0, 0.259, 0, 1, 0, -0.259, 0, 0.966, 5, 0, -3)
 
-[node name="EsculturaBienvenida" parent="." instance=ExtResource("27_escult")]
-transform = Transform3D(0.866, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866, 6, 0, 26)
+[node name="EsculturaBienvenida" parent="." unique_id=1959249750 instance=ExtResource("27_escult")]
+transform = Transform3D(0.86543983, -0.035961043, -0.4996766, 0.025960185, 0.9992996, -0.02695203, 0.50029576, 0.010354117, 0.86576724, 5.8094254, -0.988716, 27.120523)
 
-[node name="TotemsCorrupcion" parent="." instance=ExtResource("28_totems")]
+[node name="TotemsCorrupcion" parent="." unique_id=1705327991 instance=ExtResource("28_totems")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
 
-[node name="MascaraGuardiana" parent="." instance=ExtResource("29_kollon")]
+[node name="MascaraGuardiana" parent="." unique_id=442314032 instance=ExtResource("29_kollon")]
 transform = Transform3D(0.707, 0, 0.707, 0, 1, 0, -0.707, 0, 0.707, 20, 4, -10)
 
-[node name="DebugHud" parent="." instance=ExtResource("4_hud")]
+[node name="ArenaFloor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -33.5)
+mesh = SubResource("mesh_arena_floor")
+surface_material_override/0 = SubResource("mat_arena_floor")
+
+[node name="LavaCrack1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.966, 0, 0.259, 0, 1, 0, -0.259, 0, 0.966, -8, 0.14, -32)
+mesh = SubResource("mesh_lava_crack")
+surface_material_override/0 = SubResource("mat_lava_crack")
+
+[node name="LavaCrack2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.966, 0, -0.259, 0, 1, 0, 0.259, 0, 0.966, 9, 0.14, -35)
+mesh = SubResource("mesh_lava_crack")
+surface_material_override/0 = SubResource("mat_lava_crack")
+
+[node name="BossCherufe" parent="." instance=ExtResource("30_cherufe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34)
+
+[node name="BossHealthBar" parent="." instance=ExtResource("31_bosshud")]
+
+[node name="DebugHud" parent="." unique_id=1628268555 instance=ExtResource("4_hud")]

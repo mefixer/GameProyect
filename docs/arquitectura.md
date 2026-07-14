@@ -300,6 +300,30 @@ Al pulsar **E** dentro del área del rewe:
 **R** cura el 40% de la vida máxima si queda algún frasco (3 al inicio).
 Solo se rellenan descansando en el rewe.
 
+## El jefe: Cherufe (Fase 6)
+
+Diseño completo, tabla de ataques y diagrama de estados en
+[jefe-cherufe.md](jefe-cherufe.md). Resumen de la arquitectura:
+
+- **No hereda de `EnemyBase`**: la FSM del jefe (`boss_cherufe.gd`) es propia
+  porque su comportamiento diverge bastante (sin estado RETURN/casa, dos fases,
+  tres ataques en vez de uno) — reutiliza los mismos componentes
+  (HealthComponent, Hurtbox, Hitbox, NavigationAgent3D) pero no la lógica de FSM.
+- **Activación diferida**: nace `DORMANT` (hurtbox inactiva) hasta que
+  `boss_trigger.gd` —el `Area3D` en el que se convirtió la niebla— llama a
+  `awaken(player)`. Antes de eso es completamente inofensivo e invulnerable.
+- **Persistencia de jefes**: `GameState.defeated_bosses` (paralelo a
+  `shortcuts`) recuerda para siempre qué jefes están muertos; el jefe
+  se autodestruye en `_ready()` si ya figura como vencido, incluso tras
+  recargar la escena al descansar en el rewe.
+- **Peligro de erupción** (`eruption_hazard.tscn`, solo Fase 2): anillo de
+  aviso que crece durante el telegrafiado y detona con un `Hitbox` — mismo
+  patrón hitbox/hurtbox que el resto del combate, sin caso especial.
+- **Barra de vida de jefe**: `boss_health_bar.tscn` permanece oculta hasta
+  que `boss_trigger.gd` llama a `track(boss, nombre)`, que conecta sus propias
+  señales (`health_changed`, `died`, `phase_changed`) — el mismo patrón
+  desacoplado que usa el HUD del jugador.
+
 ## Cámara y lock-on
 
 - `CameraRig` es `top_level`: sigue la **posición** del jugador con suavizado pero
