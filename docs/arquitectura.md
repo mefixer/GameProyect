@@ -377,6 +377,21 @@ flowchart TD
   ignora el otro mientras esté visible gracias a `get_viewport().set_input_as_handled()`
   tras actuar, evitando una condición de carrera donde cerrar uno reabriera
   el otro en el mismo frame.
+
+> [!warning] Gotcha de Godot: `Control` vacío + `mouse_filter` por defecto
+> `MainMenu` y `PauseMenu` tienen un `OptionsContainer` — un `Control` vacío
+> a pantalla completa donde se instancia `OptionsMenu` solo cuando se abre.
+> Como es el **último** hijo (se dibuja encima de todo) y el `mouse_filter`
+> por defecto de un `Control` es **Stop**, absorbía cualquier clic del ratón
+> aunque no tuviera hijos ni contenido visible — el menú se veía perfecto
+> pero ningún botón respondía. En `PauseMenu` (autoload siempre presente)
+> esto bloqueaba el ratón en **todo el juego**, no solo en el menú.
+> **Fix**: `mouse_filter = 2` (`MOUSE_FILTER_IGNORE`) en el contenedor vacío
+> — dejar pasar el clic mientras no tenga contenido interactivo propio.
+> Lección: cualquier `Control` de pantalla completa que exista "por si acaso"
+> (contenedores de overlays dinámicos, áreas de drop, etc.) necesita revisar
+> su `mouse_filter` explícitamente si no está pensado para capturar input.
+
 - **Grupo `"level"`**: los menús de pausa/inventario solo reaccionan si
   `get_tree().current_scene` pertenece a este grupo — así no interfieren
   con el menú principal, que no lo tiene.
