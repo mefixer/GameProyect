@@ -95,7 +95,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 1.3, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.425)
 
 [node name="SwordModel" parent="Visual/WeaponPivot/Weapon" unique_id=263281525 instance=ExtResource("7_demon_sword")]
-transform = Transform3D(0.095775075, 0.028355, 0.00480923, 0, 0.01672197, -0.09859197, -0.02875995, 0.09442653, 0.01601548, 0.19844365, 0.15828764, -0.39782804)
+transform = Transform3D(0.095775075, 0.028355, 0.00480923, 0, 0.01672197, -0.09859197, -0.02875995, 0.09442653, 0.01601548, 0.16080958, 0.15815377, -0.56203836)
 
 [node name="Hitbox" type="Area3D" parent="Visual/WeaponPivot/Weapon" unique_id=1146340969]
 collision_layer = 0
@@ -112,7 +112,7 @@ shape = SubResource("shape_hitbox")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42, 1.15, 0)
 
 [node name="Shield" type="MeshInstance3D" parent="Visual/ShieldPivot" unique_id=278437386]
-transform = Transform3D(0.98236835, 0, 0.18695563, 0.056654315, 0.9529791, -0.29769313, -0.17816481, 0.30303615, 0.9361765, 0.037398607, -0.038351297, -0.46389854)
+transform = Transform3D(0.98236835, 0, 0.18695563, 0.056654315, 0.9529791, -0.29769313, -0.17816481, 0.30303615, 0.9361765, -0.22544327, -0.03827381, -0.2910748)
 mesh = SubResource("mesh_shield")
 surface_material_override/0 = SubResource("mat_shield")
 

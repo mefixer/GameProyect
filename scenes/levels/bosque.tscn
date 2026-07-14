@@ -29,10 +29,10 @@
 [ext_resource type="PackedScene" uid="uid://dprop0escult1" path="res://scenes/props/escultura_pueblos.tscn" id="27_escult"]
 [ext_resource type="PackedScene" uid="uid://dprop0totems1" path="res://scenes/props/totems_colectivo.tscn" id="28_totems"]
 [ext_resource type="PackedScene" uid="uid://dprop0kollon1" path="res://scenes/props/mascara_kollon.tscn" id="29_kollon"]
-[ext_resource type="PackedScene" path="res://scenes/bosses/boss_cherufe.tscn" id="30_cherufe"]
-[ext_resource type="PackedScene" path="res://scenes/ui/boss_health_bar.tscn" id="31_bosshud"]
-[ext_resource type="Script" path="res://scripts/world/boss_trigger.gd" id="32_bosstrigger"]
-[ext_resource type="PackedScene" path="res://scenes/wildlife/huemul.tscn" id="33_huemul"]
+[ext_resource type="PackedScene" uid="uid://bopxjv4p7uwy5" path="res://scenes/bosses/boss_cherufe.tscn" id="30_cherufe"]
+[ext_resource type="PackedScene" uid="uid://v4x5u0cqn465" path="res://scenes/ui/boss_health_bar.tscn" id="31_bosshud"]
+[ext_resource type="Script" uid="uid://bf56ydvhw3uiv" path="res://scripts/world/boss_trigger.gd" id="32_bosstrigger"]
+[ext_resource type="PackedScene" uid="uid://bmyac1adg642m" path="res://scenes/wildlife/huemul.tscn" id="33_huemul"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.12, 0.15, 0.22, 1)
@@ -116,6 +116,13 @@ size = Vector3(10, 4.4, 0.3)
 [sub_resource type="BoxMesh" id="mesh_fog"]
 size = Vector3(10, 4.4, 0.3)
 
+[sub_resource type="StandardMaterial3D" id="mat_fog"]
+transparency = 1
+albedo_color = Color(1, 0.45, 0.15, 0.4)
+emission_enabled = true
+emission = Color(1, 0.4, 0.1, 1)
+emission_energy_multiplier = 1.5
+
 [sub_resource type="BoxMesh" id="mesh_arena_floor"]
 size = Vector3(30, 0.15, 12)
 
@@ -130,13 +137,6 @@ albedo_color = Color(1, 0.35, 0.1, 1)
 emission_enabled = true
 emission = Color(1, 0.3, 0.05, 1)
 emission_energy_multiplier = 2.5
-
-[sub_resource type="StandardMaterial3D" id="mat_fog"]
-transparency = 1
-albedo_color = Color(1, 0.45, 0.15, 0.4)
-emission_enabled = true
-emission = Color(1, 0.4, 0.1, 1)
-emission_energy_multiplier = 1.5
 
 [node name="Bosque" type="Node3D" unique_id=147320806 groups=["level"]]
 script = ExtResource("9_levelmgr")
@@ -161,6 +161,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("shape_floor")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Floor" unique_id=1274082110]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0064783096, 0.04557991, -0.0062246323)
 mesh = SubResource("mesh_floor")
 surface_material_override/0 = SubResource("mat_ground")
 
@@ -264,24 +265,22 @@ shape = SubResource("shape_bosswall")
 mesh = SubResource("mesh_bosswall")
 surface_material_override/0 = SubResource("mat_rock")
 
-[node name="FogGate" type="Area3D" parent="."]
+[node name="FogGate" type="Area3D" parent="." unique_id=632952783]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, -27)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("32_bosstrigger")
 boss_path = NodePath("../BossCherufe")
-boss_id = "cherufe"
-boss_display_name = "Cherufe"
 health_bar_path = NodePath("../BossHealthBar")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FogGate"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FogGate" unique_id=1135427684]
 shape = SubResource("shape_fog")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="FogGate"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FogGate" unique_id=1829210195]
 mesh = SubResource("mesh_fog")
 surface_material_override/0 = SubResource("mat_fog")
 
-[node name="Label3D" type="Label3D" parent="FogGate"]
+[node name="Label3D" type="Label3D" parent="FogGate" unique_id=314754670]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0.4)
 billboard = 1
 text = "El Cherufe duerme más allá…"
@@ -297,10 +296,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 4, -19)
 gate = NodePath("../Gate")
 
 [node name="Rewe" parent="." unique_id=1823305274 instance=ExtResource("5_rewe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 24)
+transform = Transform3D(0.87857085, 0.025368638, 0.47693783, -0.06664154, 0.9953312, 0.06981855, -0.4729399, -0.093124405, 0.8761596, -4.905075, -0.6970396, 29.155539)
+rotation_edit_mode = 1
 
 [node name="Player" parent="." unique_id=1828636204 instance=ExtResource("1_player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.1, 28)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.057425, 0.34246883, 27.30152)
 
 [node name="SoldadoSendero" parent="." unique_id=1726894113 instance=ExtResource("2_enemy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 8)
@@ -365,7 +365,7 @@ attack_cooldown = 2.0
 [node name="Decor" type="Node3D" parent="." unique_id=1614106660]
 
 [node name="Pino1" parent="Decor" unique_id=1862011104 instance=ExtResource("10_pine1")]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -5, 0, 22)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -10.542509, -0.42777944, 27.890835)
 
 [node name="Pino2" parent="Decor" unique_id=114983994 instance=ExtResource("11_pine2")]
 transform = Transform3D(0, 0, 1.1, 0, 1.1, 0, -1.1, 0, 0, 5, 0, 21)
@@ -500,7 +500,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 11)
 transform = Transform3D(0.966, 0, 0.259, 0, 1, 0, -0.259, 0, 0.966, 5, 0, -3)
 
 [node name="EsculturaBienvenida" parent="." unique_id=1959249750 instance=ExtResource("27_escult")]
-transform = Transform3D(0.86543983, -0.035961043, -0.4996766, 0.025960185, 0.9992996, -0.02695203, 0.50029576, 0.010354117, 0.86576724, 5.8094254, -0.988716, 27.120523)
+transform = Transform3D(0.86543983, -0.035961043, -0.4996766, 0.025960185, 0.9992996, -0.02695203, 0.50029576, 0.010354117, 0.86576724, 5.5818415, -0.83141667, 29.14466)
 
 [node name="TotemsCorrupcion" parent="." unique_id=1705327991 instance=ExtResource("28_totems")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
@@ -508,30 +508,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
 [node name="MascaraGuardiana" parent="." unique_id=442314032 instance=ExtResource("29_kollon")]
 transform = Transform3D(0.707, 0, 0.707, 0, 1, 0, -0.707, 0, 0.707, 20, 4, -10)
 
-[node name="ArenaFloor" type="MeshInstance3D" parent="."]
+[node name="ArenaFloor" type="MeshInstance3D" parent="." unique_id=751164152]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -33.5)
 mesh = SubResource("mesh_arena_floor")
 surface_material_override/0 = SubResource("mat_arena_floor")
 
-[node name="LavaCrack1" type="MeshInstance3D" parent="."]
+[node name="LavaCrack1" type="MeshInstance3D" parent="." unique_id=899322406]
 transform = Transform3D(0.966, 0, 0.259, 0, 1, 0, -0.259, 0, 0.966, -8, 0.14, -32)
 mesh = SubResource("mesh_lava_crack")
 surface_material_override/0 = SubResource("mat_lava_crack")
 
-[node name="LavaCrack2" type="MeshInstance3D" parent="."]
+[node name="LavaCrack2" type="MeshInstance3D" parent="." unique_id=1184767150]
 transform = Transform3D(0.966, 0, -0.259, 0, 1, 0, 0.259, 0, 0.966, 9, 0.14, -35)
 mesh = SubResource("mesh_lava_crack")
 surface_material_override/0 = SubResource("mat_lava_crack")
 
-[node name="BossCherufe" parent="." instance=ExtResource("30_cherufe")]
+[node name="BossCherufe" parent="." unique_id=233243074 instance=ExtResource("30_cherufe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34)
 
-[node name="BossHealthBar" parent="." instance=ExtResource("31_bosshud")]
+[node name="BossHealthBar" parent="." unique_id=397662198 instance=ExtResource("31_bosshud")]
 
-[node name="Huemul1" parent="." instance=ExtResource("33_huemul")]
+[node name="Huemul1" parent="." unique_id=1057557160 instance=ExtResource("33_huemul")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 18)
 
-[node name="Huemul2" parent="." instance=ExtResource("33_huemul")]
+[node name="Huemul2" parent="." unique_id=843746704 instance=ExtResource("33_huemul")]
 transform = Transform3D(0.966, 0, 0.259, 0, 1, 0, -0.259, 0, 0.966, -10, 0, 16)
 
 [node name="DebugHud" parent="." unique_id=1628268555 instance=ExtResource("4_hud")]

@@ -57,7 +57,7 @@ func _set_key_binding(action: String, physical_keycode: int) -> void:
 		if event is InputEventKey:
 			InputMap.action_erase_event(action, event)
 	var new_event := InputEventKey.new()
-	new_event.physical_keycode = physical_keycode
+	new_event.physical_keycode = physical_keycode as Key
 	InputMap.action_add_event(action, new_event)
 
 

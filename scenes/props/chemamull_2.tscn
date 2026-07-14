@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dprop0chema02"]
+[gd_scene format=3 uid="uid://dprop0chema02"]
 
-[ext_resource type="PackedScene" path="res://assets/models/mapuche_sketchfab/chemamull_2/scene.gltf" id="1_chema2"]
+[ext_resource type="PackedScene" uid="uid://cqcvme4v6eh07" path="res://assets/models/mapuche_sketchfab/chemamull_2/scene.gltf" id="1_chema2"]
 
-[node name="Chemamull2" type="Node3D"]
+[node name="Chemamull2" type="Node3D" unique_id=2057457861]
 
-[node name="Scan" parent="." instance=ExtResource("1_chema2")]
-transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 1.491, 0)
+[node name="Scan" parent="." unique_id=415156638 instance=ExtResource("1_chema2")]
+transform = Transform3D(0.058869768, -0.12514697, -0.36380875, -0.33023193, 0.0056233406, -0.108342245, -0.05430456, -0.16986385, 0.26444906, 0.12837434, 0.817268, -0.09658992)

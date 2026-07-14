@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dprop0rehue01"]
+[gd_scene format=3 uid="uid://dprop0rehue01"]
 
-[ext_resource type="PackedScene" path="res://assets/models/mapuche_sketchfab/rehue/scene.gltf" id="1_rehue"]
+[ext_resource type="PackedScene" uid="uid://bpw2f22as7r4c" path="res://assets/models/mapuche_sketchfab/rehue/scene.gltf" id="1_rehue"]
 
-[node name="Rehue" type="Node3D"]
+[node name="Rehue" type="Node3D" unique_id=1147033085]
 
-[node name="Scan" parent="." instance=ExtResource("1_rehue")]
-transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 2.43, 0)
+[node name="Scan" parent="." unique_id=1577048577 instance=ExtResource("1_rehue")]
+transform = Transform3D(1.054289, 0.024953237, 0, -0.0096239885, 2.7335787, 0, 0, 0, 1.9959347, -0.32641637, 2.5558047, -3.3965225)

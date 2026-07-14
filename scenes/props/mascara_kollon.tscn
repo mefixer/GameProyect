@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dprop0kollon1"]
+[gd_scene format=3 uid="uid://dprop0kollon1"]
 
-[ext_resource type="PackedScene" path="res://assets/models/mapuche_sketchfab/mascara_kollon/scene.gltf" id="1_kollon"]
+[ext_resource type="PackedScene" uid="uid://c1yvj5uj0oioq" path="res://assets/models/mapuche_sketchfab/mascara_kollon/scene.gltf" id="1_kollon"]
 
-[node name="MascaraKollon" type="Node3D"]
+[node name="MascaraKollon" type="Node3D" unique_id=1025629237]
 
-[node name="Scan" parent="." instance=ExtResource("1_kollon")]
-transform = Transform3D(0.056, 0, 0, 0, 0.056, 0, 0, 0, 0.056, 0, 1.446, 0)
+[node name="Scan" parent="." unique_id=882932304 instance=ExtResource("1_kollon")]
+transform = Transform3D(0.056, 0, 0, 0, 0.056, 0, 0, 0, 0.056, 0.45018983, 0.7245188, 0.20318794)

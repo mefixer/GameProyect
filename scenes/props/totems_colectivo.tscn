@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dprop0totems1"]
+[gd_scene format=3 uid="uid://dprop0totems1"]
 
-[ext_resource type="PackedScene" path="res://assets/models/mapuche_sketchfab/totems_colectivo/scene.gltf" id="1_totems"]
+[ext_resource type="PackedScene" uid="uid://c1k7rtyejx6mj" path="res://assets/models/mapuche_sketchfab/totems_colectivo/scene.gltf" id="1_totems"]
 
-[node name="TotemsColectivo" type="Node3D"]
+[node name="TotemsColectivo" type="Node3D" unique_id=1765639183]
 
-[node name="Scan" parent="." instance=ExtResource("1_totems")]
-transform = Transform3D(0.126, 0, 0, 0, 0.126, 0, 0, 0, 0.126, 0, 0.611, 0)
+[node name="Scan" parent="." unique_id=736630695 instance=ExtResource("1_totems")]
+transform = Transform3D(0.19927348, 0, 0, 0, 0.17787609, 0, 0, 0, 0.21880448, 0, 0.611, 0)

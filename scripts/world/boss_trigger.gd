@@ -33,6 +33,7 @@ func _on_body_entered(body: Node3D) -> void:
 	var hud := get_node_or_null(health_bar_path)
 	if hud:
 		hud.track(boss, boss_display_name)
-	create_tween().tween_property(visual, "modulate:a", 0.0, 1.5) \
-			.finished.connect(func() -> void: visual.visible = false)
+	var tween := create_tween()
+	tween.tween_property(visual, "transparency", 1.0, 1.5)
+	tween.finished.connect(func() -> void: visual.visible = false)
 	label.visible = false
