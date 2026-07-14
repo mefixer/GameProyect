@@ -1,6 +1,6 @@
 # Arquitectura del código
 
-Documentación técnica del estado actual (Fases 1–2: movimiento, cámara y combate núcleo).
+Documentación técnica del estado actual (Fases 1–3: movimiento, cámara, combate y enemigos con IA).
 Los diagramas son [Mermaid](https://mermaid.js.org) — GitHub y Obsidian los renderizan.
 
 ## Visión general
@@ -95,6 +95,9 @@ Notas:
   un toque corto (≤ 0.2 s) ejecuta la rodada.
 - En `BLOCK`, un golpe frontal **no** cambia de estado (solo gasta estamina), salvo
   que la deje en 0 → guard break con aturdimiento largo (0.9 s vs 0.4 s normal).
+- **Parry**: los primeros **0.18 s** tras levantar el escudo son ventana de parry —
+  un golpe recibido ahí no hace daño ni gasta estamina, produce hitstop largo y
+  llama a `on_parried()` del atacante, que queda aturdido ~2 s (ventana de castigo).
 - `DEAD` recarga la escena a los 2.5 s.
 
 ## Ataques: ventanas de tiempo
@@ -148,7 +151,9 @@ flowchart TD
     A[hit_received] --> B{¿DEAD?}
     B -- sí --> Z[ignorar]
     B -- no --> C{¿BLOCK y golpe<br/>frontal?}
-    C -- sí --> D["estamina -= daño × 1.2<br/>sin daño a la vida"]
+    C -- sí --> P{¿dentro de la ventana<br/>de parry (0.18 s)?}
+    P -- sí --> PR["PARRY ⚡<br/>sin daño ni estamina<br/>atacante aturdido 2 s"]
+    P -- no --> D["estamina -= daño × 1.2<br/>sin daño a la vida"]
     D --> E{¿estamina = 0?}
     E -- no --> F[sigue bloqueando<br/>pushback leve]
     E -- sí --> G[GUARD BREAK<br/>aturdimiento 0.9 s]
@@ -184,6 +189,68 @@ flowchart TD
 | Hurtbox | 8 | — | Recibe |
 | Hitbox | — | 8 | Golpea |
 
+## IA de enemigos (Fase 3)
+
+`enemy_base.gd` (`EnemyBase`) implementa la FSM común; las variantes se crean
+**solo con exports** (color, vida, velocidades, tiempos de ataque) al instanciar
+la escena — no hay un script por variante, salvo la de a distancia que
+sobreescribe dos métodos para disparar proyectiles.
+
+```mermaid
+stateDiagram-v2
+    [*] --> IDLE
+    IDLE --> CHASE : jugador a menos de<br/>detection_range
+    CHASE --> ATTACK : en rango y<br/>cooldown listo
+    ATTACK --> CHASE : fin de recovery<br/>(inicia cooldown)
+    CHASE --> RETURN : jugador a más de<br/>deaggro_range o muerto
+    RETURN --> CHASE : jugador reaparece<br/>en detection_range
+    RETURN --> IDLE : llega a casa<br/>(se cura al 100%)
+    IDLE --> HIT : recibe daño (agrede)
+    CHASE --> HIT : recibe daño
+    ATTACK --> HIT : recibe daño o<br/>es parriado (2 s)
+    HIT --> CHASE : fin aturdimiento
+    HIT --> DEAD : vida 0
+    CHASE --> DEAD : vida 0
+    DEAD --> [*] : queue_free a los 4 s
+```
+
+Reglas clave:
+
+- **Telegrafiado**: al iniciar ataque, destello amarillo + el arma se alza durante
+  todo el windup. Durante el windup el enemigo sigue apuntando al jugador; la
+  dirección queda fijada al soltar el golpe (esquivable).
+- **Recibir daño siempre agrede**, aunque el jugador esté fuera del rango de visión.
+- **Volver a casa cura al 100%** (regla souls: no se puede desgastar a un enemigo
+  a base de huir).
+- **Parry**: `on_parried()` interrumpe el ataque y aturde `parry_stagger` (2 s).
+- **Sin fuego amigo**: los hitboxes de enemigos usan `ignore_group = "enemies"`.
+
+### Variantes actuales (configuradas en el greybox)
+
+| Variante | Color | Vida | Velocidad | Daño | Windup | Rasgo |
+| --- | --- | --- | --- | --- | --- | --- |
+| Pesado | Rojo oscuro | 150 | 2.6 | 24 | 0.8 s | Lento, pega como camión |
+| Rápido | Verde azulado | 50 | 5.5 | 9 | 0.3 s | Frágil, apenas telegrafía |
+| A distancia | Púrpura | 60 | 3.5 | 12 | 0.7 s | Dispara a 9 m, retrocede si te acercas a 4 m |
+
+### Navegación
+
+- El greybox cuelga su geometría de un `NavigationRegion3D` cuyo navmesh se
+  **hornea en runtime** (`navmesh_baker.gd` llama a `bake_navigation_mesh()` en
+  `_ready`), parseando los colisionadores estáticos hijos. Editar el nivel no
+  requiere rehornear a mano.
+- Cada enemigo lleva un `NavigationAgent3D`: en CHASE/RETURN fija
+  `target_position` y avanza hacia `get_next_path_position()`.
+- Los enemigos no colisionan entre sí (mask = mundo + jugador) para evitar
+  atascos en pasillos.
+
+### Proyectiles
+
+`projectile.tscn`: nodo con un `Hitbox` (mask = hurtboxes + mundo). Vuela recto,
+se destruye al impactar cualquier cosa o a los 4 s. El enemigo a distancia lo
+instancia en `_attack_became_active()` apuntando al pecho del jugador — se
+esquiva con la rodada (i-frames) o moviéndose lateralmente.
+
 ## Cámara y lock-on
 
 - `CameraRig` es `top_level`: sigue la **posición** del jugador con suavizado pero
@@ -201,8 +268,9 @@ flowchart TD
 
 | Grupo | Uso |
 | --- | --- |
-| `player` | El HUD localiza al jugador sin acoplarse a la escena |
+| `player` | El HUD y los enemigos localizan al jugador sin acoplarse a la escena |
 | `lock_target` | Candidatos al lock-on; salir del grupo = morir a efectos de juego |
+| `enemies` | Fuego amigo: los hitboxes enemigos ignoran hurtboxes de este grupo |
 
 | Señal | Emisor | Escuchas típicas |
 | --- | --- | --- |

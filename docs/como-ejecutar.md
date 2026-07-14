@@ -86,6 +86,7 @@ godot --path .
 | Ataque ligero | Clic izquierdo | RB / R1 |
 | Ataque fuerte | Q | Gatillo derecho |
 | Bloquear (mantener) | Clic derecho | LB / L1 |
+| Parry (bloquear justo antes del impacto) | Clic derecho | LB / L1 |
 | Lock-on / soltar lock-on | Tab o clic central | R3 |
 | Cambiar objetivo fijado | Rueda del ratón | — |
 | Soltar/recapturar el ratón | Esc / clic | — |

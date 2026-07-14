@@ -1,9 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://dq1vf6z8yw3sm"]
+[gd_scene load_steps=30 format=3 uid="uid://dq1vf6z8yw3sm"]
 
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_playerscn"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/training_dummy.tscn" id="2_dummyscn"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/spinner_dummy.tscn" id="3_spinnerscn"]
 [ext_resource type="PackedScene" path="res://scenes/ui/debug_hud.tscn" id="4_hudscn"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="5_enemyscn"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/ranged_enemy.tscn" id="6_rangedscn"]
+[ext_resource type="Script" path="res://scripts/levels/navmesh_baker.gd" id="7_baker"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.18, 0.22, 0.35, 1)
@@ -18,6 +21,10 @@ sky_material = SubResource("sky_mat")
 background_mode = 2
 sky = SubResource("sky")
 tonemap_mode = 2
+
+[sub_resource type="NavigationMesh" id="navmesh"]
+geometry_parsed_geometry_type = 1
+agent_radius = 0.4
 
 [sub_resource type="StandardMaterial3D" id="mat_floor"]
 albedo_color = Color(0.35, 0.36, 0.38, 1)
@@ -82,103 +89,107 @@ environment = SubResource("env")
 transform = Transform3D(0.86603, -0.38302, 0.32139, 0, 0.64279, 0.76604, -0.5, -0.66341, 0.55667, 0, 12, 0)
 shadow_enabled = true
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="NavRegion" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("navmesh")
+script = ExtResource("7_baker")
+
+[node name="Floor" type="StaticBody3D" parent="NavRegion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Floor"]
 shape = SubResource("shape_floor")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Floor"]
 mesh = SubResource("mesh_floor")
 surface_material_override/0 = SubResource("mat_floor")
 
-[node name="Ramp" type="StaticBody3D" parent="."]
+[node name="Ramp" type="StaticBody3D" parent="NavRegion"]
 transform = Transform3D(1, 0, 0, 0, 0.96593, -0.25882, 0, 0.25882, 0.96593, 8, 1, -8)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Ramp"]
 shape = SubResource("shape_ramp")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ramp"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Ramp"]
 mesh = SubResource("mesh_ramp")
 surface_material_override/0 = SubResource("mat_block")
 
-[node name="Platform" type="StaticBody3D" parent="."]
+[node name="Platform" type="StaticBody3D" parent="NavRegion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.1, -15.8)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Platform"]
 shape = SubResource("shape_platform")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Platform"]
 mesh = SubResource("mesh_platform")
 surface_material_override/0 = SubResource("mat_block")
 
-[node name="Pillar1" type="StaticBody3D" parent="."]
+[node name="Pillar1" type="StaticBody3D" parent="NavRegion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.5, -8)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Pillar1"]
 shape = SubResource("shape_pillar")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillar1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Pillar1"]
 mesh = SubResource("mesh_pillar")
 surface_material_override/0 = SubResource("mat_block")
 
-[node name="Pillar2" type="StaticBody3D" parent="."]
+[node name="Pillar2" type="StaticBody3D" parent="NavRegion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.5, 5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Pillar2"]
 shape = SubResource("shape_pillar")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillar2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Pillar2"]
 mesh = SubResource("mesh_pillar")
 surface_material_override/0 = SubResource("mat_block")
 
-[node name="Pillar3" type="StaticBody3D" parent="."]
+[node name="Pillar3" type="StaticBody3D" parent="NavRegion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.5, -12)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Pillar3"]
 shape = SubResource("shape_pillar")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillar3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Pillar3"]
 mesh = SubResource("mesh_pillar")
 surface_material_override/0 = SubResource("mat_block")
 
-[node name="Step1" type="StaticBody3D" parent="."]
+[node name="Step1" type="StaticBody3D" parent="NavRegion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.15, 6)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Step1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Step1"]
 shape = SubResource("shape_step1")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Step1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Step1"]
 mesh = SubResource("mesh_step1")
 surface_material_override/0 = SubResource("mat_block")
 
-[node name="Step2" type="StaticBody3D" parent="."]
+[node name="Step2" type="StaticBody3D" parent="NavRegion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.3, 7)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Step2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Step2"]
 shape = SubResource("shape_step2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Step2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Step2"]
 mesh = SubResource("mesh_step2")
 surface_material_override/0 = SubResource("mat_block")
 
-[node name="Step3" type="StaticBody3D" parent="."]
+[node name="Step3" type="StaticBody3D" parent="NavRegion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.45, 8)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Step3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Step3"]
 shape = SubResource("shape_step3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Step3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Step3"]
 mesh = SubResource("mesh_step3")
 surface_material_override/0 = SubResource("mat_block")
 
-[node name="Wall" type="StaticBody3D" parent="."]
+[node name="Wall" type="StaticBody3D" parent="NavRegion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -14)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/Wall"]
 shape = SubResource("shape_wall")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavRegion/Wall"]
 mesh = SubResource("mesh_wall")
 surface_material_override/0 = SubResource("mat_block")
 
@@ -196,5 +207,45 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 
 [node name="SpinnerDummy" parent="." instance=ExtResource("3_spinnerscn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 4)
+
+[node name="HeavyEnemy" parent="." instance=ExtResource("5_enemyscn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -20)
+body_color = Color(0.55, 0.15, 0.12, 1)
+max_health = 150.0
+chase_speed = 2.6
+attack_damage = 24.0
+attack_knockback = 7.0
+attack_range = 2.1
+attack_windup = 0.8
+attack_active = 0.3
+attack_recovery = 0.9
+attack_cooldown = 2.0
+
+[node name="FastEnemy" parent="." instance=ExtResource("5_enemyscn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -22)
+body_color = Color(0.2, 0.65, 0.6, 1)
+max_health = 50.0
+chase_speed = 5.5
+attack_damage = 9.0
+attack_knockback = 4.0
+attack_range = 1.7
+attack_windup = 0.3
+attack_active = 0.15
+attack_recovery = 0.35
+attack_cooldown = 0.9
+
+[node name="RangedEnemy" parent="." instance=ExtResource("6_rangedscn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
+max_health = 60.0
+chase_speed = 3.5
+detection_range = 11.0
+deaggro_range = 20.0
+attack_damage = 12.0
+attack_range = 9.0
+min_range = 4.0
+attack_windup = 0.7
+attack_active = 0.1
+attack_recovery = 0.5
+attack_cooldown = 2.2
 
 [node name="DebugHud" parent="." instance=ExtResource("4_hudscn")]

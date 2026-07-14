@@ -7,7 +7,7 @@ Juego 3D de acción tipo *soulslike*, **de código abierto**, desarrollado con
 
 ## Estado
 
-🚧 **En desarrollo temprano** — Fase 2: combate núcleo (ataques, esquiva con i-frames, estamina, bloqueo) en greybox.
+🚧 **En desarrollo temprano** — Fase 3: enemigos con IA (persecución con navmesh, ataques telegrafiados, 3 variantes) en greybox.
 
 ## Controles (prototipo)
 
@@ -20,7 +20,7 @@ Juego 3D de acción tipo *soulslike*, **de código abierto**, desarrollado con
 | Salto | Espacio | A / Cruz |
 | Ataque ligero | Clic izquierdo | RB / R1 |
 | Ataque fuerte | Q | Gatillo derecho |
-| Bloquear (mantener) | Clic derecho | LB / L1 |
+| Bloquear (mantener) / Parry (justo antes del impacto) | Clic derecho | LB / L1 |
 | Lock-on | Tab o clic central | R3 |
 | Cambiar objetivo | Rueda del ratón | — |
 | Soltar/capturar ratón | Esc / clic | — |
