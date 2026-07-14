@@ -23,6 +23,12 @@
 [ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/bush.tscn" id="21_bush"]
 [ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/bush_large.tscn" id="22_bushlg"]
 [ext_resource type="PackedScene" path="res://assets/models/quaternius_nature/prefabs/grass_large.tscn" id="23_grass"]
+[ext_resource type="PackedScene" path="res://scenes/props/ruca.tscn" id="24_ruca"]
+[ext_resource type="PackedScene" path="res://scenes/props/chemamull_1.tscn" id="25_chema1"]
+[ext_resource type="PackedScene" path="res://scenes/props/chemamull_2.tscn" id="26_chema2"]
+[ext_resource type="PackedScene" path="res://scenes/props/escultura_pueblos.tscn" id="27_escult"]
+[ext_resource type="PackedScene" path="res://scenes/props/totems_colectivo.tscn" id="28_totems"]
+[ext_resource type="PackedScene" path="res://scenes/props/mascara_kollon.tscn" id="29_kollon"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.12, 0.15, 0.22, 1)
@@ -457,5 +463,23 @@ transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 16, 0, 20)
 
 [node name="Hierba6" parent="Decor" instance=ExtResource("23_grass")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 22, 4, -10)
+
+[node name="ReweHut" parent="." instance=ExtResource("24_ruca")]
+transform = Transform3D(0.985, 0, -0.174, 0, 1, 0, 0.174, 0, 0.985, 5, 0, 21)
+
+[node name="AncestroSendero" parent="." instance=ExtResource("25_chema1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 11)
+
+[node name="AncestroEmboscada" parent="." instance=ExtResource("26_chema2")]
+transform = Transform3D(0.966, 0, 0.259, 0, 1, 0, -0.259, 0, 0.966, 5, 0, -3)
+
+[node name="EsculturaBienvenida" parent="." instance=ExtResource("27_escult")]
+transform = Transform3D(0.866, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866, 6, 0, 26)
+
+[node name="TotemsCorrupcion" parent="." instance=ExtResource("28_totems")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
+
+[node name="MascaraGuardiana" parent="." instance=ExtResource("29_kollon")]
+transform = Transform3D(0.707, 0, 0.707, 0, 1, 0, -0.707, 0, 0.707, 20, 4, -10)
 
 [node name="DebugHud" parent="." instance=ExtResource("4_hud")]

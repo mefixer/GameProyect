@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dprop0chema02"]
+
+[ext_resource type="PackedScene" path="res://assets/models/mapuche_sketchfab/chemamull_2/scene.gltf" id="1_chema2"]
+
+[node name="Chemamull2" type="Node3D"]
+
+[node name="Scan" parent="." instance=ExtResource("1_chema2")]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 1.491, 0)

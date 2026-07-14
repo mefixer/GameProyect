@@ -1,16 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://crewe0totem01"]
+[gd_scene load_steps=9 format=3 uid="uid://crewe0totem01"]
 
 [ext_resource type="Script" path="res://scripts/world/rewe.gd" id="1_rewe"]
 [ext_resource type="PackedScene" path="res://scenes/ui/rewe_menu.tscn" id="2_rewemenu"]
-
-[sub_resource type="BoxMesh" id="mesh_base"]
-size = Vector3(0.9, 0.5, 0.9)
-
-[sub_resource type="BoxMesh" id="mesh_trunk"]
-size = Vector3(0.5, 1.6, 0.5)
-
-[sub_resource type="StandardMaterial3D" id="mat_wood"]
-albedo_color = Color(0.42, 0.3, 0.2, 1)
+[ext_resource type="PackedScene" path="res://scenes/props/rehue.tscn" id="3_rehue"]
 
 [sub_resource type="SphereMesh" id="mesh_ember"]
 radius = 0.22
@@ -31,15 +23,7 @@ radius = 2.6
 [node name="Rewe" type="Node3D"]
 script = ExtResource("1_rewe")
 
-[node name="Base" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-mesh = SubResource("mesh_base")
-surface_material_override/0 = SubResource("mat_wood")
-
-[node name="Trunk" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
-mesh = SubResource("mesh_trunk")
-surface_material_override/0 = SubResource("mat_wood")
+[node name="RehueScan" parent="." instance=ExtResource("3_rehue")]
 
 [node name="Ember" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)

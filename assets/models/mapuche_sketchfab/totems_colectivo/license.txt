@@ -1,0 +1,11 @@
+Model Information:
+* title:	Totems Colectivo Originario
+* source:	https://sketchfab.com/3d-models/totems-colectivo-originario-9c5bd6c472e34a6a9cff47ca2dd9c6b1
+* author:	EternalEchoesVR (https://sketchfab.com/EternalEchoesVR)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Totems Colectivo Originario" (https://sketchfab.com/3d-models/totems-colectivo-originario-9c5bd6c472e34a6a9cff47ca2dd9c6b1) by EternalEchoesVR (https://sketchfab.com/EternalEchoesVR) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

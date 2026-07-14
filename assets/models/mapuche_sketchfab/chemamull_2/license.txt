@@ -1,0 +1,11 @@
+Model Information:
+* title:	Tótem mapuche para ritos funerarios (Chemamull)
+* source:	https://sketchfab.com/3d-models/totem-mapuche-para-ritos-funerarios-chemamull-68f82ac47d774f408073003c091b8a9f
+* author:	fablab.uct (https://sketchfab.com/FabLab.UCT)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Tótem mapuche para ritos funerarios (Chemamull)" (https://sketchfab.com/3d-models/totem-mapuche-para-ritos-funerarios-chemamull-68f82ac47d774f408073003c091b8a9f) by fablab.uct (https://sketchfab.com/FabLab.UCT) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

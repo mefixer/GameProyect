@@ -1,0 +1,11 @@
+Model Information:
+* title:	Escultura Pueblos Originarios - Plaza Baquedano
+* source:	https://sketchfab.com/3d-models/escultura-pueblos-originarios-plaza-baquedano-9377fdfc40994c3bb5212b6e90f895a0
+* author:	Luis Cuevas Quiroga (https://sketchfab.com/luiscuevas)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Escultura Pueblos Originarios - Plaza Baquedano" (https://sketchfab.com/3d-models/escultura-pueblos-originarios-plaza-baquedano-9377fdfc40994c3bb5212b6e90f895a0) by Luis Cuevas Quiroga (https://sketchfab.com/luiscuevas) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

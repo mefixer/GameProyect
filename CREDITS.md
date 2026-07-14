@@ -8,32 +8,38 @@ con su origen y licencia.
 | Ultimate Stylized Nature (selección: pinos, árboles muertos, rocas, arbustos, hierba) | [Quaternius](https://quaternius.com) | vía [mirror Godot de W. Palladino](https://github.com/walterpalladino/godot-quaternius-ultimate-stylized-nature) | **CC0** (modelos originales) | `assets/models/quaternius_nature/` |
 | Wooden Shield (escudo de madera, placeholder de arma) | Jarlan Perez | [poly.pizza](https://poly.pizza/m/0uun1lQOHmj) | **CC-BY** — requiere atribución | `assets/models/props_cc/escudo_madera.glb` |
 | Axe (hacha, placeholder de arma) | Daniel López Lacalle | [poly.pizza](https://poly.pizza/m/2hgRrLeI45k) | **CC-BY** — requiere atribución | `assets/models/props_cc/hacha.glb` |
+| Figura Ceremonial mapuche (Rehue) | fablab.uct (U. Católica de Temuco) | [Sketchfab](https://sketchfab.com/3d-models/figura-ceremonial-mapuche-rehue-630557d7d28b46919e79247179b2f371) | **CC-BY 4.0** | `assets/models/mapuche_sketchfab/rehue/` — usado como el **rewe** real del juego (`scenes/props/rehue.tscn`, integrado en `scenes/world/rewe.tscn`) |
+| Figura antropomorfa mapuche (Chemamull) | fablab.uct (U. Católica de Temuco) | [Sketchfab](https://sketchfab.com/3d-models/figura-antropomorfa-mapuche-chemamull-e9592c7cf1784072bd08befac951745b) | **CC-BY 4.0** | `assets/models/mapuche_sketchfab/chemamull_1/` — decoración en el sendero (`scenes/props/chemamull_1.tscn`) |
+| Tótem mapuche para ritos funerarios (Chemamull) | fablab.uct (U. Católica de Temuco) | [Sketchfab](https://sketchfab.com/3d-models/totem-mapuche-para-ritos-funerarios-chemamull-68f82ac47d774f408073003c091b8a9f) | **CC-BY 4.0** | `assets/models/mapuche_sketchfab/chemamull_2/` — decoración junto a la emboscada (`scenes/props/chemamull_2.tscn`) |
+| Mascara Antropomorfa Mapuche (Kollon) | fablab.uct (U. Católica de Temuco) | [Sketchfab](https://sketchfab.com/3d-models/mascara-antropomorfa-mapuche-kollon-db6fcd0d07d142e196be20df1c344b39) | **CC-BY 4.0** | `assets/models/mapuche_sketchfab/mascara_kollon/` — guardián cerca de la meseta (`scenes/props/mascara_kollon.tscn`) |
+| RUCA MAPUCHE | borisquezadaa | [Sketchfab](https://sketchfab.com/3d-models/ruca-mapuche-cd2de259ba4941ecb1818b2259dd65dc) | **CC-BY 4.0** | `assets/models/mapuche_sketchfab/ruca/` — choza junto al rewe (`scenes/props/ruca.tscn`) |
+| Ruka, ruca mapuche con estructura interior | borisquezadaa | [Sketchfab](https://sketchfab.com/3d-models/ruka-ruca-mapuche-con-estructura-interior-ee090c403bd14aa5b80b49ed36fe4263) | **CC-BY 4.0** | `assets/models/mapuche_sketchfab/ruka_interior/` — descargado pero **sin usar aún** (alternativa a la ruca de arriba, tiene interior habitable) |
+| Totems Colectivo Originario | EternalEchoesVR | [Sketchfab](https://sketchfab.com/3d-models/totems-colectivo-originario-9c5bd6c472e34a6a9cff47ca2dd9c6b1) | **CC-BY 4.0** | `assets/models/mapuche_sketchfab/totems_colectivo/` — hito visual hacia la zona norte corrupta (`scenes/props/totems_colectivo.tscn`) |
+| Escultura Pueblos Originarios - Plaza Baquedano | Luis Cuevas Quiroga | [Sketchfab](https://sketchfab.com/3d-models/escultura-pueblos-originarios-plaza-baquedano-9377fdfc40994c3bb5212b6e90f895a0) | **CC-BY 4.0** | `assets/models/mapuche_sketchfab/escultura_pueblos/` — bienvenida cerca del rewe (`scenes/props/escultura_pueblos.tscn`) |
 
-> Nota: las texturas del pack Quaternius se redujeron de 4K a 512px para mantener el repo ligero.
+> Notas técnicas:
+>
+> - Las texturas del pack Quaternius se redujeron de 4K a 512px; las de los escaneos
+>   mapuche, de hasta 4K a 1024px máximo. Motivo: mantener el repositorio ligero
+>   (Git LFS gestiona estos binarios, pero el tamaño en disco sigue importando).
+> - Los escaneos de Sketchfab vienen en **unidades arbitrarias del escáner**, no metros.
+>   Cada `scenes/props/*.tscn` aplica una escala y desplazamiento aproximados para
+>   llevarlos a un tamaño realista (p. ej. un chemamüll de ~1.8 m). Son aproximaciones
+>   de greybox — conviene refinarlas a ojo en Blender más adelante (escala exacta,
+>   orientación/rotación de "frente", y opcionalmente decimar mallas muy pesadas).
 
-## Pendientes de descarga manual (requieren cuenta de Sketchfab)
+## Assets excluidos por licencia (NO usar en el juego)
 
-Sketchfab exige inicio de sesión incluso para modelos CC-BY gratuitos, así que estos no
-se pudieron automatizar. Son los más valiosos para la identidad visual del juego —
-escaneos reales de piezas mapuche del FabLab de la Universidad Católica de Temuco:
+Estos dos también son escaneos reales y de gran calidad, pero su licencia
+**CC-BY-NC-SA** (No Comercial) es incompatible con la posibilidad de vender el
+juego o monetizar assets en el futuro. **Decisión del autor: no integrarlos.**
+Se dejan documentados aquí solo como referencia de investigación — no hay
+archivos de estos en el repositorio.
 
-| Modelo | Autor | Licencia | Enlace | Uso previsto |
-| --- | --- | --- | --- | --- |
-| Chemamüll (figura antropomorfa funeraria) | fablab.uct | CC-BY | [Sketchfab](https://sketchfab.com/3d-models/figura-antropomorfa-mapuche-chemamull-e9592c7cf1784072bd08befac951745b) | Decoración/hito visual en el bosque o cerca del rewe |
-| Chemamüll (tótem funerario, variante) | fablab.uct | CC-BY | [Sketchfab](https://sketchfab.com/3d-models/totem-mapuche-para-ritos-funerarios-chemamull-68f82ac47d774f408073003c091b8a9f) | Alternativa a la anterior |
-| Rehue (figura ceremonial de la machi) | fablab.uct | CC-BY | [Sketchfab](https://sketchfab.com/3d-models/figura-ceremonial-mapuche-rehue-630557d7d28b46919e79247179b2f371) | Base para el modelo real del **rewe** del juego (ver [[Nivel 1 - Bosque de Araucarias]]) |
-| Kultrün (tambor ceremonial) | cidvictoria | CC-BY (verificar en la página) | [Sketchfab](https://sketchfab.com/3d-models/kultrun-3c96296996274f76b256203efcdfc702) | Prop de la machi / mecánica de trance del GDD |
-
-**Cómo descargarlos** (gratis, ~2 min cada uno):
-
-1. Crear cuenta gratuita en [sketchfab.com](https://sketchfab.com) (o iniciar sesión con Google).
-2. Abrir cada enlace de arriba → botón **Download 3D Model** → formato **glTF** (o
-   Original) → se descarga un `.zip`.
-3. Descomprimir en `assets/models/mapuche_sketchfab/<nombre>/` dentro del proyecto.
-4. Abrir el `.glb`/`.gltf` en **Blender** para revisar escala, orientación y
-   decimar el mesh (el chemamüll trae 66k triángulos — sobra para un prop de fondo,
-   conviene bajarlo a 2–5k con el modificador Decimate antes de traerlo a Godot).
-5. Anotar aquí la ruta final una vez integrados.
+| Modelo | Autor | Licencia | Enlace |
+| --- | --- | --- | --- |
+| Kollón Mapuche (máscara ritual) | Museo Nacional de Historia Natural de Chile | CC-BY-NC-SA 4.0 | [Sketchfab](https://sketchfab.com/3d-models/kollon-mapuche-ef800332bbaf49e8a7ba51b28e86a4ad) |
+| Pipa antropomorfa de piedra | Museo Nacional de Historia Natural de Chile | CC-BY-NC-SA 4.0 | [Sketchfab](https://sketchfab.com/3d-models/pipa-antropomorfa-de-piedra-d1f74b3e4aad42268b4c381a0f10a03f) |
 
 ## Herramientas
 

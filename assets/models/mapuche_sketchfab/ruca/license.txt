@@ -1,0 +1,11 @@
+Model Information:
+* title:	RUCA MAPUCHE
+* source:	https://sketchfab.com/3d-models/ruca-mapuche-cd2de259ba4941ecb1818b2259dd65dc
+* author:	borisquezadaa (https://sketchfab.com/borisquezadaa)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "RUCA MAPUCHE" (https://sketchfab.com/3d-models/ruca-mapuche-cd2de259ba4941ecb1818b2259dd65dc) by borisquezadaa (https://sketchfab.com/borisquezadaa) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dprop0ruca001"]
+
+[ext_resource type="PackedScene" path="res://assets/models/mapuche_sketchfab/ruca/scene.gltf" id="1_ruca"]
+
+[sub_resource type="BoxShape3D" id="shape_ruca"]
+size = Vector3(4.2, 3.2, 1.9)
+
+[node name="Ruca" type="StaticBody3D"]
+
+[node name="Scan" parent="." instance=ExtResource("1_ruca")]
+transform = Transform3D(0.0052, 0, 0, 0, 0.0052, 0, 0, 0, 0.0052, 0, 1.14, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+shape = SubResource("shape_ruca")

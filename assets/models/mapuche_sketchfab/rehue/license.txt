@@ -1,0 +1,11 @@
+Model Information:
+* title:	Figura Ceremonial mapuche (Rehue)
+* source:	https://sketchfab.com/3d-models/figura-ceremonial-mapuche-rehue-630557d7d28b46919e79247179b2f371
+* author:	fablab.uct (https://sketchfab.com/FabLab.UCT)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Figura Ceremonial mapuche (Rehue)" (https://sketchfab.com/3d-models/figura-ceremonial-mapuche-rehue-630557d7d28b46919e79247179b2f371) by fablab.uct (https://sketchfab.com/FabLab.UCT) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

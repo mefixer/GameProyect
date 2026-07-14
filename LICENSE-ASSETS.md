@@ -13,3 +13,9 @@ comercialmente— siempre que acredites a los autores originales.
 
 Los assets de terceros incluidos en el proyecto conservan su licencia original
 y están listados con su autor y licencia en [CREDITS.md](CREDITS.md).
+
+**Política del proyecto**: para mantener el juego 100% viable comercialmente
+(venta, donaciones, monetización futura), **no se aceptan assets de terceros
+con cláusula No Comercial (NC)**, aunque sean gratuitos y de buena calidad.
+Ver la sección "Assets excluidos por licencia" en CREDITS.md para ver ejemplos
+de piezas descartadas por este motivo.

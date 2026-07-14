@@ -42,18 +42,30 @@ flowchart TD
 
 - Modelos **CC0 de Quaternius** (Ultimate Stylized Nature, vía mirror MIT):
   pinos como araucarias jóvenes, árboles muertos, rocas, arbustos y hierba.
-  Ver [CREDITS.md](../CREDITS.md).
+- Modelos **CC-BY reales de cultura mapuche** (escaneos 3D, principalmente del
+  FabLab de la Universidad Católica de Temuco), integrados en `scenes/props/`:
+  - **Rehue** → reemplaza el totem placeholder del **rewe** (`scenes/world/rewe.tscn`)
+  - **Ruca** → choza junto al rewe (`ReweHut`), da sensación de "hogar"
+  - **2 Chemamüll** → hitos ancestrales en el sendero y junto a la emboscada
+  - **Escultura Pueblos Originarios** → bienvenida cerca del rewe
+  - **Tótems Colectivo** → presagio visual hacia la zona norte corrupta
+  - **Máscara Kollón** → guardián cerca de la meseta del enemigo pesado
+  - Ver la tabla completa con licencias en [CREDITS.md](../CREDITS.md).
+- ⚠️ Los escaneos vienen en unidades arbitrarias; cada prop tiene una escala/
+  offset aproximados a mano (ver nota técnica en CREDITS.md) — **revisar y
+  afinar en Blender** cuando haya tiempo (escala exacta, orientación, decimado).
 - Ambientación: atardecer con niebla (`fog_density 0.012`), luz cálida baja,
   cielo oscuro — el tono "oscuro místico" del GDD.
-- Los árboles no tienen colisión todavía (decisión de greybox: no bloquear
-  el combate mientras se ajustan posiciones).
+- Los árboles y props decorativos no tienen colisión todavía, salvo la ruca
+  (decisión de greybox: no bloquear el combate mientras se ajustan posiciones).
 
 ## Pendiente para cerrar la fase
 
 - [ ] Playtest de ritmo: ¿el recorrido completo toma 10–15 min la primera vez?
-- [ ] Colisión en árboles que bordean el camino principal
+- [ ] Colisión en árboles y props que bordean el camino principal
 - [ ] Arena del jefe real detrás de la niebla (Fase 6)
-- [ ] Assets temáticos propios: **pendiente descarga manual** de Sketchfab (chemamüll ×2,
-  rehue, kultrün — todos CC-BY del FabLab UC Temuco). Ver la tabla y los pasos en
-  [CREDITS.md](../CREDITS.md). Requiere cuenta gratuita de Sketchfab; no automatizable.
+- [ ] Afinar en Blender la escala/orientación de los escaneos mapuche (aproximaciones actuales)
 - [x] 2 props CC-BY descargados directo (escudo de madera, hacha) en `assets/models/props_cc/` ✅ 2026-07-13
+- [x] 7 modelos CC-BY de cultura mapuche integrados (rehue, ruca, 2 chemamüll,
+  escultura, tótems, máscara kollón); 2 descartados por licencia NC (kollón del
+  Museo Nacional, pipa de piedra) ✅ 2026-07-14

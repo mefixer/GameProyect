@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dprop0rehue01"]
+
+[ext_resource type="PackedScene" path="res://assets/models/mapuche_sketchfab/rehue/scene.gltf" id="1_rehue"]
+
+[node name="Rehue" type="Node3D"]
+
+[node name="Scan" parent="." instance=ExtResource("1_rehue")]
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 2.43, 0)

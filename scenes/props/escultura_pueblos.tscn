@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dprop0escult1"]
+
+[ext_resource type="PackedScene" path="res://assets/models/mapuche_sketchfab/escultura_pueblos/scene.gltf" id="1_escult"]
+
+[node name="EsculturaPueblos" type="Node3D"]
+
+[node name="Scan" parent="." instance=ExtResource("1_escult")]
+transform = Transform3D(0.273, 0, 0, 0, 0.273, 0, 0, 0, 0.273, 0, 1.729, 0)
