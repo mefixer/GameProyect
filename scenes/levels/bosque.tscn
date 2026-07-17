@@ -46,10 +46,31 @@ sky_material = SubResource("sky_mat")
 [sub_resource type="Environment" id="env"]
 background_mode = 2
 sky = SubResource("sky")
-tonemap_mode = 2
+tonemap_mode = 4
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_cascades = 4
+sdfgi_min_cell_size = 0.3
+ssao_enabled = true
+ssao_radius = 2.0
+ssao_intensity = 1.5
+glow_enabled = true
+glow_intensity = 0.6
+glow_bloom = 0.1
+glow_blend_mode = 0
+glow_hdr_threshold = 1.1
 fog_enabled = true
 fog_light_color = Color(0.5, 0.55, 0.6, 1)
-fog_density = 0.012
+fog_density = 0.004
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.03
+volumetric_fog_albedo = Color(0.75, 0.72, 0.68, 1)
+volumetric_fog_emission = Color(0.03, 0.03, 0.04, 1)
+volumetric_fog_length = 80.0
+volumetric_fog_ambient_inject = 0.3
+adjustments_enabled = true
+adjustments_contrast = 1.05
+adjustments_saturation = 1.05
 
 [sub_resource type="NavigationMesh" id="navmesh"]
 geometry_parsed_geometry_type = 1
@@ -147,8 +168,13 @@ environment = SubResource("env")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=30925814]
 transform = Transform3D(0.86603, -0.38302, 0.32139, 0, 0.64279, 0.76604, -0.5, -0.66341, 0.55667, 0, 15, 0)
 light_color = Color(1, 0.87, 0.72, 1)
-light_energy = 0.8
+light_energy = 1.2
+light_angular_distance = 1.5
+light_volumetric_fog_energy = 1.4
 shadow_enabled = true
+shadow_blur = 1.5
+directional_shadow_mode = 2
+directional_shadow_max_distance = 60.0
 
 [node name="NavRegion" type="NavigationRegion3D" parent="." unique_id=2055346558]
 navigation_mesh = SubResource("navmesh")
@@ -500,7 +526,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 11)
 transform = Transform3D(0.966, 0, 0.259, 0, 1, 0, -0.259, 0, 0.966, 5, 0, -3)
 
 [node name="EsculturaBienvenida" parent="." unique_id=1959249750 instance=ExtResource("27_escult")]
-transform = Transform3D(0.86543983, -0.035961043, -0.4996766, 0.025960185, 0.9992996, -0.02695203, 0.50029576, 0.010354117, 0.86576724, 5.5818415, -0.83141667, 29.14466)
+transform = Transform3D(0.86607623, -0.021084491, -0.49942333, 0.0362759, 0.999127, 0.020728987, 0.49855006, -0.036071494, 0.8660848, 5.5818415, 0.31207985, 30.229557)
 
 [node name="TotemsCorrupcion" parent="." unique_id=1705327991 instance=ExtResource("28_totems")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)

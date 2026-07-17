@@ -108,11 +108,28 @@ Cada ataque tiene tres fases; el hitbox del arma **solo daña durante los frames
 | Ataque | Windup | Activo | Recovery | Daño | Estamina |
 | --- | --- | --- | --- | --- | --- |
 | Ligero (tajo horizontal) | 0.25 s | 0.20 s | 0.30 s | 15 | 20 |
+| Ligero 2 — combo (tajo de vuelta, en espejo) | 0.16 s | 0.18 s | 0.35 s | 17 | 15 |
 | Fuerte (golpe descendente) | 0.45 s | 0.25 s | 0.45 s | 32 | 35 |
 
 La animación placeholder es un tween sobre `WeaponPivot` sincronizado con esas
 mismas duraciones; cuando lleguen animaciones reales (Fase 5+), las ventanas se
 moverán a ellas sin tocar la lógica.
+
+### Buffer de inputs y cancelaciones (Fase 9)
+
+- **Buffer** (`BUFFER_WINDOW = 0.3 s`): durante un ataque, la siguiente
+  acción pulsada (ligero, fuerte o el tap de esquiva) se guarda y se
+  ejecuta en el primer frame legal — sin esto los inputs entre animaciones
+  se pierden y el combate se siente "sordo". El buffer se limpia al recibir
+  un golpe (un stagger no debe "recordar" órdenes previas).
+- **Combo ligero**: con "ligero" en buffer durante el recovery de un tajo
+  ligero, el segundo golpe (`light2`) sale de inmediato — más rápido, algo
+  más de daño, menos estamina, animación en espejo. No encadena un tercero:
+  tras `light2` el buffer se resuelve al terminar el recovery completo
+  (permite el ritmo tajo-tajo-pausa-tajo).
+- **Esquiva cancela recovery**: el tap de esquiva en buffer corta el
+  recovery de cualquier ataque en cuanto terminan los frames activos —
+  la agresión tiene salida defensiva inmediata, como en los souls.
 
 ## Flujo de un golpe
 
@@ -323,6 +340,73 @@ Diseño completo, tabla de ataques y diagrama de estados en
   que `boss_trigger.gd` llama a `track(boss, nombre)`, que conecta sus propias
   señales (`health_changed`, `died`, `phase_changed`) — el mismo patrón
   desacoplado que usa el HUD del jugador.
+- **Modelo 3D propio (v2)**: `Visual/Body` instancia
+  `assets/models/cherufe/cherufe_base.glb` — un golem generado por script de
+  Blender (`bpy`), no un asset de terceros. `boss_cherufe.gd` busca el
+  `MeshInstance3D` en `$Visual/Body/CherufeBody` (el nombre que el importador
+  de glTF le da al único mesh de la escena importada) en vez de `$Visual/Body`
+  directamente, porque `Body` ahora es la raíz `Node3D` de la escena
+  instanciada. El cuerpo es un torso/cabeza orgánico por metaballs con
+  extremidades fusionadas por Boolean (Union), rugosidad real por
+  Subdivision+Displace (ruido Voronoi) y color por vértice procedural
+  (roca oscura con vetas de lava en las grietas más profundas); los ojos y
+  la boca goteando lava son mallas emisivas separadas, unidas al cuerpo en
+  el mismo objeto final (no viven sueltas en la escena de Godot como en la
+  v1). Detalle de diseño e investigación mitológica en
+  [jefe-cherufe.md](jefe-cherufe.md).
+
+  > [!warning] Gotcha de Godot: `size=1` vs `size=2` en `primitive_cube_add`
+  > Al generar la malla por script, `bpy.ops.mesh.primitive_cube_add(size=1)`
+  > crea un cubo de semi-tamaño 0.5 — escalarlo por `(sx, sy, sz)` da un
+  > semi-extento real de `0.5*scale`, no `scale`. La primera pasada del
+  > script asumía que `scale` ya era el semi-extento, así que el torso
+  > terminó siendo la mitad de ancho de lo previsto y los brazos (colocados
+  > asumiendo el ancho correcto) quedaron flotando lejos del cuerpo. Fix:
+  > usar `size=2` (vértices en ±1) para que `scale` sea directamente el
+  > semi-extento deseado, igual que `radius` en cilindros/conos.
+
+  > [!warning] Gotcha de Blender: `Boolean` deja un slot de material vacío
+  > Al fusionar el core con las extremidades vía modificador `Boolean`
+  > (`operation='UNION'`), Blender inserta un slot de material **vacío**
+  > (`None`) en el índice 0 si el objeto activo aún no tenía materiales — y
+  > ahí se quedan todas las caras (`material_index` por defecto es 0). Si
+  > después simplemente haces `mesh.materials.append(mat)`, el material real
+  > cae en el slot 1 **sin que ninguna cara lo use**: el cuerpo se renderiza
+  > con el material vacío (gris) aunque el color por vértice esté perfecto.
+  > Pasó desapercibido al principio porque una luz cálida de relleno en el
+  > render de verificación *simulaba* variación de color por iluminación.
+  > Fix: `mesh.materials.clear()` antes de `append()`, para que el material
+  > real quede garantizado en el slot 0 real.
+  >
+  > Por separado, el exportador de glTF de Blender a veces **también**
+  > pierde la asignación de material (`material: null` en el glTF) cuando el
+  > Base Color viene de un nodo de color por vértice — reproducido con el
+  > Cherufe (mesh de 3 materiales) pero no con el weichafe (mesh de 1 solo
+  > material), así que parece ligado a mallas multi-material. El atributo
+  > `COLOR_0` se exporta igual, y aunque el material sí llegue bien, Godot
+  > **no** activa `vertex_color_use_as_albedo` automáticamente al importar
+  > — hay que asumir en ambos casos que el material embebido no sirve tal
+  > cual y hacer override explícito en el `.tscn`
+  > (`surface_material_override/0` con `vertex_color_use_as_albedo = true`).
+  > Para overridear la superficie de un nodo *dentro* de una escena
+  > instanciada, la sintaxis es `[node name="X" parent="Ruta/Al/Padre"
+  > index="N"]` (sin `type=` ni `instance=`) seguida de las propiedades.
+
+- **Modelo 3D del jugador (weichafe)**: mismo enfoque que el Cherufe
+  (`assets/models/weichafe/weichafe_base.glb`, fuente en
+  `assets/models/weichafe/blender_source/`) pero con proporciones humanas
+  ágiles y sin armadura pesada (GDD: "joven weichafe... la defensa es
+  esquivar, no resistir"). Torso/cadera/cabeza por metaballs, brazos y
+  piernas normales (sin garras), color por vértice por zona de altura en
+  vez de ruido de grieta (piel en cabeza/manos/pies, textil rojo-tierra en
+  el torso, calzas oscuras en las piernas). A propósito **no** modela
+  rasgos faciales ni étnicos específicos por script — el GDD pide
+  explícitamente evitar estereotipos, y una cara "realista" generada por
+  primitivas resultaría en el mejor de los casos genérica y en el peor,
+  caricaturesca; se dejó la cabeza simple y estilizada, coherente con el
+  arte low-poly del proyecto, para que cualquier detalle facial se decida
+  a mano en Blender. `Visual/Body` en `player.tscn` instancia el modelo;
+  `player.gd` referencia `$Visual/Body/WeichafeBody`.
 
 ## Cámara y lock-on
 
@@ -399,6 +483,94 @@ flowchart TD
   (limpia newen, stats, atajos, jefes vencidos…) antes de cargar el nivel;
   "Continuar" solo se habilita si `GameState.has_respawn` es verdadero, y
   carga `GameState.respawn_scene` (el nivel donde estaba el último rewe).
+
+## Audio (Fase 8)
+
+```mermaid
+flowchart LR
+    Player -->|"AudioManager.play_footstep(surface, pos)"| AM[AudioManager]
+    Player -->|"play_combat('golpe_ligero'…)"| AM
+    EnemyBase -->|"hitbox.hit_landed"| AM
+    BossCherufe -->|"slam_hitbox.hit_landed"| AM
+    UI[Botones de menú] -->|"play_ui('click')"| AM
+    AM --> Pool["pool de 8 AudioStreamPlayer3D<br/>(bus SFX)"]
+    AM --> UIPlayer["AudioStreamPlayer<br/>(bus UI)"]
+    AM --> Music["2× AudioStreamPlayer<br/>(bus Music, crossfade)"]
+```
+
+- **`AudioManager`** (autoload): único punto de entrada para sonido.
+  `play_footstep(surface, pos)` y `play_combat(name, pos)` reproducen en un
+  *pool* rotatorio de 8 `AudioStreamPlayer3D` (posicional, bus `"SFX"`) con
+  variación aleatoria de pitch (0.94–1.06) para que no suenen repetitivos;
+  `play_ui(name)` usa un `AudioStreamPlayer` 2D (bus `"UI"`); `play_music()`
+  hace crossfade entre dos `AudioStreamPlayer` (bus `"Music"`) — preparado
+  pero **sin pistas todavía** (ver pendientes de Fase 8 en el plan).
+- **Buses** (`default_bus_layout.tres`): `Master → SFX / Music / UI`. Los
+  tres sub-buses envían a `Master`, así el slider general los escala a
+  todos; `Settings` añade `sfx_volume` y `music_volume` independientes
+  (persisten en `user://settings.cfg` junto al volumen general).
+- **Pasos por superficie**: `Player._current_surface()` lanza un raycast
+  corto hacia abajo (capa `"mundo"`) y busca en el colisionador los grupos
+  `"surface_piedra"` / `"surface_madera"`; si no encuentra ninguno, cae en
+  `"pasto"` (el suelo del bosque hoy es un único `StaticBody3D` sin
+  etiquetar — el sistema ya soporta variarlo por zona con solo añadir el
+  grupo al `StaticBody3D` correspondiente, p. ej. el piso de la ruca).
+- **Impactos de combate**: cada `Hitbox` que debe sonar conecta su señal
+  `hit_landed` a `AudioManager.play_combat(...)` — el jugador al golpear
+  (`golpe_ligero`/`golpe_fuerte` según el ataque), `EnemyBase` y el slam
+  del Cherufe (`jefe_impacto`). El parry y el bloqueo se disparan aparte
+  (`_execute_parry` / rama de bloqueo en `_on_hit_received`) porque no
+  dependen de que la hurtbox reciba daño.
+
+## Renderizado (Fase 9)
+
+El nivel principal (`bosque.tscn`) usa el stack moderno de Forward+:
+
+- **SDFGI** (iluminación global dinámica por SDF, 4 cascadas, media
+  resolución vía project setting): los árboles y la ruca rebotan luz de
+  verdad; las grietas de lava de la arena iluminan el entorno sin luces
+  puntuales extra.
+- **Niebla volumétrica** con dispersión de la luz direccional
+  (`light_volumetric_fog_energy = 1.4`): rayos de sol de atardecer entre
+  los pinos ("god rays") — la niebla exponencial clásica queda de respaldo
+  a baja densidad para el horizonte lejano.
+- **Glow/bloom** con umbral HDR: solo lo emisivo (lava, ojos del Cherufe,
+  vetas, marcador de lock-on) florece; el resto de la imagen no se lava.
+- **Tonemapping AgX** (`tonemap_mode = 4`) + ajustes leves de
+  contraste/saturación: el estándar filmico actual, aguanta los naranjas
+  intensos de la lava sin quemarse a blanco.
+- **TAA** global + **sombras suaves** (filtro alto, atlas direccional de
+  4096, `light_angular_distance` para penumbra física del sol) +
+  anisotrópico ×4 — en `project.godot`, aplican a todas las escenas.
+- **SSAO** (radio 2.0) para contacto de oclusión en la base de árboles,
+  rocas y props.
+
+Todo está en el `Environment` de la escena o en `project.godot` — no hay
+código de renderizado; el greybox de pruebas mantiene el entorno simple.
+
+## Game feel: partículas (Fase 9)
+
+- **`Fx`** (autoload, paralelo a `AudioManager`): único punto de entrada
+  para partículas. `burst(preset, posición)` dispara un one-shot de un pool
+  de 12 `GPUParticles3D`; los presets (`chispas`, `chispas_parry`, `polvo`,
+  `muerte`, `lava`, `curacion`) se construyen **por código** en `_ready()`
+  (`ParticleProcessMaterial` + `QuadMesh` billboard con color ramp que se
+  desvanece) — sin un `.tscn` por efecto, y los recursos se comparten entre
+  usos del mismo preset.
+- **Trail del arma**: `Fx.create_trail(hitbox)` crea un emisor persistente
+  colgado del hitbox del arma con `local_coords = false` (las partículas
+  quedan en el mundo, dibujando el arco del tajo). El jugador lo enciende
+  exactamente en los frames activos del ataque y lo apaga al terminar,
+  al entrar en stagger o al morir — mismos puntos donde se desactiva el
+  hitbox, para que nunca quede emitiendo colgado.
+- **Brasas del rewe**: `Fx.create_embers(nodo)` — emisor en bucle, lento y
+  ascendente con `preprocess = 2.0` para que ya haya brasas visibles al
+  cargar la escena (sin "arranque en frío").
+- Dónde suena cada burst: golpe conectado (`chispas`), parry
+  (`chispas_parry` en el escudo), esquiva (`polvo` a ras de suelo), muerte
+  de enemigo y recogida de newen (`muerte`, verde), impactos/fase 2/muerte
+  del Cherufe y detonación de la erupción (`lava`), frasco de lawen
+  (`curacion`).
 
 ## Grupos y señales clave
 

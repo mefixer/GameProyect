@@ -11,10 +11,17 @@ const SHIELD_IDLE_POS := Vector3(-0.42, 1.15, 0.0)
 const SHIELD_BLOCK_POS := Vector3(-0.15, 1.25, -0.3)
 
 ## Tiempos en segundos; los frames activos del hitbox van de windup a windup+active.
+## "light2" es el segundo golpe del combo ligero: más rápido, encadenable
+## solo desde el recovery de "light" con el input en buffer.
 const ATTACKS := {
 	light = { windup = 0.25, active = 0.20, recovery = 0.30, damage = 15.0, stamina = 20.0 },
+	light2 = { windup = 0.16, active = 0.18, recovery = 0.35, damage = 17.0, stamina = 15.0 },
 	heavy = { windup = 0.45, active = 0.25, recovery = 0.45, damage = 32.0, stamina = 35.0 },
 }
+
+## Ventana del buffer de inputs: una acción pulsada durante un ataque se
+## guarda y se ejecuta en el primer frame legal (estilo souls).
+const BUFFER_WINDOW := 0.3
 
 @export_group("Movimiento")
 @export var run_speed := 5.5
@@ -36,6 +43,10 @@ const ATTACKS := {
 ## Ventana de parry: los primeros N segundos tras levantar el escudo.
 @export var parry_window := 0.18
 
+@export_group("Audio")
+@export var footstep_interval_walk := 0.42
+@export var footstep_interval_sprint := 0.28
+
 var state := State.MOVE
 
 var _state_time := 0.0
@@ -43,10 +54,16 @@ var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var _sprint_held := 0.0
 var _dodge_direction := Vector3.ZERO
 var _attack: Dictionary
+var _attack_name := "light"
+var _footstep_timer := 0.0
+var _buffered_action := ""
+var _buffer_time := 0.0
+var _attack_sprint_held := 0.0
 var _hitbox_active := false
 var _knockback := Vector3.ZERO
 var _stagger_duration := 0.4
 var _attack_tween: Tween
+var _weapon_trail: GPUParticles3D
 var _body_material: StandardMaterial3D
 var _body_base_color: Color
 var _shield_material: StandardMaterial3D
@@ -54,7 +71,7 @@ var _shield_base_color: Color
 
 @onready var camera_rig: CameraRig = $CameraRig
 @onready var visual: Node3D = $Visual
-@onready var body_mesh: MeshInstance3D = $Visual/Body
+@onready var body_mesh: MeshInstance3D = $Visual/Body/WeichafeBody
 @onready var weapon_pivot: Node3D = $Visual/WeaponPivot
 @onready var shield_pivot: Node3D = $Visual/ShieldPivot
 @onready var shield_mesh: MeshInstance3D = $Visual/ShieldPivot/Shield
@@ -83,10 +100,14 @@ func _ready() -> void:
 	_shield_material = shield_mesh.get_active_material(0).duplicate()
 	shield_mesh.set_surface_override_material(0, _shield_material)
 	_shield_base_color = _shield_material.albedo_color
+	# Trail del arma: emite solo durante los frames activos del ataque
+	_weapon_trail = Fx.create_trail(hitbox)
 
 
 func _physics_process(delta: float) -> void:
 	_state_time += delta
+	_buffer_time += delta
+	_capture_combat_buffer(delta)
 	if not is_on_floor():
 		velocity.y -= _gravity * delta
 
@@ -132,6 +153,7 @@ func _state_move(delta: float) -> void:
 
 	_accelerate_towards(direction * (sprint_speed if sprinting else run_speed), delta)
 	_update_facing(direction, sprinting, delta)
+	_update_footsteps(direction, sprinting, delta)
 
 	if is_on_floor():
 		if Input.is_action_just_pressed("attack_light"):
@@ -162,6 +184,7 @@ func _state_attack(delta: float) -> void:
 	if not _hitbox_active and _state_time >= windup and _state_time < active_end:
 		_hitbox_active = true
 		hitbox.activate()
+		_weapon_trail.emitting = true
 		# Pequeño empuje hacia delante que acompaña el golpe
 		var forward := -visual.global_transform.basis.z
 		velocity.x = forward.x * 2.5
@@ -169,8 +192,25 @@ func _state_attack(delta: float) -> void:
 	elif _hitbox_active and _state_time >= active_end:
 		_hitbox_active = false
 		hitbox.deactivate()
+		_weapon_trail.emitting = false
+
+	# Recovery cancelable: esquiva o segundo golpe del combo salen ya,
+	# sin esperar a que termine la animación
+	if _state_time >= active_end:
+		if _consume_buffer("dodge"):
+			if is_on_floor() and _try_dodge():
+				return
+		elif _attack_name == "light" and _consume_buffer("light"):
+			if _try_attack("light2"):
+				return
+
 	if _state_time >= active_end + _attack.recovery:
 		_change_state(State.MOVE)
+		# Ataque en cola al terminar (encadena heavy→light, light2→light…)
+		if _consume_buffer("light"):
+			_try_attack("light")
+		elif _consume_buffer("heavy"):
+			_try_attack("heavy")
 
 
 func _state_block(delta: float) -> void:
@@ -203,8 +243,9 @@ func _try_attack(attack_name: String) -> bool:
 		return false
 	_lower_shield()
 	_attack = def
+	_attack_name = attack_name
 	_hitbox_active = false
-	var multiplier := GameState.light_damage_multiplier() if attack_name == "light" \
+	var multiplier := GameState.light_damage_multiplier() if attack_name.begins_with("light") \
 			else GameState.heavy_damage_multiplier()
 	hitbox.damage = def.damage * multiplier
 	_change_state(State.ATTACK)
@@ -226,6 +267,8 @@ func _try_dodge() -> bool:
 	if _dodge_direction.is_zero_approx():
 		_dodge_direction = -visual.global_transform.basis.z
 	_dodge_direction = _dodge_direction.normalized()
+	AudioManager.play_combat("esquiva", global_position)
+	Fx.burst("polvo", global_position + Vector3.UP * 0.1)
 	_change_state(State.DODGE)
 	var tween := create_tween()
 	tween.tween_property(visual, "scale:y", 0.55, dodge_duration * 0.3)
@@ -238,6 +281,7 @@ func _try_use_flask() -> void:
 		return
 	health.heal(health.max_health * 0.4)
 	_flash(Color(0.4, 1.0, 0.55))
+	Fx.burst("curacion", global_position + Vector3.UP * 1.0)
 
 
 func _enter_block() -> void:
@@ -253,14 +297,58 @@ func _lower_shield() -> void:
 
 func _enter_stagger(duration: float) -> void:
 	_stagger_duration = duration
+	_clear_buffer()  # un golpe recibido no debe "recordar" inputs previos
 	if _attack_tween:
 		_attack_tween.kill()
 	hitbox.deactivate()
+	_weapon_trail.emitting = false
 	_hitbox_active = false
 	hurtbox.invulnerable = false
 	visual.scale = Vector3.ONE
 	create_tween().tween_property(weapon_pivot, "rotation_degrees", WEAPON_IDLE, 0.1)
 	_change_state(State.HIT)
+
+
+# ── Buffer de inputs (estilo souls) ──────────────────────────
+
+
+## Durante un ataque, guarda la siguiente acción pulsada para ejecutarla
+## en el primer frame legal — sin esto, los inputs entre animaciones se
+## pierden y el combate se siente "sordo".
+func _capture_combat_buffer(delta: float) -> void:
+	if state != State.ATTACK:
+		_attack_sprint_held = 0.0
+		return
+	if Input.is_action_just_pressed("attack_light"):
+		_set_buffer("light")
+	elif Input.is_action_just_pressed("attack_heavy"):
+		_set_buffer("heavy")
+	# La esquiva es toque corto de sprint: replicar la detección de tap
+	if Input.is_action_just_pressed("sprint"):
+		_attack_sprint_held = delta
+	elif Input.is_action_pressed("sprint") and _attack_sprint_held > 0.0:
+		_attack_sprint_held += delta
+	if Input.is_action_just_released("sprint"):
+		if _attack_sprint_held > 0.0 and _attack_sprint_held <= 0.2:
+			_set_buffer("dodge")
+		_attack_sprint_held = 0.0
+
+
+func _set_buffer(action: String) -> void:
+	_buffered_action = action
+	_buffer_time = 0.0
+
+
+## Consume y devuelve true solo si esa acción está en buffer y fresca.
+func _consume_buffer(action: String) -> bool:
+	if _buffered_action != action or _buffer_time > BUFFER_WINDOW:
+		return false
+	_buffered_action = ""
+	return true
+
+
+func _clear_buffer() -> void:
+	_buffered_action = ""
 
 
 # ── Reacciones ───────────────────────────────────────────────
@@ -283,6 +371,7 @@ func _on_hit_received(from_hitbox: Hitbox) -> void:
 			return
 		# Bloqueo: sin daño, pero cuesta estamina; si te deja en 0, rompe la guardia
 		stamina.try_consume(from_hitbox.damage * 1.2)
+		AudioManager.play_combat("bloqueo", global_position)
 		camera_rig.add_trauma(0.25)
 		_knockback = away * from_hitbox.knockback * 0.5
 		if stamina.stamina <= 0.0:
@@ -291,6 +380,7 @@ func _on_hit_received(from_hitbox: Hitbox) -> void:
 		return
 
 	health.apply_damage(from_hitbox.damage)
+	AudioManager.play_combat("jugador_dano", global_position)
 	_flash(Color(1.0, 0.25, 0.2))
 	camera_rig.add_trauma(0.5)
 	if health.is_alive():
@@ -300,6 +390,8 @@ func _on_hit_received(from_hitbox: Hitbox) -> void:
 
 
 func _execute_parry(from_hitbox: Hitbox) -> void:
+	AudioManager.play_combat("parry", global_position)
+	Fx.burst("chispas_parry", shield_pivot.global_position)
 	GameFeel.hitstop(0.15)
 	camera_rig.add_trauma(0.3)
 	_flash_shield(Color(1.0, 0.95, 0.55))
@@ -316,7 +408,10 @@ func _flash_shield(color: Color) -> void:
 	create_tween().tween_property(_shield_material, "albedo_color", _shield_base_color, 0.35)
 
 
-func _on_hit_landed(_hurtbox: Hurtbox) -> void:
+func _on_hit_landed(hurtbox: Hurtbox) -> void:
+	var sound := "golpe_ligero" if _attack_name == "light" else "golpe_fuerte"
+	AudioManager.play_combat(sound, hurtbox.global_position)
+	Fx.burst("chispas", hurtbox.global_position)
 	GameFeel.hitstop()
 	camera_rig.add_trauma(0.35)
 
@@ -367,6 +462,32 @@ func _face_towards(direction: Vector3, delta: float) -> void:
 	visual.quaternion = visual.quaternion.slerp(target_rotation, 1.0 - exp(-rotation_speed * delta))
 
 
+func _update_footsteps(direction: Vector3, sprinting: bool, delta: float) -> void:
+	if not is_on_floor() or direction.is_zero_approx():
+		_footstep_timer = 0.0
+		return
+	_footstep_timer -= delta
+	if _footstep_timer <= 0.0:
+		_footstep_timer = footstep_interval_sprint if sprinting else footstep_interval_walk
+		AudioManager.play_footstep(_current_surface(), global_position)
+
+
+## Superficie del suelo bajo el jugador según el grupo del StaticBody
+## ("surface_piedra", "surface_madera"…); sin grupo reconocido, cae en pasto.
+func _current_surface() -> String:
+	var space_state := get_world_3d().direct_space_state
+	var query := PhysicsRayQueryParameters3D.create(
+		global_position + Vector3.UP * 0.5, global_position - Vector3.UP * 1.5
+	)
+	query.collision_mask = 1  # capa "mundo"
+	var result := space_state.intersect_ray(query)
+	if result and result.collider:
+		for surface_name in ["piedra", "madera"]:
+			if result.collider.is_in_group("surface_%s" % surface_name):
+				return surface_name
+	return "pasto"
+
+
 func _is_facing(point: Vector3) -> bool:
 	var to_point := point - global_position
 	to_point.y = 0.0
@@ -380,13 +501,14 @@ func _animate_attack(attack_name: String) -> void:
 		_attack_tween.kill()
 	var def: Dictionary = ATTACKS[attack_name]
 	_attack_tween = create_tween()
-	if attack_name == "light":
-		# Tajo horizontal
+	if attack_name.begins_with("light"):
+		# Tajo horizontal; el segundo golpe del combo vuelve en espejo
+		var dir := 1.0 if attack_name == "light" else -1.0
 		_attack_tween.tween_property(
-			weapon_pivot, "rotation_degrees", Vector3(-15, 80, 0), def.windup
+			weapon_pivot, "rotation_degrees", Vector3(-15, 80 * dir, 0), def.windup
 		).set_ease(Tween.EASE_OUT)
 		_attack_tween.tween_property(
-			weapon_pivot, "rotation_degrees", Vector3(-15, -80, 0), def.active
+			weapon_pivot, "rotation_degrees", Vector3(-15, -80 * dir, 0), def.active
 		)
 		_attack_tween.tween_property(
 			weapon_pivot, "rotation_degrees", WEAPON_IDLE, def.recovery

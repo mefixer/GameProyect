@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+AudioManager="*res://scripts/autoload/audio_manager.gd"
+Fx="*res://scripts/autoload/fx.gd"
 GameFeel="*res://scripts/autoload/game_feel.gd"
 GameState="*res://scripts/autoload/game_state.gd"
 Settings="*res://scripts/autoload/settings.gd"
@@ -153,3 +155,12 @@ inventory={
 [navigation]
 
 3d/default_cell_size=0.2
+
+[rendering]
+
+anti_aliasing/quality/use_taa=true
+lights_and_shadows/directional_shadow/size=4096
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
+global_illumination/gi/use_half_resolution=true
+textures/default_filters/anisotropic_filtering_level=4

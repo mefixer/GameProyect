@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://brn8vlnin3v0p" path="res://scripts/components/hurtbox.gd" id="5_hurtbox"]
 [ext_resource type="Script" uid="uid://p2kk3bs0cmdw" path="res://scripts/components/hitbox.gd" id="6_hitbox"]
 [ext_resource type="PackedScene" uid="uid://bo6ms5rrobbmo" path="res://assets/models/sketchfab_cc/demon_sword/scene.gltf" id="7_demon_sword"]
+[ext_resource type="PackedScene" path="res://assets/models/weichafe/weichafe_base.glb" id="8_weichafe_model"]
 
 [sub_resource type="CapsuleShape3D" id="shape_body"]
 radius = 0.35
@@ -16,12 +17,10 @@ height = 1.7
 radius = 0.38
 height = 1.7
 
-[sub_resource type="CapsuleMesh" id="mesh_body"]
-radius = 0.35
-height = 1.7
-
-[sub_resource type="StandardMaterial3D" id="mat_body"]
-albedo_color = Color(0.35, 0.55, 0.85, 1)
+[sub_resource type="StandardMaterial3D" id="mat_body_vc"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 1)
+roughness = 0.8
 
 [sub_resource type="BoxMesh" id="mesh_nose"]
 size = Vector3(0.14, 0.14, 0.35)
@@ -78,13 +77,13 @@ shape = SubResource("shape_hurtbox")
 
 [node name="Visual" type="Node3D" parent="." unique_id=741028878]
 
-[node name="Body" type="MeshInstance3D" parent="Visual" unique_id=906929929]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
-mesh = SubResource("mesh_body")
-surface_material_override/0 = SubResource("mat_body")
+[node name="Body" parent="Visual" instance=ExtResource("8_weichafe_model")]
+
+[node name="WeichafeBody" parent="Visual/Body" index="0"]
+surface_material_override/0 = SubResource("mat_body_vc")
 
 [node name="Nose" type="MeshInstance3D" parent="Visual" unique_id=925149664]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -0.35)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32, -0.28)
 mesh = SubResource("mesh_nose")
 surface_material_override/0 = SubResource("mat_nose")
 

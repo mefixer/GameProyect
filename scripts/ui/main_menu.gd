@@ -17,6 +17,8 @@ var _options_instance: Control = null
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	continue_button.disabled = not GameState.has_respawn
+	for button in [continue_button, new_game_button, options_button, quit_button]:
+		button.pressed.connect(AudioManager.play_ui.bind("click"))
 	continue_button.pressed.connect(_on_continue)
 	new_game_button.pressed.connect(_on_new_game)
 	options_button.pressed.connect(_on_options)

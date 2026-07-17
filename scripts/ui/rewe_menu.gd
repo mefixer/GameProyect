@@ -24,6 +24,7 @@ var _value_labels := {}
 
 func _ready() -> void:
 	visible = false
+	close_button.pressed.connect(AudioManager.play_ui.bind("click"))
 	close_button.pressed.connect(_close)
 	_build_rows()
 
@@ -51,6 +52,7 @@ func _build_rows() -> void:
 
 		var plus := Button.new()
 		plus.text = "+"
+		plus.pressed.connect(AudioManager.play_ui.bind("click"))
 		plus.pressed.connect(_on_plus_pressed.bind(stat_name))
 		grid.add_child(plus)
 		_plus_buttons[stat_name] = plus

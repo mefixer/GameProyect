@@ -64,7 +64,7 @@ var _attack_tween: Tween
 
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 @onready var visual: Node3D = $Visual
-@onready var mesh: MeshInstance3D = $Visual/Body
+@onready var mesh: MeshInstance3D = $Visual/Body/CherufeBody
 @onready var slam_pivot: Node3D = $Visual/SlamPivot
 @onready var slam_hitbox: Hitbox = $Visual/SlamPivot/Hitbox
 @onready var muzzle: Marker3D = $Visual/Muzzle
@@ -88,6 +88,7 @@ func _ready() -> void:
 	slam_hitbox.damage = slam_damage
 	slam_hitbox.knockback = slam_knockback
 	slam_hitbox.ignore_group = "enemies"
+	slam_hitbox.hit_landed.connect(_on_slam_landed)
 
 
 func _physics_process(delta: float) -> void:
@@ -238,6 +239,7 @@ func _fire_rock() -> void:
 	rock.hitbox.damage = throw_damage
 	rock.hitbox.knockback = 6.0
 	rock.hitbox.ignore_group = "enemies"
+	rock.hitbox.hit_landed.connect(_on_slam_landed)
 
 
 func _spawn_eruption() -> void:
@@ -255,6 +257,11 @@ func _spawn_eruption() -> void:
 func _end_attack() -> void:
 	_cooldown = attack_cooldown * (phase2_cooldown_multiplier if phase == 2 else 1.0)
 	_change_state(State.CHASE)
+
+
+func _on_slam_landed(hurtbox: Hurtbox) -> void:
+	AudioManager.play_combat("jefe_impacto", hurtbox.global_position)
+	Fx.burst("lava", hurtbox.global_position)
 
 
 # ── Reacciones ───────────────────────────────────────────────
@@ -280,6 +287,7 @@ func _enter_phase2() -> void:
 	phase = 2
 	phase_changed.emit(phase)
 	_material.albedo_color = BODY_PHASE2_COLOR
+	Fx.burst("lava", global_position + Vector3.UP * 1.7)
 	GameFeel.hitstop(0.2, 0.05)
 	create_tween().tween_property(visual, "scale", Vector3.ONE * 1.25, 0.4) \
 			.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
@@ -289,6 +297,8 @@ func _on_died() -> void:
 	_change_state(State.DEAD)
 	GameState.add_newen(newen_reward)
 	GameState.defeat_boss(BOSS_ID)
+	Fx.burst("lava", global_position + Vector3.UP * 1.7)
+	Fx.burst("muerte", global_position + Vector3.UP * 1.0)
 	if _attack_tween:
 		_attack_tween.kill()
 	slam_hitbox.deactivate()

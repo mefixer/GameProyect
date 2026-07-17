@@ -20,4 +20,5 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		GameState.recover_drop()
+		Fx.burst("muerte", global_position + Vector3.UP * 0.6)
 		queue_free()

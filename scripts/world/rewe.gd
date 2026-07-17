@@ -16,6 +16,8 @@ func _ready() -> void:
 	area.body_entered.connect(_on_body_entered)
 	area.body_exited.connect(_on_body_exited)
 	menu.closed.connect(_on_menu_closed)
+	# Brasas ascendentes: el rewe "vivo" se ve desde lejos, como una hoguera
+	Fx.create_embers(self, Vector3(0, 1.2, 0))
 
 
 func _physics_process(_delta: float) -> void:

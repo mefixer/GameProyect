@@ -18,6 +18,8 @@ const ACTION_LABELS := {
 }
 
 @onready var volume_slider: HSlider = %VolumeSlider
+@onready var sfx_volume_slider: HSlider = %SfxVolumeSlider
+@onready var music_volume_slider: HSlider = %MusicVolumeSlider
 @onready var sensitivity_slider: HSlider = %SensitivitySlider
 @onready var binds_container: VBoxContainer = %BindsContainer
 @onready var back_button: Button = %BackButton
@@ -29,8 +31,13 @@ var _listening_action := ""
 func _ready() -> void:
 	volume_slider.value = Settings.master_volume * 100.0
 	volume_slider.value_changed.connect(func(v: float) -> void: Settings.set_master_volume(v / 100.0))
+	sfx_volume_slider.value = Settings.sfx_volume * 100.0
+	sfx_volume_slider.value_changed.connect(func(v: float) -> void: Settings.set_sfx_volume(v / 100.0))
+	music_volume_slider.value = Settings.music_volume * 100.0
+	music_volume_slider.value_changed.connect(func(v: float) -> void: Settings.set_music_volume(v / 100.0))
 	sensitivity_slider.value = Settings.mouse_sensitivity
 	sensitivity_slider.value_changed.connect(Settings.set_mouse_sensitivity)
+	back_button.pressed.connect(AudioManager.play_ui.bind("click"))
 	back_button.pressed.connect(_on_back)
 	_build_binds()
 

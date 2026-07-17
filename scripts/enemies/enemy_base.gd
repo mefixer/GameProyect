@@ -74,6 +74,7 @@ func _ready() -> void:
 		hitbox.damage = attack_damage
 		hitbox.knockback = attack_knockback
 		hitbox.ignore_group = "enemies"
+		hitbox.hit_landed.connect(_on_hitbox_landed)
 
 
 func _physics_process(delta: float) -> void:
@@ -225,6 +226,10 @@ func _on_hit_received(from_hitbox: Hitbox) -> void:
 	_enter_stagger(hit_stagger)
 
 
+func _on_hitbox_landed(hurtbox: Hurtbox) -> void:
+	AudioManager.play_combat("golpe_fuerte", hurtbox.global_position)
+
+
 ## Llamado por el jugador al hacer parry a un golpe de este enemigo.
 func on_parried() -> void:
 	if state == State.DEAD:
@@ -237,6 +242,7 @@ func on_parried() -> void:
 func _on_died() -> void:
 	_change_state(State.DEAD)
 	GameState.add_newen(newen_reward)
+	Fx.burst("muerte", global_position + Vector3.UP * 0.9)
 	remove_from_group("lock_target")
 	if _attack_tween:
 		_attack_tween.kill()

@@ -20,6 +20,9 @@ con su origen y licencia.
 | Demon Sword (arma, placeholder) | kyrylyushkov | [Sketchfab](https://sketchfab.com/3d-models/demon-sword-9b385527820545a39bacf4410297767c) | **CC-BY 4.0** — requiere atribución | `assets/models/sketchfab_cc/demon_sword/` |
 | The Parade Armour of King Erik XIV of Sweden (armadura, placeholder) | The Royal Armoury (Livrustkammaren) | [Sketchfab](https://sketchfab.com/3d-models/the-parade-armour-of-king-erik-xiv-of-sweden-bd189bba7d9e4924b12826a6d68200d9) | **CC-BY 4.0** — requiere atribución | `assets/models/sketchfab_cc/parade_armour_erik_xiv/` |
 | Retro Textures Fantasy (pack de texturas: puertas, muros, suelos, techos, ventanas) | [Kenney](https://kenney.nl) | [kenney.nl](https://kenney.nl/assets/retro-textures-fantasy) | **CC0** | `assets/textures/kenney_retro_fantasy/` |
+| RPG Audio (selección: esquiva/tela) | [Kenney](https://kenney.nl) | [kenney.nl](https://kenney.nl/assets/rpg-audio) | **CC0** | `assets/audio/sfx/combat/esquiva.ogg` |
+| Impact Sounds (selección: pasos por superficie, golpes, metal, campana) | [Kenney](https://kenney.nl) | [kenney.nl](https://kenney.nl/assets/impact-sounds) | **CC0** | `assets/audio/sfx/footsteps/`, `assets/audio/sfx/combat/` (excepto esquiva.ogg) |
+| UI Audio (selección: click, hover) | [Kenney](https://kenney.nl) | [kenney.nl](https://kenney.nl/assets/ui-audio) | **CC0** | `assets/audio/sfx/ui/` |
 
 > Notas técnicas:
 >

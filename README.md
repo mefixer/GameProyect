@@ -7,7 +7,10 @@ Juego 3D de acción tipo *soulslike*, **de código abierto**, desarrollado con
 
 ## Estado
 
-🚧 **En desarrollo temprano** — Fase 7: UI/UX — menú principal, pausa, opciones (volumen/sensibilidad/remapeo) e inventario, sobre el bosque con jefe (Fase 6).
+🚧 **En desarrollo temprano** — Fase 9: pulido y demo pública — partículas de combate (chispas, trail de arma, polvo de esquiva), brasas en el rewe, presets de exportación Linux/Windows y [guía para colaboradores](CONTRIBUTING.md). Audio y UI completos (Fases 7-8; falta música).
+
+¿Quieres ayudar? Lee la [guía para contribuir](CONTRIBUTING.md) — se busca
+ayuda especialmente en arte 3D, música y revisión cultural mapuche.
 
 ## Controles (prototipo)
 

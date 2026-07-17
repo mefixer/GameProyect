@@ -19,6 +19,8 @@ var _options_instance: Control = null
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	panel.visible = false
+	for button in [resume_button, options_button, main_menu_button, quit_button]:
+		button.pressed.connect(AudioManager.play_ui.bind("click"))
 	resume_button.pressed.connect(_close)
 	options_button.pressed.connect(_on_options)
 	main_menu_button.pressed.connect(_on_main_menu)

@@ -47,6 +47,26 @@ max_value = 100.0
 step = 1.0
 value = 100.0
 
+[node name="SfxVolumeLabel" type="Label" parent="Center/Panel/Margin/VBox"]
+text = "Volumen de efectos"
+
+[node name="SfxVolumeSlider" type="HSlider" parent="Center/Panel/Margin/VBox"]
+unique_name_in_owner = true
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+value = 100.0
+
+[node name="MusicVolumeLabel" type="Label" parent="Center/Panel/Margin/VBox"]
+text = "Volumen de música"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="Center/Panel/Margin/VBox"]
+unique_name_in_owner = true
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+value = 100.0
+
 [node name="SensitivityLabel" type="Label" parent="Center/Panel/Margin/VBox"]
 text = "Sensibilidad de cámara"
 

@@ -15,6 +15,7 @@ extends CanvasLayer
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	panel.visible = false
+	close_button.pressed.connect(AudioManager.play_ui.bind("click"))
 	close_button.pressed.connect(_close)
 
 

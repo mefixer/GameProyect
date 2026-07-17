@@ -38,5 +38,6 @@ func _detonate() -> void:
 	hitbox.activate()
 	glow.visible = true
 	warning_ring.visible = false
+	Fx.burst("lava", global_position)
 	await get_tree().create_timer(0.15, true).timeout
 	queue_free()
