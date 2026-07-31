@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://qdgqbk3ucx64"
 path.s3tc="res://.godot/imported/SwordMat_normal.png-679e2130ebe6b69b6c9112216b87b371.s3tc.ctex"
+path.etc2="res://.godot/imported/SwordMat_normal.png-679e2130ebe6b69b6c9112216b87b371.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/sketchfab_cc/demon_sword/textures/SwordMat_normal.png"
-dest_files=["res://.godot/imported/SwordMat_normal.png-679e2130ebe6b69b6c9112216b87b371.s3tc.ctex"]
+dest_files=["res://.godot/imported/SwordMat_normal.png-679e2130ebe6b69b6c9112216b87b371.s3tc.ctex", "res://.godot/imported/SwordMat_normal.png-679e2130ebe6b69b6c9112216b87b371.etc2.ctex"]
 
 [params]
 

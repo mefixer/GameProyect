@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dxusuvfqflstv"
 path.s3tc="res://.godot/imported/13-0-13_diffuse.jpeg-228c27193352f1f343e05fd4a8b93aa7.s3tc.ctex"
+path.etc2="res://.godot/imported/13-0-13_diffuse.jpeg-228c27193352f1f343e05fd4a8b93aa7.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/mapuche_sketchfab/ruca/textures/13-0-13_diffuse.jpeg"
-dest_files=["res://.godot/imported/13-0-13_diffuse.jpeg-228c27193352f1f343e05fd4a8b93aa7.s3tc.ctex"]
+dest_files=["res://.godot/imported/13-0-13_diffuse.jpeg-228c27193352f1f343e05fd4a8b93aa7.s3tc.ctex", "res://.godot/imported/13-0-13_diffuse.jpeg-228c27193352f1f343e05fd4a8b93aa7.etc2.ctex"]
 
 [params]
 

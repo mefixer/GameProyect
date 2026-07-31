@@ -33,6 +33,13 @@
 [ext_resource type="PackedScene" uid="uid://v4x5u0cqn465" path="res://scenes/ui/boss_health_bar.tscn" id="31_bosshud"]
 [ext_resource type="Script" uid="uid://bf56ydvhw3uiv" path="res://scripts/world/boss_trigger.gd" id="32_bosstrigger"]
 [ext_resource type="PackedScene" uid="uid://bmyac1adg642m" path="res://scenes/wildlife/huemul.tscn" id="33_huemul"]
+[ext_resource type="Texture2D" uid="uid://hwlwgqtvhlhe" path="res://assets/textures/environment/forest_floor/forest_leaves_02_Diffuse_2k.jpg" id="34_ff_alb"]
+[ext_resource type="Texture2D" uid="uid://bdnfjigcxb2xw" path="res://assets/textures/environment/forest_floor/forest_leaves_02_nor_gl_2k.jpg" id="35_ff_nrm"]
+[ext_resource type="Texture2D" uid="uid://btn7xu303hnwm" path="res://assets/textures/environment/forest_floor/forest_leaves_02_Rough_2k.jpg" id="36_ff_rgh"]
+[ext_resource type="Texture2D" uid="uid://b0dh80tqk17lv" path="res://assets/textures/environment/rock/rock_boulder_dry_Diffuse_2k.jpg" id="37_rk_alb"]
+[ext_resource type="Texture2D" uid="uid://dayfp7tif041l" path="res://assets/textures/environment/rock/rock_boulder_dry_nor_gl_2k.jpg" id="38_rk_nrm"]
+[ext_resource type="Texture2D" uid="uid://cubn30ffaep6v" path="res://assets/textures/environment/rock/rock_boulder_dry_Rough_2k.jpg" id="39_rk_rgh"]
+[ext_resource type="Texture2D" uid="uid://c0gastxthb3l3" path="res://assets/hdris/belfast_sunset_2k.hdr" id="40_hdri"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.12, 0.15, 0.22, 1)
@@ -40,8 +47,12 @@ sky_horizon_color = Color(0.35, 0.32, 0.3, 1)
 ground_bottom_color = Color(0.08, 0.09, 0.1, 1)
 ground_horizon_color = Color(0.35, 0.32, 0.3, 1)
 
+[sub_resource type="PanoramaSkyMaterial" id="sky_mat_hdri"]
+panorama = ExtResource("40_hdri")
+energy_multiplier = 0.8
+
 [sub_resource type="Sky" id="sky"]
-sky_material = SubResource("sky_mat")
+sky_material = SubResource("sky_mat_hdri")
 
 [sub_resource type="Environment" id="env"]
 background_mode = 2
@@ -84,7 +95,11 @@ size = Vector3(80, 1, 80)
 size = Vector3(80, 1, 80)
 
 [sub_resource type="StandardMaterial3D" id="mat_ground"]
-albedo_color = Color(0.2, 0.26, 0.17, 1)
+albedo_texture = ExtResource("34_ff_alb")
+normal_enabled = true
+normal_texture = ExtResource("35_ff_nrm")
+roughness_texture = ExtResource("36_ff_rgh")
+uv1_scale = Vector3(24, 24, 1)
 
 [sub_resource type="BoxShape3D" id="shape_wall_ns"]
 size = Vector3(82, 7, 1)
@@ -93,7 +108,11 @@ size = Vector3(82, 7, 1)
 size = Vector3(82, 7, 1)
 
 [sub_resource type="StandardMaterial3D" id="mat_rock"]
-albedo_color = Color(0.32, 0.31, 0.3, 1)
+albedo_texture = ExtResource("37_rk_alb")
+normal_enabled = true
+normal_texture = ExtResource("38_rk_nrm")
+roughness_texture = ExtResource("39_rk_rgh")
+uv1_scale = Vector3(8, 4, 1)
 
 [sub_resource type="BoxShape3D" id="shape_wall_ew"]
 size = Vector3(1, 7, 82)
@@ -148,7 +167,12 @@ emission_energy_multiplier = 1.5
 size = Vector3(30, 0.15, 12)
 
 [sub_resource type="StandardMaterial3D" id="mat_arena_floor"]
-albedo_color = Color(0.16, 0.1, 0.09, 1)
+albedo_texture = ExtResource("37_rk_alb")
+normal_enabled = true
+normal_texture = ExtResource("38_rk_nrm")
+roughness_texture = ExtResource("39_rk_rgh")
+albedo_color = Color(0.55, 0.4, 0.36, 1)
+uv1_scale = Vector3(6, 3, 1)
 
 [sub_resource type="BoxMesh" id="mesh_lava_crack"]
 size = Vector3(1.2, 0.05, 8)

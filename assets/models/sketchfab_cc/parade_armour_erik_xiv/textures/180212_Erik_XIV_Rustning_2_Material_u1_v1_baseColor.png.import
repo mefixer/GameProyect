@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bv7vqkbvrb1ie"
 path.s3tc="res://.godot/imported/180212_Erik_XIV_Rustning_2_Material_u1_v1_baseColor.png-47fc89284ff36f30205405fe57e31f32.s3tc.ctex"
+path.etc2="res://.godot/imported/180212_Erik_XIV_Rustning_2_Material_u1_v1_baseColor.png-47fc89284ff36f30205405fe57e31f32.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/sketchfab_cc/parade_armour_erik_xiv/textures/180212_Erik_XIV_Rustning_2_Material_u1_v1_baseColor.png"
-dest_files=["res://.godot/imported/180212_Erik_XIV_Rustning_2_Material_u1_v1_baseColor.png-47fc89284ff36f30205405fe57e31f32.s3tc.ctex"]
+dest_files=["res://.godot/imported/180212_Erik_XIV_Rustning_2_Material_u1_v1_baseColor.png-47fc89284ff36f30205405fe57e31f32.s3tc.ctex", "res://.godot/imported/180212_Erik_XIV_Rustning_2_Material_u1_v1_baseColor.png-47fc89284ff36f30205405fe57e31f32.etc2.ctex"]
 
 [params]
 

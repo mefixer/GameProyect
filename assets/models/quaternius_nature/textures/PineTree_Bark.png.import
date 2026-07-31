@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c0jltqfslh2iv"
 path.s3tc="res://.godot/imported/PineTree_Bark.png-93d4ad100eb338de3a20fc507e1c6e2f.s3tc.ctex"
+path.etc2="res://.godot/imported/PineTree_Bark.png-93d4ad100eb338de3a20fc507e1c6e2f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/quaternius_nature/textures/PineTree_Bark.png"
-dest_files=["res://.godot/imported/PineTree_Bark.png-93d4ad100eb338de3a20fc507e1c6e2f.s3tc.ctex"]
+dest_files=["res://.godot/imported/PineTree_Bark.png-93d4ad100eb338de3a20fc507e1c6e2f.s3tc.ctex", "res://.godot/imported/PineTree_Bark.png-93d4ad100eb338de3a20fc507e1c6e2f.etc2.ctex"]
 
 [params]
 

@@ -71,7 +71,8 @@ var _shield_base_color: Color
 
 @onready var camera_rig: CameraRig = $CameraRig
 @onready var visual: Node3D = $Visual
-@onready var body_mesh: MeshInstance3D = $Visual/Body/WeichafeBody
+@onready var body_mesh: MeshInstance3D = $Visual/Body/WeichafeRig_001/Skeleton3D/HumanoBase
+@onready var body_anim: AnimationPlayer = $Visual/Body/AnimationPlayer
 @onready var weapon_pivot: Node3D = $Visual/WeaponPivot
 @onready var shield_pivot: Node3D = $Visual/ShieldPivot
 @onready var shield_mesh: MeshInstance3D = $Visual/ShieldPivot/Shield
@@ -100,6 +101,8 @@ func _ready() -> void:
 	_shield_material = shield_mesh.get_active_material(0).duplicate()
 	shield_mesh.set_surface_override_material(0, _shield_material)
 	_shield_base_color = _shield_material.albedo_color
+	if body_anim and body_anim.has_animation("Idle"):
+		body_anim.play("Idle")
 	# Trail del arma: emite solo durante los frames activos del ataque
 	_weapon_trail = Fx.create_trail(hitbox)
 
@@ -154,6 +157,7 @@ func _state_move(delta: float) -> void:
 	_accelerate_towards(direction * (sprint_speed if sprinting else run_speed), delta)
 	_update_facing(direction, sprinting, delta)
 	_update_footsteps(direction, sprinting, delta)
+	_update_body_animation(direction)
 
 	if is_on_floor():
 		if Input.is_action_just_pressed("attack_light"):
@@ -470,6 +474,16 @@ func _update_footsteps(direction: Vector3, sprinting: bool, delta: float) -> voi
 	if _footstep_timer <= 0.0:
 		_footstep_timer = footstep_interval_sprint if sprinting else footstep_interval_walk
 		AudioManager.play_footstep(_current_surface(), global_position)
+
+
+## Reproduce Walk/Idle del cuerpo (esqueleto del weichafe) según si se mueve.
+## No fuerza el mismo clip cada frame: solo cambia si el objetivo difiere.
+func _update_body_animation(direction: Vector3) -> void:
+	if not body_anim:
+		return
+	var target := "Walk" if (is_on_floor() and not direction.is_zero_approx()) else "Idle"
+	if body_anim.has_animation(target) and body_anim.current_animation != target:
+		body_anim.play(target, 0.2)
 
 
 ## Superficie del suelo bajo el jugador según el grupo del StaticBody

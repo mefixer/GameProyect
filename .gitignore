@@ -12,6 +12,12 @@ export_presets.cfg
 *.blend1
 *.blend2
 
+# Config MCP local (ruta absoluta específica de la máquina; ver Blender_aprendizaje.md)
+.mcp.json
+
+# Assets descargados en staging para revisar antes de integrar (no versionar tal cual)
+assets/_incoming/
+
 # Sistema
 .directory
 .DS_Store

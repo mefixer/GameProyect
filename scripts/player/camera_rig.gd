@@ -92,6 +92,17 @@ func add_trauma(amount: float) -> void:
 	_trauma = minf(_trauma + amount, 1.0)
 
 
+## Rota la cámara por un delta de arrastre táctil (controles de Android),
+## con la misma matemática que el mouse-look de _unhandled_input pero sin
+## depender de Input.mouse_mode (no tiene sentido real en touch).
+func apply_touch_delta(delta_pixels: Vector2) -> void:
+	if lock_target != null:
+		return
+	var sensitivity := mouse_sensitivity * Settings.mouse_sensitivity
+	_yaw -= delta_pixels.x * sensitivity
+	_pitch = clampf(_pitch - delta_pixels.y * sensitivity, min_pitch, max_pitch)
+
+
 ## Convierte el input 2D (get_vector) a una dirección en el mundo
 ## relativa a la orientación horizontal de la cámara.
 func to_world_direction(input: Vector2) -> Vector3:

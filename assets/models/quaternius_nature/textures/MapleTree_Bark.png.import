@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c2wamba1dvg1g"
 path.s3tc="res://.godot/imported/MapleTree_Bark.png-e16b4fd171de5fea5fe43070c34cf90f.s3tc.ctex"
+path.etc2="res://.godot/imported/MapleTree_Bark.png-e16b4fd171de5fea5fe43070c34cf90f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/quaternius_nature/textures/MapleTree_Bark.png"
-dest_files=["res://.godot/imported/MapleTree_Bark.png-e16b4fd171de5fea5fe43070c34cf90f.s3tc.ctex"]
+dest_files=["res://.godot/imported/MapleTree_Bark.png-e16b4fd171de5fea5fe43070c34cf90f.s3tc.ctex", "res://.godot/imported/MapleTree_Bark.png-e16b4fd171de5fea5fe43070c34cf90f.etc2.ctex"]
 
 [params]
 

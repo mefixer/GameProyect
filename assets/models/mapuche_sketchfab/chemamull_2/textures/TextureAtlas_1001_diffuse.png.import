@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://v10msc3si340"
 path.s3tc="res://.godot/imported/TextureAtlas_1001_diffuse.png-dbfa1d85b7db71a0a4d89ef097e19209.s3tc.ctex"
+path.etc2="res://.godot/imported/TextureAtlas_1001_diffuse.png-dbfa1d85b7db71a0a4d89ef097e19209.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/mapuche_sketchfab/chemamull_2/textures/TextureAtlas_1001_diffuse.png"
-dest_files=["res://.godot/imported/TextureAtlas_1001_diffuse.png-dbfa1d85b7db71a0a4d89ef097e19209.s3tc.ctex"]
+dest_files=["res://.godot/imported/TextureAtlas_1001_diffuse.png-dbfa1d85b7db71a0a4d89ef097e19209.s3tc.ctex", "res://.godot/imported/TextureAtlas_1001_diffuse.png-dbfa1d85b7db71a0a4d89ef097e19209.etc2.ctex"]
 
 [params]
 

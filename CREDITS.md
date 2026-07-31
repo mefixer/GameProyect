@@ -23,6 +23,11 @@ con su origen y licencia.
 | RPG Audio (selección: esquiva/tela) | [Kenney](https://kenney.nl) | [kenney.nl](https://kenney.nl/assets/rpg-audio) | **CC0** | `assets/audio/sfx/combat/esquiva.ogg` |
 | Impact Sounds (selección: pasos por superficie, golpes, metal, campana) | [Kenney](https://kenney.nl) | [kenney.nl](https://kenney.nl/assets/impact-sounds) | **CC0** | `assets/audio/sfx/footsteps/`, `assets/audio/sfx/combat/` (excepto esquiva.ogg) |
 | UI Audio (selección: click, hover) | [Kenney](https://kenney.nl) | [kenney.nl](https://kenney.nl/assets/ui-audio) | **CC0** | `assets/audio/sfx/ui/` |
+| Forest Leaves 02 (textura PBR del suelo del bosque) | [Poly Haven](https://polyhaven.com) | [polyhaven.com/a/forest_leaves_02](https://polyhaven.com/a/forest_leaves_02) | **CC0** | `assets/textures/environment/forest_floor/` |
+| Rock Boulder Dry (textura PBR de muros y arena del Cherufe) | [Poly Haven](https://polyhaven.com) | [polyhaven.com/a/rock_boulder_dry](https://polyhaven.com/a/rock_boulder_dry) | **CC0** | `assets/textures/environment/rock/` |
+| Belfast Sunset (HDRI del cielo del bosque) | [Poly Haven](https://polyhaven.com) | [polyhaven.com/a/belfast_sunset](https://polyhaven.com/a/belfast_sunset) | **CC0** | `assets/hdris/belfast_sunset_2k.hdr` |
+| Malla base humana ("body", MakeHuman) — cuerpo del weichafe realista | [MakeHuman](http://www.makehumancommunity.org) (vía addon MPFB2, GPL) | [makehumancommunity.org](http://www.makehumancommunity.org) | **CC0** (malla base) | `assets/models/weichafe/weichafe_realista.glb` |
+| Textura de piel `young_darkskinned_male_diffuse` | [MakeHuman](http://www.makehumancommunity.org) | incluida en la instalación de MakeHuman 1.3.0 | **CC0** | embebida en `assets/models/weichafe/weichafe_realista.glb` |
 
 > Notas técnicas:
 >

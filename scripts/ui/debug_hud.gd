@@ -8,6 +8,7 @@ extends CanvasLayer
 
 
 func _ready() -> void:
+	add_child(TouchControls.new())
 	GameState.newen_changed.connect(_on_newen_changed)
 	GameState.flasks_changed.connect(_on_flasks_changed)
 	_on_newen_changed(GameState.newen)

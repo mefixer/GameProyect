@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://blm8h7m3lph3h"
 path.s3tc="res://.godot/imported/TextureAtlas_1001_diffuse.png-13f7672a6b1e0e8577ad3709395bca05.s3tc.ctex"
+path.etc2="res://.godot/imported/TextureAtlas_1001_diffuse.png-13f7672a6b1e0e8577ad3709395bca05.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/mapuche_sketchfab/rehue/textures/TextureAtlas_1001_diffuse.png"
-dest_files=["res://.godot/imported/TextureAtlas_1001_diffuse.png-13f7672a6b1e0e8577ad3709395bca05.s3tc.ctex"]
+dest_files=["res://.godot/imported/TextureAtlas_1001_diffuse.png-13f7672a6b1e0e8577ad3709395bca05.s3tc.ctex", "res://.godot/imported/TextureAtlas_1001_diffuse.png-13f7672a6b1e0e8577ad3709395bca05.etc2.ctex"]
 
 [params]
 
