@@ -1,0 +1,49 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(godot --headless --check-only --script *)",
+      "Bash(timeout * godot --headless --check-only --script *)",
+      "Bash(timeout * godot --headless --import)",
+      "Bash(godot --version)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(git blame*)",
+      "Bash(grep*)",
+      "Bash(rg*)",
+      "Bash(sed -n *)",
+      "Bash(awk*)",
+      "Bash(head*)",
+      "Bash(tail*)",
+      "Bash(wc*)",
+      "Bash(ls*)",
+      "Bash(find*)",
+      "Bash(du*)"
+    ],
+    "deny": [
+      "Read(./.godot/**)",
+      "Read(./build/**)",
+      "Read(//home/mauripcio/Documentos/GameProyect/**/*.import)",
+      "Read(//home/mauripcio/Documentos/GameProyect/**/*.uid)",
+      "Read(//home/mauripcio/Documentos/GameProyect/**/*.glb)",
+      "Read(//home/mauripcio/Documentos/GameProyect/**/*.blend)",
+      "Read(//home/mauripcio/Documentos/GameProyect/**/*.blend1)",
+      "Read(//home/mauripcio/Documentos/GameProyect/**/*.fbx)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/validar.py\"",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -35,3 +35,6 @@ modelos/totems_colectivo_originario.zip
 modelos/demon_sword.zip
 modelos/the_parade_armour_of_king_erik_xiv_of_sweden.zip
 modelos/kenney_retro-textures-fantasy.zip
+
+# Claude Code (config personal; CLAUDE.md, .claude/settings.json y .claude/skills/ sí se versionan)
+.claude/settings.local.json

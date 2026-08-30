@@ -120,7 +120,7 @@ script = ExtResource("2_camrig")
 [node name="Pitch" type="Node3D" parent="CameraRig" unique_id=662033450]
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraRig/Pitch" unique_id=1740452668]
-spring_length = 4.0
+spring_length = 2.8
 margin = 0.2
 
 [node name="Camera3D" type="Camera3D" parent="CameraRig/Pitch/SpringArm3D" unique_id=1436627039]

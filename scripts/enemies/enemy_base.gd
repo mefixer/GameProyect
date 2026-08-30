@@ -46,12 +46,12 @@ var _cooldown := 0.0
 var _attack_phase := 0
 var _knockback := Vector3.ZERO
 var _stagger := 0.35
-var _material: StandardMaterial3D
+var _materials: Array[StandardMaterial3D] = []
 var _attack_tween: Tween
 
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 @onready var visual: Node3D = $Visual
-@onready var mesh: MeshInstance3D = $Visual/Body
+@onready var body_root: Node3D = $Visual/Body
 @onready var weapon_pivot: Node3D = get_node_or_null("Visual/WeaponPivot")
 @onready var hitbox: Hitbox = get_node_or_null("Visual/WeaponPivot/Weapon/Hitbox")
 @onready var hurtbox: Hurtbox = $Hurtbox
@@ -60,9 +60,7 @@ var _attack_tween: Tween
 
 func _ready() -> void:
 	_home = global_position
-	_material = mesh.get_active_material(0).duplicate()
-	_material.albedo_color = body_color
-	mesh.set_surface_override_material(0, _material)
+	_setup_body_materials(body_root)
 	health.max_health = max_health
 	health.reset()
 	hurtbox.hit_received.connect(_on_hit_received)
@@ -331,5 +329,23 @@ func _tween_weapon(to_rotation: Vector3, duration: float) -> void:
 
 
 func _flash(color: Color) -> void:
-	_material.albedo_color = color
-	create_tween().tween_property(_material, "albedo_color", body_color, 0.3)
+	var tween := create_tween().set_parallel(true)
+	for material in _materials:
+		material.albedo_color = color
+		tween.tween_property(material, "albedo_color", body_color, 0.3)
+
+
+## Recorre el modelo del cuerpo, duplica el material de cada malla (para no
+## compartirlo con otras instancias) y le aplica el tinte de la variante.
+## Guarda los duplicados en _materials para poder animarlos en _flash().
+func _setup_body_materials(node: Node) -> void:
+	if node is MeshInstance3D:
+		var mesh_instance := node as MeshInstance3D
+		var base_material := mesh_instance.get_active_material(0)
+		if base_material:
+			var material := base_material.duplicate() as StandardMaterial3D
+			material.albedo_color = body_color
+			mesh_instance.set_surface_override_material(0, material)
+			_materials.append(material)
+	for child in node.get_children():
+		_setup_body_materials(child)

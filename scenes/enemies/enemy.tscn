@@ -1,20 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://benemy0melee1"]
+[gd_scene load_steps=13 format=3 uid="uid://benemy0melee1"]
 
 [ext_resource type="Script" path="res://scripts/enemies/enemy_base.gd" id="1_enemy"]
 [ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
 [ext_resource type="Script" path="res://scripts/components/hurtbox.gd" id="3_hurtbox"]
 [ext_resource type="Script" path="res://scripts/components/hitbox.gd" id="4_hitbox"]
+[ext_resource type="PackedScene" path="res://assets/models/sketchfab_cc/parade_armour_erik_xiv/scene.gltf" id="5_armor"]
 
 [sub_resource type="CapsuleShape3D" id="shape_body"]
 radius = 0.38
 height = 1.8
-
-[sub_resource type="CapsuleMesh" id="mesh_body"]
-radius = 0.38
-height = 1.8
-
-[sub_resource type="StandardMaterial3D" id="mat_body"]
-albedo_color = Color(0.7, 0.25, 0.2, 1)
 
 [sub_resource type="BoxMesh" id="mesh_nose"]
 size = Vector3(0.16, 0.16, 0.3)
@@ -63,10 +57,8 @@ shape = SubResource("shape_hurt")
 
 [node name="Visual" type="Node3D" parent="."]
 
-[node name="Body" type="MeshInstance3D" parent="Visual"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-mesh = SubResource("mesh_body")
-surface_material_override/0 = SubResource("mat_body")
+[node name="Body" parent="Visual" instance=ExtResource("5_armor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.150491, 17.10442, -17.410483)
 
 [node name="Nose" type="MeshInstance3D" parent="Visual"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.38)
