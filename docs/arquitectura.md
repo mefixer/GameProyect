@@ -392,21 +392,45 @@ Diseño completo, tabla de ataques y diagrama de estados en
   > instanciada, la sintaxis es `[node name="X" parent="Ruta/Al/Padre"
   > index="N"]` (sin `type=` ni `instance=`) seguida de las propiedades.
 
-- **Modelo 3D del jugador (weichafe)**: mismo enfoque que el Cherufe
-  (`assets/models/weichafe/weichafe_base.glb`, fuente en
-  `assets/models/weichafe/blender_source/`) pero con proporciones humanas
-  ágiles y sin armadura pesada (GDD: "joven weichafe... la defensa es
-  esquivar, no resistir"). Torso/cadera/cabeza por metaballs, brazos y
-  piernas normales (sin garras), color por vértice por zona de altura en
-  vez de ruido de grieta (piel en cabeza/manos/pies, textil rojo-tierra en
-  el torso, calzas oscuras en las piernas). A propósito **no** modela
-  rasgos faciales ni étnicos específicos por script — el GDD pide
-  explícitamente evitar estereotipos, y una cara "realista" generada por
-  primitivas resultaría en el mejor de los casos genérica y en el peor,
-  caricaturesca; se dejó la cabeza simple y estilizada, coherente con el
-  arte low-poly del proyecto, para que cualquier detalle facial se decida
-  a mano en Blender. `Visual/Body` en `player.tscn` instancia el modelo;
-  `player.gd` referencia `$Visual/Body/WeichafeBody`.
+- **Modelo 3D del jugador (weichafe)**: `assets/models/weichafe/weichafe_realista.glb`,
+  fuente en `assets/models/weichafe/blender_source/weichafe_vestido_v2.blend`
+  (mesh `HumanoBase` + ropa: Taparrabos, Trariwe, Trarilonko, Makun, Collar,
+  Faja, Plumas, Mocasines.L/R, Polainas.L/R, Pelo.001). Rig **Rigify**
+  generado desde un metarig humano ajustado a mano (huesos `DEF-`/`ORG-`,
+  compatible con mocap) — reemplaza a un rig manual de 19 huesos
+  (`WeichafeRig.001`) cuya cadena de pierna (`thigh→shin→foot`) estaba
+  desalineada ~0.2 m hacia adelante en el eje de profundidad; el metarig se
+  ajustó hueso por hueso a la geometría real de `HumanoBase` (medida
+  vértice por vértice, no a ojo) antes de generar el rig, así que la pierna
+  quedó recta desde el origen y no como parche posterior. El rig viejo y
+  los objetos WIP sin usar (`WeichafeBody`, `WeichafeRig`, `Cuerpo`, `Pelo`,
+  `PeloBase`, `Botas`) quedaron documentados y movidos a la colección
+  `_legacy_sin_usar` del `.blend`, no borrados.
+  - **Skinning**: `HumanoBase` con pesos automáticos de Blender sobre el
+    rig nuevo (reemplaza los vertex groups del rig viejo). Taparrabos y
+    Trariwe también llevan skinning real (Armature Deform, pesos
+    automáticos) para que la tela se deforme con la cadera/pierna. El
+    resto de la ropa es rígida, bone-parented al hueso `DEF-` que le
+    corresponde (Trarilonko/Plumas/Pelo.001→cabeza, Collar→cuello,
+    Makun→pecho, Faja→cadera, Mocasines→pie, Polainas→espinilla) — sigue
+    el movimiento sin desfasarse pero no se deforma por sí sola.
+  - **Animaciones**: `Idle` (pose de reposo estática — la malla ya está
+    modelada en su pose natural de reposo, brazos algo flexionados) y
+    `Walk` (ciclo procedural de 24 frames por código: piernas en
+    oposición de fase, rodilla se flexiona en la mitad de swing, brazos en
+    contra-fase). Es un placeholder deliberado: no hubo mocap (Mixamo)
+    retargeteado en esta pasada — pendiente si se quiere un ciclo de
+    marcha más natural o agregar `Run`.
+  - **Export a Godot**: el `.glb` incluye el control rig completo de
+    Rigify (~700 nodos, huesos `FK`/`IK`/`MCH`/`tweak` más los `DEF-` que
+    de verdad deforman) — Godot lo importa entero como `Skeleton3D` con
+    todos esos huesos, aunque solo los `DEF-` tienen malla skineada; es
+    más pesado de lo estrictamente necesario pero funciona, y podar el rig
+    a solo huesos deform es una optimización aparte, no bloqueante.
+    `Visual/Body` en `player.tscn` instancia el modelo; `player.gd`
+    referencia `$"Visual/Body/RIG-WeichafeMetarig/Skeleton3D/HumanoBase"`
+    (la comilla es obligatoria: el guion en `RIG-WeichafeMetarig` rompe el
+    atajo `$Ruta/Sin/Comillas` de GDScript, que lo lee como una resta).
 
 ## Cámara y lock-on
 

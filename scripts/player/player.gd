@@ -71,7 +71,7 @@ var _shield_base_color: Color
 
 @onready var camera_rig: CameraRig = $CameraRig
 @onready var visual: Node3D = $Visual
-@onready var body_mesh: MeshInstance3D = $Visual/Body/WeichafeRig_001/Skeleton3D/HumanoBase
+@onready var body_mesh: MeshInstance3D = $"Visual/Body/RIG-WeichafeMetarig/Skeleton3D/HumanoBase"
 @onready var body_anim: AnimationPlayer = $Visual/Body/AnimationPlayer
 @onready var weapon_pivot: Node3D = $Visual/WeaponPivot
 @onready var shield_pivot: Node3D = $Visual/ShieldPivot
