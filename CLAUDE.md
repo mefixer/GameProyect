@@ -60,6 +60,13 @@ docs/arquitectura.md       la fuente de verdad del diseño (28 KB — no leer en
 - Validar con `--check-only` (2 s, 3 líneas) antes que arrancar escenas.
   El hook `PostToolUse` ya lo corre solo al editar un `.gd`.
 
+## Seguridad — `ollama_client.gd`
+
+Llama a `http://127.0.0.1:11434` (Ollama local, sin auth por diseño). Si
+algún día se apunta a un servidor remoto, esa URL necesitaría autenticación —
+no hardcodear una API key en el `.gd` si eso pasa; usar variable de entorno
+leída en runtime.
+
 ## Antes de dar algo por hecho
 
 1. `--check-only` sobre cada `.gd` tocado.
